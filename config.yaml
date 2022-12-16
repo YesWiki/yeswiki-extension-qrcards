@@ -3,6 +3,3 @@ services:
   _defaults:
     autowire: true
     public: true
-
-  YesWiki\Qrcards\Service\:
-    resource: 'services/*'
