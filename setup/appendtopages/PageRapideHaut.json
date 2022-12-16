@@ -1,0 +1,4 @@
+{
+    "replace": "{{end elem=\"buttondropdown\"}}",
+    "content": " - ------\r\n - {{button class=\"btn-primary\" hideifnoaccess=\"true\" link=\"AdminQrcards\" nobtn=\"1\" text=\"QRcards\" }}\r\n{{end elem=\"buttondropdown\"}}"
+}

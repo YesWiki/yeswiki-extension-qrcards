@@ -1,0 +1,9 @@
+{
+    "titre_liste": "Prise en main",
+    "label": {
+      "aucune": "Aucune",
+      "facile": "Facile",
+      "moyen": "Moyen",
+      "complexe": "Complexe"
+    }
+  }

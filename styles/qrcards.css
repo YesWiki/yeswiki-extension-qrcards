@@ -1,0 +1,338 @@
+@import url("https://fonts.googleapis.com/css?family=Amaranth&display=swap");
+
+.page-qrcard {
+  background-color: transparent;
+  width: 100%;
+  display: flex;
+  padding: 1em 0;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 1em;
+}
+
+.qrcard {
+  font-family: "Amaranth", sans-serif;
+  line-height: 1.1em;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  width: 75mm;
+  height: 125mm;
+  padding: 5mm;
+  display: grid;
+  grid-gap: 5mm;
+  align-content: start;
+  grid-template-columns: 1fr;
+  grid-template-rows: 20mm 70mm 15mm;
+}
+
+.complexity {
+  height: 5mm;
+  font-size: 8px;
+}
+
+.qrcard-title {
+  text-align: center;
+  margin: 1px 0;
+  font-size: 24px;
+  text-transform: uppercase;
+  color: #222;
+}
+
+.qrcard-main-content {
+  background: transparent;
+  padding: 2mm;
+  overflow: hidden;
+}
+
+.qrcard-img {
+  width: 45mm;
+  height: 45mm;
+  margin: 3mm auto;
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+.qrcard-img img {
+  width: 45mm;
+  height: auto;
+  display: block;
+}
+
+.qrcard-text {
+  text-align: center;
+  font-style: italic;
+  height: 15mm;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/*Back side content */
+.qrcard-longtext {
+  font-size: 0.8em;
+  text-align: left;
+  overflow: hidden;
+}
+
+.qrcard-footer {
+  background: white;
+  padding: 2mm;
+  display: flex;
+  justify-content: space-around;
+  height: 100%;
+  font-size: 12px;
+}
+
+.qrcard-footer .fa {
+  font-size: 20px;
+  margin: 3px 0;
+}
+
+.boite1,
+.boite2,
+.boite3,
+.qrcode {
+  width: 12mm;
+  text-align: center;
+  font-size: 0.8em;
+}
+.mini-picto img {
+  max-width: 30px;
+  margin-bottom: 2px;
+}
+.mini-text {
+  font-size: 7px;
+  text-transform: uppercase;
+  line-height: 1em;
+  word-break: break-word;
+}
+
+.link {
+  width: 39mm;
+  text-align: center;
+  position: relative;
+  line-height: 1em;
+}
+
+.card-link {
+  color: inherit;
+  word-break: break-word;
+  padding: 0;
+  line-height: 0.9em;
+  font-size: 0.9em;
+  margin: 0;
+}
+
+/*QR code parameters */
+.qrcode,
+.qrcode img {
+  width: 10mm;
+}
+
+.logo-cc {
+  width: 8mm;
+  opacity: 0.85;
+  position: absolute;
+  bottom: 0mm;
+  left: 16mm;
+}
+
+.logo {
+  width: 10mm;
+}
+
+/* flip */
+.flip-container {
+  -webkit-perspective: 1000;
+  -moz-perspective: 1000;
+  -ms-perspective: 1000;
+  perspective: 1000;
+
+  -ms-transform: perspective(1000px);
+  -moz-transform: perspective(1000px);
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+}
+
+/* START: Accommodating for IE */
+.flip-container:hover .back,
+.flip-container.hover .back {
+  -webkit-transform: rotateY(0deg);
+  -moz-transform: rotateY(0deg);
+  -o-transform: rotateY(0deg);
+  -ms-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+}
+
+.flip-container:hover .front,
+.flip-container.hover .front {
+  -webkit-transform: rotateY(180deg);
+  -moz-transform: rotateY(180deg);
+  -o-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+/* END: Accommodating for IE */
+
+.flip-container,
+.front,
+.back {
+  width: 75mm;
+  height: 125mm;
+}
+
+.flipper {
+  -webkit-transition: 0.6s;
+  -webkit-transform-style: preserve-3d;
+  -ms-transition: 0.6s;
+
+  -moz-transition: 0.6s;
+  -moz-transform: perspective(1000px);
+  -moz-transform-style: preserve-3d;
+  -ms-transform-style: preserve-3d;
+
+  transition: 0.6s;
+  transform-style: preserve-3d;
+
+  position: relative;
+}
+
+.front,
+.back {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  -webkit-transition: 0.6s;
+  -webkit-transform-style: preserve-3d;
+  -webkit-transform: rotateY(0deg);
+
+  -moz-transition: 0.6s;
+  -moz-transform-style: preserve-3d;
+  -moz-transform: rotateY(0deg);
+
+  -o-transition: 0.6s;
+  -o-transform-style: preserve-3d;
+  -o-transform: rotateY(0deg);
+
+  -ms-transition: 0.6s;
+  -ms-transform-style: preserve-3d;
+  -ms-transform: rotateY(0deg);
+
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  transform: rotateY(0deg);
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.front {
+  -webkit-transform: rotateY(0deg);
+  -ms-transform: rotateY(0deg);
+  z-index: 2;
+}
+
+.back {
+  -webkit-transform: rotateY(-180deg);
+  -moz-transform: rotateY(-180deg);
+  -o-transform: rotateY(-180deg);
+  -ms-transform: rotateY(-180deg);
+  transform: rotateY(-180deg);
+}
+
+/* vertical */
+.vertical.flip-container {
+  position: relative;
+}
+
+.vertical .back {
+  -webkit-transform: rotateX(180deg);
+  -moz-transform: rotateX(180deg);
+  -ms-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+}
+
+.vertical.flip-container .flipper {
+  -webkit-transform-origin: 100% 213.5px;
+  -moz-transform-origin: 100% 213.5px;
+  -ms-transform-origin: 100% 213.5px;
+  transform-origin: 100% 213.5px;
+}
+
+/* START: Accommodating for IE */
+.vertical.flip-container:hover .back,
+.vertical.flip-container.hover .back {
+  -webkit-transform: rotateX(0deg);
+  -moz-transform: rotateX(0deg);
+  -o-transform: rotateX(0deg);
+  -ms-transform: rotateX(0deg);
+  transform: rotateX(0deg);
+}
+
+.vertical.flip-container:hover .front,
+.vertical.flip-container.hover .front {
+  -webkit-transform: rotateX(180deg);
+  -moz-transform: rotateX(180deg);
+  -o-transform: rotateX(180deg);
+  transform: rotateX(180deg);
+}
+
+/* END: Accommodating for IE */
+
+.card-actions {
+  margin-top: 115mm;
+  opacity: 0;
+  transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 1000ms;
+}
+.bazar-entry:hover .card-actions {
+  margin-top: 126mm;
+  opacity: 1;
+}
+
+.verso1 {
+  line-height: 1.1em;
+}
+
+.single-qrcard-container .qrcard {
+  float: left;
+}
+
+.qrcard-main-content {
+  display: flex;
+  padding: 0mm;
+  flex-direction: column;
+}
+
+.qrcard-img {
+  width: 65mm;
+  height: 55mm;
+  margin: 0;
+  overflow: hidden;
+}
+
+.qrcard-img img {
+  width: 65mm;
+  object-fit: cover;
+}
+
+.qrcard-text {
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.page-qrcard.print {
+  filter: grayscale(100) !important;
+}
+.page-qrcard.print .qrcard {
+  background-color: transparent !important;
+}
+
+.btn-group-qrcards {
+  margin-top: 1em;
+  border: 1px solid var(--primary-color);
+  border-radius: 6px;
+}

@@ -1,0 +1,12 @@
+<?php 
+if ($GLOBALS['wiki']->getMethod() == 'pdf' 
+|| $GLOBALS['wiki']->getMethod() == 'preview' 
+|| $GLOBALS['wiki']->getMethod() == 'iframe' 
+|| !empty($_GET['print'])) {
+    require_once('tools/qrcards/templates/bazar/qrcards.lib.php');
+    echo displayCard($fiche, 'print');
+} else {
+    foreach ($html as $k => $val) {
+        show($html[$k]);
+    }
+}

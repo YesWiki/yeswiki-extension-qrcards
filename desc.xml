@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<plugin name="wkqrcards" version="0.1" active="1">
+  <author>Florian Schmitt</author>
+  <author>Lilian Ricaud</author>
+  <label>QR cards</label>
+  <desc>Permet de créer des cartes imprimables avec un qrcode associé pour prolonger l'expérience en ligne.</desc>
+</plugin>
