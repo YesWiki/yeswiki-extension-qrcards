@@ -1,2 +1,2 @@
-{{nav links="AdminQrCards, AjouterQrCard" titles="Cartes, Ajouter une carte"}}
+{{nav class="nav nav-tabs no-print" links="AdminQrCards, AjouterQrCard" titles="Cartes, Ajouter une carte"}}
 {{bazarliste id="{QrcardFormId}" template="qrcards"}}

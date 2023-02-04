@@ -3,7 +3,6 @@
     require_once('tools/qrcards/templates/bazar/qrcards.lib.php');
     if ($GLOBALS['wiki']->getMethod() == 'pdf' 
       || $GLOBALS['wiki']->getMethod() == 'preview' 
-      || $GLOBALS['wiki']->getMethod() == 'iframe' 
       || !empty($_GET['print'])) {
       $displayMode = 'print';
     } else {
@@ -11,11 +10,11 @@
     }
     echo $info_res;
 ?>
-<div class="btn-group-qrcards btn-group btn-group-sm" role="group" aria-label="selecteur de vue">
+<div class="no-print btn-group-qrcards btn-group btn-group-sm" role="group" aria-label="selecteur de vue">
   <a href="<?php echo $GLOBALS['wiki']->href('', '', '');?>" class="btn <?php echo ($displayMode == 'web') ? 'btn-primary': 'btn-default'; ?>">Vue web</a>
   <a href="<?php echo $GLOBALS['wiki']->href('', '', 'print=1');?>" class="btn <?php echo ($displayMode == 'print') ? 'btn-primary': 'btn-default'; ?>">Vue impression</a>
 </div>
-<div class="page-qrcard <?php echo $displayMode; ?>">
+<div id="<?php echo $GLOBALS['wiki']->GetPageTag(); ?>-qrcard-container" class="page-qrcard <?php echo $displayMode; ?>">
   <?php
   foreach($fiches as $fiche) {
     echo displayCard($fiche, $displayMode);

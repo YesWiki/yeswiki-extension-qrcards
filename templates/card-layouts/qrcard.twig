@@ -1,0 +1,59 @@
+{{ include_css('tools/qrcards/styles/qrcards.css') }}
+{% if view != 'print' %}
+<div class="flip-container" ontouchstart="this.classList.toggle('hover');" {{ fiche.html_data|raw }}><div><div class="flipper">
+{% else %}
+<div class="qrcard-to-print">
+{% endif %} 
+    <div class="qrcard front" style="background-color: {{ fiche.bf_card_color }} !important;">
+        <div class="qrcard-header">
+            <div class="complexity">{{ difficulty }}</div>
+            <div class="card-type">{{ type }}</div>
+        </div>
+        <h2 class="qrcard-title">{{ fiche.bf_titre }}</h2>
+        <div class="qrcard-image">
+            {{ mainimage|raw }}
+        </div>
+        <div class="qrcard-text">
+            {{ fiche.bf_accroche }}
+        </div>
+        <div class="qrcard-footer">
+            <img class="logo" alt="logo" src="{{ logoimage }}" />
+            <div class="boite1">
+                <div class="mini-picto">{{ picto1|raw }}</div>
+                <div class="mini-text">{{ textpicto1 }}</div>
+            </div>
+            <div class="boite2">
+                <div class="mini-picto">{{ picto2|raw }}</div>
+                <div class="mini-text">{{ textpicto2 }}</div>
+            </div>
+            <div class="boite3">
+                <div class="mini-picto">{{ picto3|raw }}</div>
+                <div class="mini-text">{{ textpicto3 }}</div>
+            </div>
+        </div>
+    </div>
+    <div class="qrcard back" style="background-color: {{ fiche.bf_card_color }} !important;">
+        <div class="qrcard-header">
+            <div class="complexity">{{ difficulty }}</div>
+            <div class="card-type">{{ type }}</div>
+        </div>
+        <h2 class="qrcard-title">{{ fiche.bf_titre }}</h2>
+        <div class="qrcard-main-content">
+            {{ longtext }}
+        </div>
+        <div class="qrcard-footer">
+            <img class="logo" alt="logo" src="{{ logoimage }}" />
+            <div class="link">
+                <a class="card-link" href="{{ link }}">{{ shortlink }}</a>
+                <img class="logo-cc" src="tools/qrcards/images/cc-by-sa.png" alt="licence CC BY SA" />
+            </div>
+            <div class="qrcode">
+                {{ qrcode|raw }}
+            </div>
+        </div>
+    </div>
+{% if view != 'print' %}
+</div></div></div>
+{% else %}
+</div>
+{% endif %}

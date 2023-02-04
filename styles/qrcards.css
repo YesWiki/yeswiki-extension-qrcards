@@ -1,4 +1,54 @@
-@import url("https://fonts.googleapis.com/css?family=Amaranth&display=swap");
+:root {
+  /* largeur de la carte */
+  --card-width: 75mm;
+
+  /* hauteur de la carte */
+  --card-height: 125mm;
+
+  /* bordure de la carte */
+  --card-border: 1px solid rgba(0, 0, 0, 0.3);
+
+  /* marges pour les bords en couleur et entre les zones de la carte */
+  --card-spacing: 5mm;
+
+  /* Dans l'ordre, hauteurs de: type de carte / titre / image / texte résumé / pied de page (pictos, qrcode)*/
+  --card-recto-zone-height: 5mm 20mm 50mm 20mm 20mm;
+
+  /* Dans l'ordre, hauteurs de: type de carte / titre / texte long / pied de page (pictos, qrcode)*/
+  --card-verso-zone-height: 5mm 20mm 70mm 20mm;
+
+  /* typo type de la carte (en haut à droite) */
+  --type-font-family: tahoma,sans-serif;
+  --type-font-size: 10px;
+  --type-color: #222;
+  --type-text-transform: uppercase;  
+
+  /* typo titre de la carte */
+  --title-font-family: garamond,serif;
+  --title-font-size: 24px;
+  --title-color: #222;
+  --title-text-transform: uppercase;
+
+  /* typo texte recto de la carte */
+  --text-font-family: tahoma,sans-serif;
+  --text-font-size: 16px;
+  --text-color: #222;
+
+  /* typo texte verso de la carte */
+  --longtext-font-family: tahoma,sans-serif;
+  --longtext-font-size: 16px;
+  --longtext-color: #222;
+
+  /* typo lien pied de page de la carte */
+  --link-font-family: tahoma,sans-serif;
+  --link-font-size: 10px;
+  --link-color: #222;
+
+  /* typo texte pictos pied de page de la carte */
+  --picto-font-family: tahoma,sans-serif;
+  --picto-font-size: 8px;
+  --picto-color: #222;
+}
 
 .page-qrcard {
   background-color: transparent;
@@ -10,80 +60,96 @@
   gap: 1em;
 }
 
-.qrcard {
-  font-family: "Amaranth", sans-serif;
-  line-height: 1.1em;
-  background: white;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  width: 75mm;
-  height: 125mm;
-  padding: 5mm;
-  display: grid;
-  grid-gap: 5mm;
-  align-content: start;
-  grid-template-columns: 1fr;
-  grid-template-rows: 20mm 70mm 15mm;
+.qrcard-to-print {
+  display: flex;
 }
 
+.qrcard {
+  line-height: 1.1em;
+  border: var(--card-border);
+  width: var(--card-width);
+  height: var(--card-height);
+  padding: var(--card-spacing);
+  display: grid;
+  grid-gap: 0;
+  align-content: start;
+  grid-template-columns: 1fr;
+}
+.qrcard.front {
+  grid-template-rows: var(--card-recto-zone-height);
+}
+
+.qrcard.back {
+  grid-template-rows: var(--card-verso-zone-height);
+}
+
+.qrcard-header {
+  display: flex;
+  justify-content: space-between;
+}
 .complexity {
-  height: 5mm;
   font-size: 8px;
+  width: 10mm;
+  margin-right: 2mm;
+}
+.card-type {
+  font-family: var(--type-font-family);
+  font-size: var(--type-font-size);
+  color: var(--type-color);
+  text-transform: var(--type-text-transform);
 }
 
 .qrcard-title {
   text-align: center;
-  margin: 1px 0;
-  font-size: 24px;
-  text-transform: uppercase;
-  color: #222;
-}
-
-.qrcard-main-content {
-  background: transparent;
-  padding: 2mm;
+  font-family: var(--title-font-family);
+  font-size: var(--title-font-size);
+  color: var(--title-color);
+  text-transform: var(--title-text-transform);
+  margin: 0;
+  display: flex;
+  width: 100%;
+  align-items: center;
   overflow: hidden;
+  justify-content: center;
 }
 
-.qrcard-img {
-  width: 45mm;
-  height: 45mm;
-  margin: 3mm auto;
+.qrcard-image {
   display: flex;
   align-items: center;
   align-content: center;
+  margin: 0;
+  overflow: hidden;
+  width: 100%;
 }
-.qrcard-img img {
-  width: 45mm;
+.qrcard-image img {
+  width: 100%;
   height: auto;
   display: block;
+  object-fit: cover;
+  border-radius: 0;
 }
 
 .qrcard-text {
+  font-family: var(--text-font-family);
+  font-size: var(--text-font-size);
+  color: var(--text-color);
   text-align: center;
   font-style: italic;
-  height: 15mm;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-/*Back side content */
-.qrcard-longtext {
-  font-size: 0.8em;
-  text-align: left;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+  background: white !important;
 }
 
 .qrcard-footer {
-  background: white;
+  margin-top: var(--card-spacing);
+  background: white !important;
   padding: 2mm;
   display: flex;
   justify-content: space-around;
-  height: 100%;
-  font-size: 12px;
-}
-
-.qrcard-footer .fa {
-  font-size: 20px;
-  margin: 3px 0;
 }
 
 .boite1,
@@ -92,14 +158,15 @@
 .qrcode {
   width: 12mm;
   text-align: center;
-  font-size: 0.8em;
+  font-family: var(--picto-font-family);
+  font-size: var(--picto-font-size);
+  color: var(--picto-color);
 }
 .mini-picto img {
   max-width: 30px;
   margin-bottom: 2px;
 }
 .mini-text {
-  font-size: 7px;
   text-transform: uppercase;
   line-height: 1em;
   word-break: break-word;
@@ -110,21 +177,29 @@
   text-align: center;
   position: relative;
   line-height: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
 .card-link {
-  color: inherit;
   word-break: break-word;
   padding: 0;
   line-height: 0.9em;
-  font-size: 0.9em;
+  font-family: var(--link-font-family);
+  font-size: var(--link-font-size);
+  color: var(--link-color);
   margin: 0;
 }
 
 /*QR code parameters */
 .qrcode,
 .qrcode img {
-  width: 10mm;
+  width: 13mm;
+}
+.qrcode {
+  margin: -1mm -1mm -1mm 1mm;
 }
 
 .logo-cc {
@@ -141,103 +216,49 @@
 
 /* flip */
 .flip-container {
-  -webkit-perspective: 1000;
-  -moz-perspective: 1000;
-  -ms-perspective: 1000;
   perspective: 1000;
-
-  -ms-transform: perspective(1000px);
-  -moz-transform: perspective(1000px);
-  -moz-transform-style: preserve-3d;
-  -ms-transform-style: preserve-3d;
+  transform-style: preserve-3d;
 }
 
-/* START: Accommodating for IE */
 .flip-container:hover .back,
 .flip-container.hover .back {
-  -webkit-transform: rotateY(0deg);
-  -moz-transform: rotateY(0deg);
-  -o-transform: rotateY(0deg);
-  -ms-transform: rotateY(0deg);
   transform: rotateY(0deg);
 }
 
 .flip-container:hover .front,
 .flip-container.hover .front {
-  -webkit-transform: rotateY(180deg);
-  -moz-transform: rotateY(180deg);
-  -o-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
-
-/* END: Accommodating for IE */
 
 .flip-container,
 .front,
 .back {
-  width: 75mm;
-  height: 125mm;
+  width: var(--card-width);
+  height: var(--card-height);
 }
 
 .flipper {
-  -webkit-transition: 0.6s;
-  -webkit-transform-style: preserve-3d;
-  -ms-transition: 0.6s;
-
-  -moz-transition: 0.6s;
-  -moz-transform: perspective(1000px);
-  -moz-transform-style: preserve-3d;
-  -ms-transform-style: preserve-3d;
-
   transition: 0.6s;
   transform-style: preserve-3d;
-
   position: relative;
 }
 
-.front,
-.back {
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -ms-backface-visibility: hidden;
+.flipper .front,
+.flipper .back {
   backface-visibility: hidden;
-
-  -webkit-transition: 0.6s;
-  -webkit-transform-style: preserve-3d;
-  -webkit-transform: rotateY(0deg);
-
-  -moz-transition: 0.6s;
-  -moz-transform-style: preserve-3d;
-  -moz-transform: rotateY(0deg);
-
-  -o-transition: 0.6s;
-  -o-transform-style: preserve-3d;
-  -o-transform: rotateY(0deg);
-
-  -ms-transition: 0.6s;
-  -ms-transform-style: preserve-3d;
-  -ms-transform: rotateY(0deg);
-
   transition: 0.6s;
   transform-style: preserve-3d;
   transform: rotateY(0deg);
-
   position: absolute;
   top: 0;
   left: 0;
 }
 
-.front {
-  -webkit-transform: rotateY(0deg);
-  -ms-transform: rotateY(0deg);
+.flipper .front {
   z-index: 2;
 }
 
-.back {
-  -webkit-transform: rotateY(-180deg);
-  -moz-transform: rotateY(-180deg);
-  -o-transform: rotateY(-180deg);
-  -ms-transform: rotateY(-180deg);
+.flipper .back {
   transform: rotateY(-180deg);
 }
 
@@ -247,38 +268,22 @@
 }
 
 .vertical .back {
-  -webkit-transform: rotateX(180deg);
-  -moz-transform: rotateX(180deg);
-  -ms-transform: rotateX(180deg);
   transform: rotateX(180deg);
 }
 
 .vertical.flip-container .flipper {
-  -webkit-transform-origin: 100% 213.5px;
-  -moz-transform-origin: 100% 213.5px;
-  -ms-transform-origin: 100% 213.5px;
   transform-origin: 100% 213.5px;
 }
 
-/* START: Accommodating for IE */
 .vertical.flip-container:hover .back,
 .vertical.flip-container.hover .back {
-  -webkit-transform: rotateX(0deg);
-  -moz-transform: rotateX(0deg);
-  -o-transform: rotateX(0deg);
-  -ms-transform: rotateX(0deg);
   transform: rotateX(0deg);
 }
 
 .vertical.flip-container:hover .front,
 .vertical.flip-container.hover .front {
-  -webkit-transform: rotateX(180deg);
-  -moz-transform: rotateX(180deg);
-  -o-transform: rotateX(180deg);
   transform: rotateX(180deg);
 }
-
-/* END: Accommodating for IE */
 
 .card-actions {
   margin-top: 115mm;
@@ -290,44 +295,32 @@
   opacity: 1;
 }
 
-.verso1 {
-  line-height: 1.1em;
-}
-
-.single-qrcard-container .qrcard {
-  float: left;
-}
-
 .qrcard-main-content {
   display: flex;
-  padding: 0mm;
+  padding: 1mm;
+  background: white !important;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
-}
-
-.qrcard-img {
-  width: 65mm;
-  height: 55mm;
-  margin: 0;
+  overflow: hidden;
+  font-family: var(--longtext-font-family);
+  font-size: var(--longtext-font-size);
+  color: var(--longtext-color);
+  text-align: left;
   overflow: hidden;
 }
-
-.qrcard-img img {
-  width: 65mm;
-  object-fit: cover;
+.page-qrcard img {
+  border-radius: 0;
+}
+.page-qrcard.print .back {
+  border-left: none;
 }
 
-.qrcard-text {
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-}
 
-.page-qrcard.print {
+.page-qrcard.print.monochrome {
   filter: grayscale(100) !important;
 }
-.page-qrcard.print .qrcard {
+.page-qrcard.print.monochrome .qrcard {
   background-color: transparent !important;
 }
 
@@ -335,4 +328,49 @@
   margin-top: 1em;
   border: 1px solid var(--primary-color);
   border-radius: 6px;
+}
+
+/* hide yeswiki interface in print mode, and do some tweaks */
+@media print {
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    overflow: visible;
+  }
+  a[href]::after {
+    content: none;
+  }
+  .footer,
+  #yw-topnav,
+  #yw-header,
+  #yw-footer,
+  .debug,
+  .no-print {
+    display: none;
+  }
+  #yw-main {
+    padding: 0;
+  }
+  .page-qrcard {
+    display: block;
+    padding: 0;
+    gap: 0;
+  }
+  .qrcard-to-print {
+    break-inside: avoid;
+  }
+  .page-qrcard.print:not(:first-child) .front,
+  .page-qrcard.print:not(:first-child) .back {
+    border-top: none;
+  }
+  /* .qrcard-to-print:nth-child(3n) {
+    page-break-before: always;
+    break-before: page;
+  } */
+  /* .qrcard-to-print:nth-child(3n)::before {
+    display: block;
+    content:'';
+    page-break-before: always;
+    break-before: always;
+  } */
 }
