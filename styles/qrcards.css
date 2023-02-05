@@ -18,34 +18,34 @@
   --card-verso-zone-height: 5mm 20mm 70mm 20mm;
 
   /* typo type de la carte (en haut à droite) */
-  --type-font-family: tahoma,sans-serif;
+  --type-font-family: tahoma, sans-serif;
   --type-font-size: 10px;
   --type-color: #222;
-  --type-text-transform: uppercase;  
+  --type-text-transform: uppercase;
 
   /* typo titre de la carte */
-  --title-font-family: garamond,serif;
-  --title-font-size: 24px;
+  --title-font-family: garamond, serif;
+  --title-font-size: 20px;
   --title-color: #222;
   --title-text-transform: uppercase;
 
   /* typo texte recto de la carte */
-  --text-font-family: tahoma,sans-serif;
+  --text-font-family: tahoma, sans-serif;
   --text-font-size: 16px;
   --text-color: #222;
 
   /* typo texte verso de la carte */
-  --longtext-font-family: tahoma,sans-serif;
+  --longtext-font-family: tahoma, sans-serif;
   --longtext-font-size: 16px;
   --longtext-color: #222;
 
   /* typo lien pied de page de la carte */
-  --link-font-family: tahoma,sans-serif;
+  --link-font-family: tahoma, sans-serif;
   --link-font-size: 10px;
   --link-color: #222;
 
   /* typo texte pictos pied de page de la carte */
-  --picto-font-family: tahoma,sans-serif;
+  --picto-font-family: tahoma, sans-serif;
   --picto-font-size: 8px;
   --picto-color: #222;
 }
@@ -65,6 +65,7 @@
 }
 
 .qrcard {
+  font-size: initial;
   line-height: 1.1em;
   border: var(--card-border);
   width: var(--card-width);
@@ -138,18 +139,21 @@
   overflow: hidden;
   text-overflow: ellipsis;
   display: flex;
+  flex-grow: 1;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
   background: white !important;
+  padding: 1mm;
 }
 
 .qrcard-footer {
   margin-top: var(--card-spacing);
   background: white !important;
-  padding: 2mm;
+  padding: 1mm;
   display: flex;
   justify-content: space-around;
+  align-content: center;
+  align-items: center;
 }
 
 .boite1,
@@ -163,7 +167,7 @@
   color: var(--picto-color);
 }
 .mini-picto img {
-  max-width: 30px;
+  max-width: 9mm !important;
   margin-bottom: 2px;
 }
 .mini-text {
@@ -179,8 +183,10 @@
   line-height: 1em;
   display: flex;
   align-items: center;
-  justify-content: space-between;
   flex-direction: column;
+  justify-content: space-around;
+  align-content: space-around;
+  height: 100%;
 }
 
 .card-link {
@@ -199,19 +205,17 @@
   width: 13mm;
 }
 .qrcode {
-  margin: -1mm -1mm -1mm 1mm;
+  margin: 0;
 }
 
 .logo-cc {
-  width: 8mm;
+  width: 10mm;
   opacity: 0.85;
-  position: absolute;
-  bottom: 0mm;
-  left: 16mm;
 }
 
 .logo {
   width: 10mm;
+  height: auto;
 }
 
 /* flip */
@@ -311,11 +315,11 @@
 }
 .page-qrcard img {
   border-radius: 0;
+  object-fit: contain;
 }
 .page-qrcard.print .back {
   border-left: none;
 }
-
 
 .page-qrcard.print.monochrome {
   filter: grayscale(100) !important;
@@ -332,10 +336,16 @@
 
 /* hide yeswiki interface in print mode, and do some tweaks */
 @media print {
+  @page {
+    size: auto;
+    margin: 0;
+  }
+
   body {
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
     overflow: visible;
+    margin: 0px;
   }
   a[href]::after {
     content: none;
@@ -354,23 +364,29 @@
   .page-qrcard {
     display: block;
     padding: 0;
-    gap: 0;
+    margin: 0;
+    font-size: 0;
+    letter-spacing: 0;
+    word-spacing: 0;
   }
   .qrcard-to-print {
+    break-before: avoid-page;
+    break-after: avoid-page;
     break-inside: avoid;
+    display: inline-block;
+    width: calc(2 * var(--card-width));
+    position: relative;
+    height: var(--card-height);
+    --card-border: 1px solid black;
   }
-  .page-qrcard.print:not(:first-child) .front,
-  .page-qrcard.print:not(:first-child) .back {
-    border-top: none;
+  .qrcard-to-print .qrcard.front {
+    position: absolute;
+    top: 0;
+    left: 0;
   }
-  /* .qrcard-to-print:nth-child(3n) {
-    page-break-before: always;
-    break-before: page;
-  } */
-  /* .qrcard-to-print:nth-child(3n)::before {
-    display: block;
-    content:'';
-    page-break-before: always;
-    break-before: always;
-  } */
+  .qrcard-to-print .qrcard.back {
+    position: absolute;
+    top: 0;
+    left: var(--card-width);
+  }
 }

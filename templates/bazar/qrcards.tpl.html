@@ -1,5 +1,6 @@
 <?php if(count($fiches)>0) : ?>
 <?php 
+    $GLOBALS['wiki']->addCSSFile('tools/qrcards/styles/qrcards.css');
     require_once('tools/qrcards/templates/bazar/qrcards.lib.php');
     if ($GLOBALS['wiki']->getMethod() == 'pdf' 
       || $GLOBALS['wiki']->getMethod() == 'preview' 

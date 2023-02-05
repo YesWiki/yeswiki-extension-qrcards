@@ -53,11 +53,10 @@ function display_difficulty($fiche)
 
 function displayCard($fiche, $view='print')
 {
-    $GLOBALS['wiki']->addCSSFile('tools/qrcards/styles/qrcards.css');
     $thumbwidth = 300;
     $thumbheight = 300;
     $thumbresize = 'fit';
-    $imgLogo = 'tools/qrcards/images/metacartes.png';
+    $imgLogo = !empty($GLOBALS['wiki']->config['card_logo']) ? $GLOBALS['wiki']->config['card_logo'] : 'tools/qrcards/images/metacartes.png';
     $defaultMiniIcon = 'tools/qrcards/images/metacartes.png';
     if (isset($fiche['imagebf_image']) and is_file('files/'.$fiche['imagebf_image'])) {
       $image = '<img alt="image" src="'.redimensionner_image(
