@@ -59,7 +59,7 @@ function displayCard($fiche, $view='print')
     $imgLogo = !empty($GLOBALS['wiki']->config['card_logo']) ? $GLOBALS['wiki']->config['card_logo'] : 'tools/qrcards/images/metacartes.png';
     $defaultMiniIcon = 'tools/qrcards/images/metacartes.png';
     if (isset($fiche['imagebf_image']) and is_file('files/'.$fiche['imagebf_image'])) {
-      $image = '<img alt="image" src="'.redimensionner_image(
+      $image = '<img loading="lazy" alt="image" src="'.redimensionner_image(
           'files/' . $fiche['imagebf_image'],
           'cache/image_' . $thumbwidth . 'x' . $thumbheight . '_' . $fiche['imagebf_image'],
           $thumbwidth,
@@ -67,19 +67,19 @@ function displayCard($fiche, $view='print')
           $thumbresize
       ).'" />';
     } else {
-        $image = '<img alt="logo qrcard" src="'.$imgLogo.'" />';
+        $image = '<img loading="lazy" alt="logo qrcard" src="'.$imgLogo.'" />';
     }
     $picto1 = display($fiche['bf_picto_boite1'], $defaultMiniIcon, true, $fiche['bf_texte_boite1']);
     if (!empty($picto1)) {
-        $picto1 = '<img src="'.$picto1.'" alt="mini-picto1" />';
+        $picto1 = '<img loading="lazy" src="'.$picto1.'" alt="mini-picto1" />';
     }
     $picto2 = display($fiche['bf_picto_boite2'], $defaultMiniIcon, true, $fiche['bf_texte_boite2']);
     if (!empty($picto2)) {
-        $picto2 = '<img src="'.$picto2.'" alt="mini-picto2" />';
+        $picto2 = '<img loading="lazy" src="'.$picto2.'" alt="mini-picto2" />';
     }
     $picto3 = display($fiche['bf_picto_boite3'], $defaultMiniIcon, true, $fiche['bf_texte_boite3']);
     if (!empty($picto3)) {
-        $picto3 = '<img src="'.$picto3.'" alt="mini-picto3" />';
+        $picto3 = '<img loading="lazy" src="'.$picto3.'" alt="mini-picto3" />';
     }
     $link = (!empty($fiche['bf_url'])) ? $fiche['bf_url'] : $GLOBALS['wiki']->href('', $fiche['id_fiche']);
     $types = baz_valeurs_liste('ListeTypeCarte');

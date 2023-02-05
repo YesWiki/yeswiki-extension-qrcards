@@ -16,7 +16,7 @@
             {{ fiche.bf_accroche }}
         </div>
         <div class="qrcard-footer">
-            <img class="logo" alt="logo" src="{{ logoimage }}" />
+            <img loading="lazy" class="logo" alt="logo" src="{{ logoimage }}" />
             <div class="boite1">
                 <div class="mini-picto">{{ picto1|raw }}</div>
                 <div class="mini-text">{{ textpicto1 }}</div>
@@ -41,10 +41,10 @@
             {{ longtext }}
         </div>
         <div class="qrcard-footer">
-            <img class="logo" alt="logo" src="{{ logoimage }}" />
+            <img loading="lazy" class="logo" alt="logo" src="{{ logoimage }}" />
             <div class="link">
                 <a class="card-link" href="{{ link }}">{{ shortlink }}</a>
-                <img class="logo-cc" src="tools/qrcards/images/cc-by-sa.png" alt="licence CC BY SA" />
+                <img loading="lazy" class="logo-cc" src="tools/qrcards/images/cc-by-sa.png" alt="licence CC BY SA" />
             </div>
             <div class="qrcode">
                 {{ qrcode|raw }}
@@ -54,5 +54,6 @@
 {% if view != 'print' %}
 </div></div></div>
 {% else %}
+<div class="qrcard-actions no-print text-center"><a href="#" class="text-danger link-remove-from-print">❌ Ne pas imprimer</a></div>
 </div>
 {% endif %}

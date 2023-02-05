@@ -1,6 +1,7 @@
 <?php if(count($fiches)>0) : ?>
 <?php 
     $GLOBALS['wiki']->addCSSFile('tools/qrcards/styles/qrcards.css');
+    $GLOBALS['wiki']->addJavascriptFile('tools/qrcards/javascripts/qrcards.js');
     require_once('tools/qrcards/templates/bazar/qrcards.lib.php');
     if ($GLOBALS['wiki']->getMethod() == 'pdf' 
       || $GLOBALS['wiki']->getMethod() == 'preview' 
@@ -13,7 +14,7 @@
 ?>
 <div class="no-print btn-group-qrcards btn-group btn-group-sm" role="group" aria-label="selecteur de vue">
   <a href="<?php echo $GLOBALS['wiki']->href('', '', '');?>" class="btn <?php echo ($displayMode == 'web') ? 'btn-primary': 'btn-default'; ?>">Vue web</a>
-  <a href="<?php echo $GLOBALS['wiki']->href('', '', 'print=1');?>" class="btn <?php echo ($displayMode == 'print') ? 'btn-primary': 'btn-default'; ?>">Vue impression</a>
+  <a href="<?php echo $GLOBALS['wiki']->href('', '', 'print=1');?>" class="btn <?php echo ($displayMode == 'print') ? 'btn-primary': 'btn-default'; ?>"><i class="fas fa-print"></i>Vue impression</a>
 </div>
 <div id="<?php echo $GLOBALS['wiki']->GetPageTag(); ?>-qrcard-container" class="page-qrcard <?php echo $displayMode; ?>">
   <?php

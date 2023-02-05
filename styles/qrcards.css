@@ -57,11 +57,7 @@
   padding: 1em 0;
   justify-content: flex-start;
   flex-wrap: wrap;
-  gap: 1em;
-}
-
-.qrcard-to-print {
-  display: flex;
+  gap: 2em 1em;
 }
 
 .qrcard {
@@ -317,6 +313,26 @@
   border-radius: 0;
   object-fit: contain;
 }
+.qrcard-to-print {
+  break-before: avoid-page;
+  break-after: avoid-page;
+  break-inside: avoid;
+  display: inline-block;
+  width: calc(2 * var(--card-width));
+  position: relative;
+  height: var(--card-height);
+  --card-border: 1px solid black;
+}
+.qrcard-to-print .qrcard.front {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.qrcard-to-print .qrcard.back {
+  position: absolute;
+  top: 0;
+  left: var(--card-width);
+}
 .page-qrcard.print .back {
   border-left: none;
 }
@@ -332,6 +348,18 @@
   margin-top: 1em;
   border: 1px solid var(--primary-color);
   border-radius: 6px;
+}
+
+.qrcard-actions {
+  width: var(--card-width);
+  position: absolute;
+  bottom: -22px;
+  font-size: 14px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.qrcard-to-print .qrcard-actions {
+  width: calc(2 * var(--card-width));
 }
 
 /* hide yeswiki interface in print mode, and do some tweaks */
@@ -368,25 +396,5 @@
     font-size: 0;
     letter-spacing: 0;
     word-spacing: 0;
-  }
-  .qrcard-to-print {
-    break-before: avoid-page;
-    break-after: avoid-page;
-    break-inside: avoid;
-    display: inline-block;
-    width: calc(2 * var(--card-width));
-    position: relative;
-    height: var(--card-height);
-    --card-border: 1px solid black;
-  }
-  .qrcard-to-print .qrcard.front {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  .qrcard-to-print .qrcard.back {
-    position: absolute;
-    top: 0;
-    left: var(--card-width);
   }
 }
