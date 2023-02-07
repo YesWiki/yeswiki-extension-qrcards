@@ -1,4 +1,8 @@
 <?php
+use YesWiki\Core\Controller\AuthController;
+use YesWiki\Security\Controller\SecurityController;
+use YesWiki\Core\Service\FavoritesManager;
+
 function display($val, $default = '', $checkUrl = false, $valtext = 'default')
 {
     if ($valtext != 'default' && empty($valtext)) {
@@ -87,7 +91,28 @@ function displayCard($fiche, $view='print')
     if (!empty($fiche['listeListeTypeCarte']) && !empty($types['label'][$fiche['listeListeTypeCarte']])) {
         $type = $types['label'][$fiche['listeListeTypeCarte']];
     }
+    $user = $GLOBALS['wiki']->services->get(AuthController::class)->getLoggedUser();
+    $favoritesManager = $GLOBALS['wiki']->services->get(FavoritesManager::class);
+    if (!empty($user) && $favoritesManager->areFavoritesActivated()) {
+        $fav['currentuser'] = $user['name'];
+        $fav['isUserFavorite'] = $favoritesManager->isUserFavorite($user['name'], $fiche['id_fiche']);
+    }
+    $linkedit = $linkdelete = null;
+    if ($GLOBALS['wiki']->HasAccess("write")) {
+        // on ajoute le lien d'édition si l'action est autorisée
+        if ($GLOBALS['wiki']->HasAccess("write", $fiche['id_fiche']) && !$GLOBALS['wiki']->services->get(SecurityController::class)->isWikiHibernated()) {
+            $linkedit = $GLOBALS['wiki']->href("edit", $fiche['id_fiche'], 'incomingurl='.$GLOBALS['wiki']->href());
+        }
+
+        // if current user is owner or admin
+        if ($GLOBALS['wiki']->UserIsOwner($fiche['id_fiche']) || $GLOBALS['wiki']->UserIsAdmin()) {
+            if (!$GLOBALS['wiki']->services->get(SecurityController::class)->isWikiHibernated()) {
+                $linkdelete = $GLOBALS['wiki']->href("deletepage", $fiche['id_fiche'], 'incomingurl='.$GLOBALS['wiki']->href());
+            }
+        }
+    }
     $elements = [
+      'currentPage' => $GLOBALS['wiki']->getPageTag(),
       'fiche' => $fiche,
       'view' => $view,
       'difficulty' => display_difficulty($fiche),
@@ -103,7 +128,11 @@ function displayCard($fiche, $view='print')
       'longtext' => f($fiche['bf_essentiel']),
       'qrcode' => $GLOBALS['wiki']->format('{{qrcode text="'.$link.'"}}'),
       'link' => $link,
-      'shortlink' => str_replace(array('https://', 'http://'), '', $link)
+      'shortlink' => str_replace(array('https://', 'http://'), '', $link),
+      'currentuser' => $fav['currentuser'],
+      'isUserFavorite' => $fav['isUserFavorite'],
+      'linkedit' => $linkedit,
+      'linkdelete' => $linkdelete
     ];
     $output = $GLOBALS['wiki']->render("@qrcards/card-layouts/qrcard.twig", $elements);
     return $output;

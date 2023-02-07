@@ -57,7 +57,7 @@
   padding: 1em 0;
   justify-content: flex-start;
   flex-wrap: wrap;
-  gap: 2em 1em;
+  gap: 3em 1em;
 }
 
 .qrcard {
@@ -212,9 +212,15 @@
 .logo {
   width: 10mm;
   height: auto;
+  max-height: 13mm;
 }
 
 /* flip */
+.card-plus-actions-container {
+  position: relative;
+  width: var(--card-width);
+  height: var(--card-height);
+}
 .flip-container {
   perspective: 1000;
   transform-style: preserve-3d;
@@ -353,7 +359,7 @@
 .qrcard-actions {
   width: var(--card-width);
   position: absolute;
-  bottom: -22px;
+  bottom: -28px;
   font-size: 14px;
   font-weight: bold;
   text-transform: uppercase;
@@ -361,6 +367,13 @@
 .qrcard-to-print .qrcard-actions {
   width: calc(2 * var(--card-width));
 }
+
+.flex-between {
+  display: flex;
+  justify-content: space-between;
+}
+
+[data-id="bf_plus"] .BAZ_label {display:none}
 
 /* hide yeswiki interface in print mode, and do some tweaks */
 @media print {
@@ -383,8 +396,9 @@
   #yw-header,
   #yw-footer,
   .debug,
+  .BAZ_fiche_info,
   .no-print {
-    display: none;
+    display: none !important;
   }
   #yw-main {
     padding: 0;

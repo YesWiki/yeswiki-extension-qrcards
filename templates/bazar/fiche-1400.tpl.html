@@ -1,11 +1,70 @@
 <?php 
-if ($GLOBALS['wiki']->getMethod() == 'pdf' 
-|| $GLOBALS['wiki']->getMethod() == 'preview'
-|| !empty($_GET['print'])) {
-    require_once('tools/qrcards/templates/bazar/qrcards.lib.php');
+use YesWiki\Bazar\Field\BazarField;
+
+// fields which will be hidden (the names used to identified the fields are given)
+if (!defined('FIELDS_TO_HIDE')) {
+    define('FIELDS_TO_HIDE', [  
+        "listeListePriseEnMain",
+        "bf_card_color",
+        "listeListeTypeCarte",
+        "bf_accroche",
+        "bf_picto_boite1",
+        "bf_texte_boite1",
+        "bf_picto_boite2",
+        "bf_texte_boite2",
+        "bf_picto_boite3",
+        "bf_texte_boite3",
+        "bf_essentiel",
+        "bf_url",
+        "imagebf_image",
+    ]);
+}
+$GLOBALS['wiki']->addCSSFile('tools/qrcards/styles/qrcards.css');
+$GLOBALS['wiki']->addJavascriptFile('tools/qrcards/javascripts/qrcards.js');
+require_once('tools/qrcards/templates/bazar/qrcards.lib.php');
+
+if (!empty($_GET['print'])) {
     echo displayCard($fiche, 'print');
 } else {
-    foreach ($html as $k => $val) {
-        show($html[$k]);
+    echo '<div class="pull-right" style="margin:0 0 2em 2em;">'.displayCard($fiche, 'web').'</div>';
+    $res = '';
+    $formtemplate = [];
+    for ($i = 0; $i < count($form['template']); ++$i) {
+        // if the field type is in the $INDEX_CHELOUS, the name used to identified the field is a concatenation
+        // of the index 0, 1 and 6
+        $INDEX_CHELOUS = ['radio', 'liste', 'checkbox', 'listefiche', 'checkboxfiche', 'image'];
+
+        // call the corresponding function to display the field if the field is not to hide and if the user have
+        // the read acls (index 11) on this field
+        if (isset($form['template'][$i][0])
+            && isset($form['template'][$i][1])
+            && ((!in_array($form['template'][$i][0], $INDEX_CHELOUS)
+                    && !in_array($form['template'][$i][1], FIELDS_TO_HIDE))
+                || (in_array($form['template'][$i][0], $INDEX_CHELOUS)
+                    && !in_array($form['template'][$i][0] . $form['template'][$i][1] . $form['template'][$i][6],
+                        FIELDS_TO_HIDE)
+                    && !in_array($form['template'][$i][0] . $form['template'][$i][1],
+                    FIELDS_TO_HIDE))
+            )
+        ) {
+            if ($form['prepared'][$i] instanceof BazarField) {
+                $res .= $form['prepared'][$i]->renderStaticIfPermitted($fiche);
+            } elseif (function_exists($form['template'][$i][0]) && $form['template'][$i][0] != 'image'
+                && (empty($form['prepared'][$i]['read_acl'])
+                    || $GLOBALS['wiki']->CheckACL(
+                        $form['prepared'][$i]['read_acl'],
+                        null,
+                        true,
+                        $fiche['id_fiche'] ?? null
+                    ))) {
+                $res .= $form['template'][$i][0](
+                    $formtemplate,
+                    $form['template'][$i],
+                    'html',
+                    $fiche
+                );
+            }
+        }
     }
+    echo $res;
 }

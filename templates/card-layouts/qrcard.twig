@@ -1,5 +1,5 @@
 {% if view != 'print' %}
-<div class="flip-container" ontouchstart="this.classList.toggle('hover');" {{ fiche.html_data|raw }}><div><div class="flipper">
+<div class="card-plus-actions-container"><div class="flip-container" ontouchstart="this.classList.toggle('hover');" {{ fiche.html_data|raw }}><div><div class="flipper">
 {% else %}
 <div class="qrcard-to-print">
 {% endif %} 
@@ -38,7 +38,7 @@
         </div>
         <h2 class="qrcard-title">{{ fiche.bf_titre }}</h2>
         <div class="qrcard-main-content">
-            {{ longtext }}
+            {{ longtext|raw }}
         </div>
         <div class="qrcard-footer">
             <img loading="lazy" class="logo" alt="logo" src="{{ logoimage }}" />
@@ -52,8 +52,50 @@
         </div>
     </div>
 {% if view != 'print' %}
-</div></div></div>
+</div>
+</div>
+</div>
+<div class="qrcard-actions flex-between no-print">
+{% if currentuser is not empty %}
+{{ include_javascript('javascripts/favorites.js') }}
+<a href="#"
+    class="favorites"
+    title="{{ (isUserFavorite) ? _t('FAVORITES_REMOVE') : _t('FAVORITES_ADD') }}"
+    data-resource="{{ fiche.id_fiche }}" 
+    data-user="{{ currentuser }}"
+    data-toggle="tooltip"
+    data-placement="top">
+    <i class="{{ (isUserFavorite) ? 'fas' : 'far' }} fa-star"></i>
+    {{  _t('QRCARDS_FAVORI') }}
+</a>
+{% endif %}
+<div class="card-edit-links">
+    <a title="{{ _t('QRCARDS_PRINT')}}" data-toggle="tooltip" data-placement="top" href="{{ url({tag: fiche.id_fiche,params:{print:1}})  }}" class="btn btn-xs btn-default">
+        <i class="fas fa-print"></i>
+    </a>
+    {% if currentPage != fiche.id_fiche %}
+    <a title="{{ _t('QRCARDS_VIEW')}}" data-toggle="tooltip" data-placement="top" href="{{ url({tag:fiche.id_fiche}) }}" class="btn btn-xs btn-default">
+        <i class="fa fa-eye-open"></i>
+    </a>
+    {% endif %}
+    {% if linkedit is defined %}
+    <a title="{{ _t('TEMPLATE_EDIT')}}" data-toggle="tooltip" data-placement="top" href="{{ linkedit|raw }}" class="btn btn-xs btn-default">
+      <i class="fa fa-pencil-alt"></i>
+    </a>
+  {% endif %}
+  {% if linkdelete is defined %}
+    <a href="{{ linkdelete|raw }}" class="btn btn-xs btn-danger modalbox" title="{{ _t('TEMPLATE_DELETE')}}" data-toggle="tooltip" data-placement="top">
+      <i class="fa fa-trash"></i>
+    </a>
+  {% endif %}
+</div>
+</div>
+</div>
 {% else %}
-<div class="qrcard-actions no-print text-center"><a href="#" class="text-danger link-remove-from-print">❌ Ne pas imprimer</a></div>
+{% if currentPage != fiche.id_fiche %}
+<div class="qrcard-actions no-print text-center">
+<a href="#" class="text-danger link-remove-from-print">❌ Ne pas imprimer</a>
+</div>
+{% endif %}
 </div>
 {% endif %}
