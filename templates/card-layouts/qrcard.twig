@@ -1,7 +1,7 @@
 {% if view != 'print' %}
-<div class="card-plus-actions-container"><div class="flip-container" ontouchstart="this.classList.toggle('hover');" {{ fiche.html_data|raw }}><div><div class="flipper">
+<div class="card-plus-actions-container bazar-entry" {{ fiche.html_data|raw }}><div class="flip-container" ontouchstart="this.classList.toggle('hover');"><div><div class="flipper">
 {% else %}
-<div class="qrcard-to-print">
+<div class="qrcard-to-print bazar-entry" {{ fiche.html_data|raw }}>
 {% endif %} 
     <div class="qrcard front" style="background-color: {{ fiche.bf_card_color }} !important;">
         <div class="qrcard-header">

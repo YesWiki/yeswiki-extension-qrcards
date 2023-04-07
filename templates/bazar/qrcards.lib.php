@@ -96,6 +96,8 @@ function displayCard($fiche, $view='print')
     if (!empty($user) && $favoritesManager->areFavoritesActivated()) {
         $fav['currentuser'] = $user['name'];
         $fav['isUserFavorite'] = $favoritesManager->isUserFavorite($user['name'], $fiche['id_fiche']);
+    } else {
+        $fav = ['currentuser' => null, 'isUserFavorite' => null];
     }
     $linkedit = $linkdelete = null;
     if ($GLOBALS['wiki']->HasAccess("write")) {
