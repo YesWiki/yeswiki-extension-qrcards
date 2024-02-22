@@ -117,13 +117,14 @@
   margin: 0;
   overflow: hidden;
   width: 100%;
+  background:white;
 }
 .qrcard-image img {
   width: 243px;
-  height: 188px;
   display: block;
   object-fit: contain !important;
   border-radius: 0;
+  height: 100% !important;
 }
 
 .qrcard-text {
