@@ -1,0 +1,8 @@
+{
+  "titre_liste": "Degré de maturité",
+  "label": {
+    "esquisse": "Esquisse",
+    "encours": "En cours d'élaboration",
+    "aboutie": "Aboutie"
+  }
+}
