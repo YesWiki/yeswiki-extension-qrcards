@@ -2,9 +2,7 @@
 
 Permet de créer des cartes imprimables avec un qrcode associé pour prolonger l'expérience en ligne.
 
-## Un peu d'histoire
 
-Cette extension est issue d'une collaboration entre Lilian Ricaud (lilious) et Florian Schmitt (mrflos), afin de faire émerger un outil numérique de création de cartes de type metacartes, afin de faciliter la production de prototypes de cartes, accompagner des projets de créations de carte sur d'autres thématiques, et réfléchir à des systèmes innovants de partage, d'animation, et de curations.
 
 ## Installation
 
@@ -12,28 +10,61 @@ Dans la page `GererMisesAJour` de votre YesWiki, recherchez l'extension **qrcard
 
 ## Utilisation
 
+Pour simplifier l'usage, l'extension ajoute dans la barre du haut un "lanceur", un menu avec des raccourcis vers les fonctions principales.
+
 ### Créer des cartes
 
-Dans la page `AdminQrCards` (menu en haut à droite Roue crantée > QrCards), aller dans l'onglet "Ajouter une carte" et remplir les champs.
+Dans le lanceur (menu en haut à droite),  aller dans l'onglet "Ajouter une carte" (page `AjouterQrCards`) et remplir les champs.
+
+### Voir les cartes
+
+Dans le lanceur (menu en haut à droite),  aller dans la page "Voir les cartes" (page `VoirQrCards`) pour visualiser l'ensemble des cartes. Le passage de la souris permet de visualiser le verso des cartes.
+
+### Imprimer une sélection de cartes
+
+Dans la page `VoirQrCards`, à partir de l'onglet "Cartes" (ou "Mes cartes favorites"), choisir la vue "Vue impression".  
+
+Retirer les cartes que vous ne souhaitez pas imprimer en cliquant sur le lien "Ne pas imprimer cette carte".
+
+Utilisez la fonction Fichier > Imprimer du navigateur (ou le raccourci clavier Ctrl+P sur PC / Cmd+P sur Mac) pour imprimer.   
+ 
 
 ### Choisir ses cartes favorites
 
 Attention, il faut être identifié.e sur le wiki pour pouvoir mettre des cartes en favoris, veuillez donc tout d'abord Créeer votre compte et vous identifier.
-Ensuite, dans la page `AdminQrCards` (menu en haut à droite Roue crantée > QrCards), cliquer sur l'étoile en dessous de la carte de votre choix pour en faire votre carte favorite.
-Vous retrouverez toutes vos cartes favorites dans l'onglet "Mes cartes favorites"
 
-### Imprimer une sélection de cartes
+Ensuite, dans la page `VoirQrCards` (menu en haut à droite Roue crantée > QrCards), cliquer sur l'étoile en dessous de la carte de votre choix pour en faire votre carte favorite.
 
-Dans la page `AdminQrCards` (menu en haut à droite Roue crantée > QrCards), à partir de l'onglet "Cartes" ou "Mes cartes favorites", choisir la vue "Vue impression".  
-Retirer les cartes que vous ne souhaitez pas imprimer en cliquant sur le lien "Ne pas imprimer cette carte".
-Utilisez la fonction Fichier > Imprimer du navigateur (ou le raccourci clavier Ctrl+P sur PC / Cmd+P sur Mac) pour imprimer.   
-Attention : le navigateur Firefox ne gère pas bien l'impression en mode portrait et risque de couper les cartes en deux entre deux pages... Veuillez passer en mode paysage dans les options d'impressions, ou utilisez Chromium.
+Vous retrouverez toutes vos cartes favorites dans l'onglet "Cartes favorites"
 
-## Personnaliser les cartes
+### Exporter des cartes
+
+Il est possible d'exporter les cartes en vue de les sauvegarder ou de les reinstaller sur un autre site. Pour cela, il faut télécharger le fichier CSV correspondant au formulaire QR cards
+
+http://www.monsuperwikiqrcards.com/?BazaR&vue=exporter&id=1400
+
+### Importer des cartes
+
+Lorsque l'on souhaite créer de nombreuses cartes rapidemment, il est possible d'importer des contenus à partir d'un tableur. Pour cela, il faut télécharger le fichier CSV correspondant au formulaire QR cards. 
+
+http://www.monsuperwikiqrcards.com/?BazaR&vue=exporter&id=1400
+
+Ouvrir le fichier .CSV en choisissant la virgule comme séparateur, puis dans le tableau remplir les différents champs.
+
+Enfin il faut réimporter le tableau dans la base de données `QrCards`
+
+http://www.monsuperwikiqrcards.com/?BazaR&vue=importer
+
+
+## Personnaliser les cartes (usage simple)
 
 ### Changer ou ajouter des types de carte
 
-Dans bazar, onglet liste, modifier la liste "type de carte".
+Dans le mode visualisation des cartes (`VoirQrCards`), en dessous de chaque carte, il est possible de visualiser (icone oeil) ou éditer (icone crayon) une carte. 
+
+Modifier le formulaire pour personnaliser la carte.
+
+## Personnaliser les cartes (usage avancé)
 
 ### Changer le logo
 
@@ -96,3 +127,13 @@ Dans la `PageCss`, copier/coller le css suivant et ajustez-le à vos besoins
   --picto-color: #222;
 }
 ```
+
+
+
+## Un peu d'histoire
+
+Cette extension est issue d'une collaboration entre Lilian Ricaud (lilious) et Florian Schmitt (mrflos), afin de faire émerger un outil numérique de création de cartes de type metacartes, afin de faciliter la production de prototypes de cartes, accompagner des projets de créations de carte sur d'autres thématiques, et réfléchir à des systèmes innovants de partage, d'animation, et de curations.
+
+Depuis 2023, le projet a bénéficié d'un financement de l'ADEME dans le cadre de son Appel à commun. 
+
+Dans ce cadre Mélanie (Mélanie_lac) et Lilian,via Ozon et Métacartes, portent juridiquement le projet auprès de l'ADEME et organisent des temps de travail en physique, les résidences Mets ta carte, des ateliers pluridisciplinaires pour faire avancer le projet. Florian continue le developpement avec l'aide de Lilian comme product owner.
