@@ -1,2 +1,0 @@
-{{nav links="AdminQrCards, AjouterQrCard" titles="Cartes, Ajouter une carte"}}
-{{bazar vue="saisir" redirecturl="AdminQrCards" voirmenu="0" id="{QrcardFormId}" }}

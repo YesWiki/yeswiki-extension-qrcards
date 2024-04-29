@@ -1,0 +1,2 @@
+{{nav class="nav nav-tabs no-print" links="VoirQrCards, AjouterQrCards, FavorisQrcards, ImportQrCards, ExportQrCards" titles="Cartes, Ajouter une carte, Favoris, Import de cartes en lot, Export"}}
+{{bazar vue="saisir" redirecturl="AdminQrCards" voirmenu="0" id="{QrcardFormId}" }}

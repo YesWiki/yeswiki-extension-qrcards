@@ -1,0 +1,14 @@
+{{nav class="nav nav-tabs no-print" links="VoirQrCards, AjouterQrCards, FavoriteQrcards, ImportQrCards, ExportQrCards" titles="Cartes, Ajouter une carte, Favoris, Import de cartes en lot, Export"}}
+
+## Exporter au format CSV (tableur)
+- [télécharger le fichier d'export](?BazaR&vue=exporter&id=1400) pour effectuer une sauvegarde des contenus (n'inclus pas les fichiers attachés, images, etc...)
+
+## Partager les résultats par widget HTML (code embed)
+- [voir toutes les options de partage](?BazaR/widget&id=1400)
+
+## Télécharger le fichier JSON
+JSON est un format qui permet de stocker des informations structurées. Il est principalement utilisé pour transmettre les données d’une application web entre un serveur virtuel hôte et un client.
+- [Télécharger le fichier JSON](?api/forms/1400/entries)
+
+## Suivre les dernières modification par RSS
+- [Récupérer le fil RSS](?BazaR/rss&id=1400) pour exporter le contenu ou suivre dans un lecteur de flux.

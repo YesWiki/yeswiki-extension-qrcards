@@ -1,0 +1,7 @@
+{{nav class="nav nav-tabs no-print" links="VoirQrCards, AjouterQrCards, FavorisQrcards, ImportQrCards, ExportQrCards" titles="Cartes, Ajouter une carte, Favoris, Import de cartes en lot, Export"}}
+
+{{panel title="Mes favoris"}}
+{{myfavorites template="my-favorites-tiles.twig" }}
+{{myfavorites template="my-favorites-with-titles.twig"}}
+{{myfavorites template="my-favorites-table.twig"}}
+{{end elem="panel"}}
