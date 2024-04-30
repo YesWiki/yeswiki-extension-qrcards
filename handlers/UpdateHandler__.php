@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Handler called after the 'update' handler. to install the qrcards templates and create default pages
  * needed ones.
@@ -40,7 +41,7 @@ class UpdateHandler__ extends YesWikiHandler
             foreach ($glob as $filename) {
                 $listname = str_replace(array('tools/qrcards/setup/lists/', '.json'), '', $filename);
                 if (file_exists($filename) && !$pageManager->getOne($listname)) {
-                    $output .= 'ℹ️ Adding the <em>'.$listname.'</em> list<br />';
+                    $output .= 'ℹ️ Adding the <em>' . $listname . '</em> list<br />';
                     // save the page with the list value
                     $pageManager->save($listname, file_get_contents($filename));
                     // in case, there is already some triples for the list, delete them
@@ -49,7 +50,7 @@ class UpdateHandler__ extends YesWikiHandler
                     $tripleStore->create($listname, 'http://outils-reseaux.org/_vocabulary/type', 'liste', '', '');
                     $output .= '✅ Done !<br />';
                 } else {
-                    $output .= '✅ The <em>'.$listname.'</em> list already exists.<br />';
+                    $output .= '✅ The <em>' . $listname . '</em> list already exists.<br />';
                 }
             }
 
@@ -61,16 +62,16 @@ class UpdateHandler__ extends YesWikiHandler
                 $form = $formManager->getOne($formId);
                 if (empty($form)) {
                     $form = json_decode(file_get_contents($filename), true);
-                    $output .= "ℹ️ Adding <em>".$form['bn_label_nature']."</em> form into <em>{$dbService->prefixTable('nature')}</em> table.<br />";
+                    $output .= "ℹ️ Adding <em>" . $form['bn_label_nature'] . "</em> form into <em>{$dbService->prefixTable('nature')}</em> table.<br />";
 
                     $formManager->create($form);
 
                     $output .= '✅ Done !<br />';
                 } else {
-                    $output .= "✅ The <em>".$form['bn_label_nature']."</em> form already exists in the <em>{$dbService->prefixTable('nature')}</em> table.<br />";
+                    $output .= "✅ The <em>" . $form['bn_label_nature'] . "</em> form already exists in the <em>{$dbService->prefixTable('nature')}</em> table.<br />";
                 }
             }
-        
+
             $glob = glob('tools/qrcards/setup/pages/*.txt');
             foreach ($glob as $filename) {
                 $pageName = str_replace(array('tools/qrcards/setup/pages/', '.txt'), '', $filename);
@@ -85,16 +86,16 @@ class UpdateHandler__ extends YesWikiHandler
 
             $output .= '<hr />';
         }
-        
+
         // add the content before footer
         $this->output = str_replace(
             '<!-- end handler /update -->',
-            $output.'<!-- end handler /update -->',
+            $output . '<!-- end handler /update -->',
             $this->output
         );
     }
 
-    private function updatePage(string $pageName, string $content, array $replacements = [], $append = false):string
+    private function updatePage(string $pageName, string $content, array $replacements = [], $append = false): string
     {
         $output = '';
         $aclService = $this->getService(AclService::class);
@@ -113,7 +114,7 @@ class UpdateHandler__ extends YesWikiHandler
         } else {
             if ($append) {
                 $content = json_decode($content, true);
-                if (!strpos($page['body'], $content['content'])) {
+                if (strpos($page['body'], $content['content']) === false) {
                     $newContent = str_replace($content['replace'], $content['content'], $page['body']);
                     $pageManager->save($pageName, $newContent, "", true);
                     $output .= "✅ The <em>$pageName</em> page was extented.<br />";
