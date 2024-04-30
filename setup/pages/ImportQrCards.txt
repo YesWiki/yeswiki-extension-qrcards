@@ -2,7 +2,7 @@
 
 //Saisir des fiches dans un tableur vous permet d'importer facilement un grand nombre de cartes en une fois. Préférez cette méthode si vous avez déja beaucoup de contenus, sinon ajoutez les cartes une à une au besoin.//
 
-- 0. Télécharger le tableur .csv depuis [la rubrique export de votre wiki](?BazaR&vue=exporter) (Fichers à exporter : QrCards
+- 0. Télécharger le tableur .csv depuis [la rubrique export de votre wiki](?BazaR&vue=exporter) (Fiches à exporter : """QrCards""")
 - 1. Remplir le maximum de champs (en orange les champs à remplir en priorité, les champs jaunes sont optionnels)
 - 2. Exporter au format CSV avec les virgules comme séparateur
 - 3. Si besoin [personnaliser les listes](?BazaR&vue=listes) (Optionnel)

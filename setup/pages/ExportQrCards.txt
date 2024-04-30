@@ -1,4 +1,4 @@
-{{nav class="nav nav-tabs no-print" links="VoirQrCards, AjouterQrCards, FavoriteQrcards, ImportQrCards, ExportQrCards" titles="Cartes, Ajouter une carte, Favoris, Import de cartes en lot, Export"}}
+{{nav class="nav nav-tabs no-print" links="VoirQrCards, AjouterQrCards, FavorisQrcards, ImportQrCards, ExportQrCards" titles="Cartes, Ajouter une carte, Favoris, Import de cartes en lot, Export"}}
 
 ## Exporter au format CSV (tableur)
 - [télécharger le fichier d'export](?BazaR&vue=exporter&id=1400) pour effectuer une sauvegarde des contenus (n'inclus pas les fichiers attachés, images, etc...)

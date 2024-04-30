@@ -72,6 +72,21 @@ class UpdateHandler__ extends YesWikiHandler
                 }
             }
 
+            $glob = glob('tools/qrcards/setup/entries/*.json');
+            foreach ($glob as $filename) {
+                $entryName = str_replace(array('tools/qrcards/setup/entries/', '.json'), '', $filename);
+                if (file_exists($filename) && !$pageManager->getOne($entryName)) {
+                    $output .= 'ℹ️ Adding the <em>' . $entryName . '</em> entry<br />';
+                    // save the page with the list value
+                    $entry = json_decode(file_get_contents($filename), true);
+                    $entry['antispam'] = 1;
+                    $entryManager->create(1400, $entry);
+                    $output .= '✅ Done !<br />';
+                } else {
+                    $output .= '✅ The <em>' . $entryName . '</em> entry already exists.<br />';
+                }
+            }
+
             $glob = glob('tools/qrcards/setup/pages/*.txt');
             foreach ($glob as $filename) {
                 $pageName = str_replace(array('tools/qrcards/setup/pages/', '.txt'), '', $filename);
