@@ -376,6 +376,10 @@
 
 [data-id="bf_plus"] .BAZ_label {display:none}
 
+.col-md-6 .col-md-4 .bazar-entry-edit-image {
+  flex-direction: column;
+}
+
 /* hide yeswiki interface in print mode, and do some tweaks */
 @media print {
   @page {
