@@ -89,5 +89,6 @@ class QrcardsInitialDatabaseAndPagesSetup extends YesWikiMigration
                 }
             }
         }
+        return '';
     }
 }
