@@ -1,14 +1,15 @@
 <?php
 
 use YesWiki\Core\Controller\AuthController;
-use YesWiki\Security\Controller\SecurityController;
 use YesWiki\Core\Service\FavoritesManager;
+use YesWiki\Security\Controller\SecurityController;
 
 function display($img)
 {
     if (!empty($img) && file_exists('files/' . $img)) {
         return 'files/' . $img;
     }
+
     return false;
 }
 
@@ -17,7 +18,7 @@ function f($text)
     return strip_tags($GLOBALS['wiki']->format($text), '<br>');
 }
 
-function truncate($string, $length = 550, $append = "&hellip;")
+function truncate($string, $length = 550, $append = '&hellip;')
 {
     $string = trim($string);
 
@@ -90,16 +91,16 @@ function displayCard($fiche, $view = 'print')
         $fav = ['currentuser' => null, 'isUserFavorite' => null];
     }
     $linkedit = $linkdelete = null;
-    if ($GLOBALS['wiki']->HasAccess("write")) {
+    if ($GLOBALS['wiki']->HasAccess('write')) {
         // on ajoute le lien d'édition si l'action est autorisée
-        if ($GLOBALS['wiki']->HasAccess("write", $fiche['id_fiche']) && !$GLOBALS['wiki']->services->get(SecurityController::class)->isWikiHibernated()) {
-            $linkedit = $GLOBALS['wiki']->href("edit", $fiche['id_fiche'], 'incomingurl=' . $GLOBALS['wiki']->href());
+        if ($GLOBALS['wiki']->HasAccess('write', $fiche['id_fiche']) && !$GLOBALS['wiki']->services->get(SecurityController::class)->isWikiHibernated()) {
+            $linkedit = $GLOBALS['wiki']->href('edit', $fiche['id_fiche'], 'incomingurl=' . $GLOBALS['wiki']->href());
         }
 
         // if current user is owner or admin
         if ($GLOBALS['wiki']->UserIsOwner($fiche['id_fiche']) || $GLOBALS['wiki']->UserIsAdmin()) {
             if (!$GLOBALS['wiki']->services->get(SecurityController::class)->isWikiHibernated()) {
-                $linkdelete = $GLOBALS['wiki']->href("deletepage", $fiche['id_fiche'], 'incomingurl=' . $GLOBALS['wiki']->href());
+                $linkdelete = $GLOBALS['wiki']->href('deletepage', $fiche['id_fiche'], 'incomingurl=' . $GLOBALS['wiki']->href());
             }
         }
     }
@@ -120,12 +121,13 @@ function displayCard($fiche, $view = 'print')
         'longtext' => f($fiche['bf_chapeau']),
         'qrcode' => $GLOBALS['wiki']->format('{{qrcode text="' . $link . '"}}'),
         'link' => $link,
-        'shortlink' => str_replace(array('https://', 'http://'), '', $link),
+        'shortlink' => str_replace(['https://', 'http://'], '', $link),
         'currentuser' => $fav['currentuser'],
         'isUserFavorite' => $fav['isUserFavorite'],
         'linkedit' => $linkedit,
-        'linkdelete' => $linkdelete
+        'linkdelete' => $linkdelete,
     ];
-    $output = $GLOBALS['wiki']->render("@qrcards/card-layouts/qrcard.twig", $elements);
+    $output = $GLOBALS['wiki']->render('@qrcards/card-layouts/qrcard.twig', $elements);
+
     return $output;
 }

@@ -5,12 +5,13 @@
  * needed ones.
  *
  * @category YesWiki
- * @package  qrcards
+ *
  * @author   Adrien Cheype <adrien.cheype@gmail.com>
  * @author   Florian Schmitt <mrflos@lilo.org>
  * @author   Jérémy Dufraisse <jeremy.dufraisse-info@orange.fr>
  * @license  https://www.gnu.org/licenses/agpl-3.0.en.html AGPL 3.0
- * @link     https://yeswiki.net
+ *
+ * @see     https://yeswiki.net
  */
 
 namespace YesWiki\Qrcards;
@@ -39,7 +40,7 @@ class UpdateHandler__ extends YesWikiHandler
 
             $glob = glob('tools/qrcards/setup/lists/*.json');
             foreach ($glob as $filename) {
-                $listname = str_replace(array('tools/qrcards/setup/lists/', '.json'), '', $filename);
+                $listname = str_replace(['tools/qrcards/setup/lists/', '.json'], '', $filename);
                 if (file_exists($filename) && !$pageManager->getOne($listname)) {
                     $output .= 'ℹ️ Adding the <em>' . $listname . '</em> list<br />';
                     // save the page with the list value
@@ -56,25 +57,25 @@ class UpdateHandler__ extends YesWikiHandler
 
             $glob = glob('tools/qrcards/setup/forms/*.json');
             foreach ($glob as $filename) {
-                $formId = str_replace(array('tools/qrcards/setup/forms/', '.json'), '', $filename);
+                $formId = str_replace(['tools/qrcards/setup/forms/', '.json'], '', $filename);
 
                 // test if the form exists, if not, install it
                 $form = $formManager->getOne($formId);
                 if (empty($form)) {
                     $form = json_decode(file_get_contents($filename), true);
-                    $output .= "ℹ️ Adding <em>" . $form['bn_label_nature'] . "</em> form into <em>{$dbService->prefixTable('nature')}</em> table.<br />";
+                    $output .= 'ℹ️ Adding <em>' . $form['bn_label_nature'] . "</em> form into <em>{$dbService->prefixTable('nature')}</em> table.<br />";
 
                     $formManager->create($form);
 
                     $output .= '✅ Done !<br />';
                 } else {
-                    $output .= "✅ The <em>" . $form['bn_label_nature'] . "</em> form already exists in the <em>{$dbService->prefixTable('nature')}</em> table.<br />";
+                    $output .= '✅ The <em>' . $form['bn_label_nature'] . "</em> form already exists in the <em>{$dbService->prefixTable('nature')}</em> table.<br />";
                 }
             }
 
             $glob = glob('tools/qrcards/setup/entries/*.json');
             foreach ($glob as $filename) {
-                $entryName = str_replace(array('tools/qrcards/setup/entries/', '.json'), '', $filename);
+                $entryName = str_replace(['tools/qrcards/setup/entries/', '.json'], '', $filename);
                 if (file_exists($filename) && !$pageManager->getOne($entryName)) {
                     $output .= 'ℹ️ Adding the <em>' . $entryName . '</em> entry<br />';
                     // save the page with the list value
@@ -89,13 +90,13 @@ class UpdateHandler__ extends YesWikiHandler
 
             $glob = glob('tools/qrcards/setup/pages/*.txt');
             foreach ($glob as $filename) {
-                $pageName = str_replace(array('tools/qrcards/setup/pages/', '.txt'), '', $filename);
+                $pageName = str_replace(['tools/qrcards/setup/pages/', '.txt'], '', $filename);
                 $output .= $this->updatePage($pageName, file_get_contents($filename), ['{QrcardFormId}' => 1400]);
             }
 
             $glob = glob('tools/qrcards/setup/appendtopages/*.json');
             foreach ($glob as $filename) {
-                $pageName = str_replace(array('tools/qrcards/setup/appendtopages/', '.json'), '', $filename);
+                $pageName = str_replace(['tools/qrcards/setup/appendtopages/', '.json'], '', $filename);
                 $output .= $this->updatePage($pageName, file_get_contents($filename), ['{QrcardFormId}' => 1400], true);
             }
 
@@ -124,14 +125,14 @@ class UpdateHandler__ extends YesWikiHandler
             $aclService->delete($pageName); // to clear acl cache
             $aclService->save($pageName, 'read', '@admins');
             $aclService->save($pageName, 'write', '@admins');
-            $pageManager->save($pageName, $content, "", true);
+            $pageManager->save($pageName, $content, '', true);
             $output .= '✅ Done !<br />';
         } else {
             if ($append) {
                 $content = json_decode($content, true);
                 if (strpos($page['body'], $content['content']) === false) {
                     $newContent = str_replace($content['replace'], $content['content'], $page['body']);
-                    $pageManager->save($pageName, $newContent, "", true);
+                    $pageManager->save($pageName, $newContent, '', true);
                     $output .= "✅ The <em>$pageName</em> page was extented.<br />";
                 } else {
                     $output .= "✅ The <em>$pageName</em> page was already extented.<br />";
@@ -140,6 +141,7 @@ class UpdateHandler__ extends YesWikiHandler
                 $output .= "✅ The <em>$pageName</em> page already exists.<br />";
             }
         }
+
         return $output;
     }
 }

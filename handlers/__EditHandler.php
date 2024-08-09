@@ -2,8 +2,8 @@
 
 namespace YesWiki\Qrcards;
 
-use YesWiki\Core\YesWikiHandler;
 use YesWiki\Core\Service\AssetsManager;
+use YesWiki\Core\YesWikiHandler;
 
 class __EditHandler extends YesWikiHandler
 {
