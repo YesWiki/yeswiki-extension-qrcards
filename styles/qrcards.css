@@ -303,18 +303,17 @@
 }
 
 .qrcard-main-content {
-  display: flex;
+  display: -webkit-box;
   padding: 1mm;
   background: white !important;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
   overflow: hidden;
   font-family: var(--longtext-font-family);
   font-size: var(--longtext-font-size);
   color: var(--longtext-color);
   text-align: left;
-  overflow: hidden;
+  -webkit-line-clamp: 14;
+  -webkit-box-orient: vertical;
+  line-height: 1.152em;
 }
 .page-qrcard img {
   border-radius: 0;
