@@ -67,7 +67,7 @@ class QrcardsInitialDatabaseAndPagesSetup extends YesWikiMigration
         }
     }
 
-    private function updatePage(string $pageName, string $content, array $replacements = [], $append = false): string
+    private function updatePage(string $pageName, string $content, array $replacements = [], $append = false)
     {
         $aclService = $this->getService(AclService::class);
         $pageManager = $this->getService(PageManager::class);
