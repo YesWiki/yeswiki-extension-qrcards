@@ -1,12 +1,12 @@
 <?php
 
-use YesWiki\Core\YesWikiMigration;
 use YesWiki\Bazar\Service\EntryManager;
 use YesWiki\Bazar\Service\FormManager;
-use YesWiki\Core\Service\TripleStore;
 use YesWiki\Core\Service\AclService;
 use YesWiki\Core\Service\DbService;
 use YesWiki\Core\Service\PageManager;
+use YesWiki\Core\Service\TripleStore;
+use YesWiki\Core\YesWikiMigration;
 
 class QrcardsInitialDatabaseAndPagesSetup extends YesWikiMigration
 {
@@ -20,7 +20,7 @@ class QrcardsInitialDatabaseAndPagesSetup extends YesWikiMigration
 
         $glob = glob('tools/qrcards/setup/lists/*.json');
         foreach ($glob as $filename) {
-            $listname = str_replace(array('tools/qrcards/setup/lists/', '.json'), '', $filename);
+            $listname = str_replace(['tools/qrcards/setup/lists/', '.json'], '', $filename);
             if (file_exists($filename) && !$pageManager->getOne($listname)) {
                 // save the page with the list value
                 $pageManager->save($listname, file_get_contents($filename));
@@ -33,7 +33,7 @@ class QrcardsInitialDatabaseAndPagesSetup extends YesWikiMigration
 
         $glob = glob('tools/qrcards/setup/forms/*.json');
         foreach ($glob as $filename) {
-            $formId = str_replace(array('tools/qrcards/setup/forms/', '.json'), '', $filename);
+            $formId = str_replace(['tools/qrcards/setup/forms/', '.json'], '', $filename);
 
             // test if the form exists, if not, install it
             $form = $formManager->getOne($formId);
@@ -45,7 +45,7 @@ class QrcardsInitialDatabaseAndPagesSetup extends YesWikiMigration
 
         $glob = glob('tools/qrcards/setup/entries/*.json');
         foreach ($glob as $filename) {
-            $entryName = str_replace(array('tools/qrcards/setup/entries/', '.json'), '', $filename);
+            $entryName = str_replace(['tools/qrcards/setup/entries/', '.json'], '', $filename);
             if (file_exists($filename) && !$pageManager->getOne($entryName)) {
                 // save the page with the list value
                 $entry = json_decode(file_get_contents($filename), true);
@@ -56,13 +56,13 @@ class QrcardsInitialDatabaseAndPagesSetup extends YesWikiMigration
 
         $glob = glob('tools/qrcards/setup/pages/*.txt');
         foreach ($glob as $filename) {
-            $pageName = str_replace(array('tools/qrcards/setup/pages/', '.txt'), '', $filename);
+            $pageName = str_replace(['tools/qrcards/setup/pages/', '.txt'], '', $filename);
             $this->updatePage($pageName, file_get_contents($filename), ['{QrcardFormId}' => 1400]);
         }
 
         $glob = glob('tools/qrcards/setup/appendtopages/*.json');
         foreach ($glob as $filename) {
-            $pageName = str_replace(array('tools/qrcards/setup/appendtopages/', '.json'), '', $filename);
+            $pageName = str_replace(['tools/qrcards/setup/appendtopages/', '.json'], '', $filename);
             $this->updatePage($pageName, file_get_contents($filename), ['{QrcardFormId}' => 1400], true);
         }
     }
@@ -79,16 +79,17 @@ class QrcardsInitialDatabaseAndPagesSetup extends YesWikiMigration
             $aclService->delete($pageName); // to clear acl cache
             $aclService->save($pageName, 'read', '@admins');
             $aclService->save($pageName, 'write', '@admins');
-            $pageManager->save($pageName, $content, "", true);
+            $pageManager->save($pageName, $content, '', true);
         } else {
             if ($append) {
                 $content = json_decode($content, true);
                 if (strpos($page['body'], $content['content']) === false) {
                     $newContent = str_replace($content['replace'], $content['content'], $page['body']);
-                    $pageManager->save($pageName, $newContent, "", true);
+                    $pageManager->save($pageName, $newContent, '', true);
                 }
             }
         }
+
         return '';
     }
 }

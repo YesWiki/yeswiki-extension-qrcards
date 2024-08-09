@@ -311,9 +311,9 @@
   font-size: var(--longtext-font-size);
   color: var(--longtext-color);
   text-align: left;
-  -webkit-line-clamp: 14;
-  -webkit-box-orient: vertical;
-  line-height: 1.152em;
+  -webkit-line-clamp: 19 !important;
+  line-height: 1.14em !important;
+  font-size: 12px !important;
 }
 .page-qrcard img {
   border-radius: 0;
