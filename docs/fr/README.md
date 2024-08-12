@@ -137,3 +137,16 @@ Cette extension est issue d'une collaboration entre Lilian Ricaud (lilious) et F
 Depuis 2023, le projet a bénéficié d'un financement de l'ADEME dans le cadre de son Appel à commun. 
 
 Dans ce cadre Mélanie (Mélanie_lac) et Lilian,via Ozon et Métacartes, portent juridiquement le projet auprès de l'ADEME et organisent des temps de travail en physique, les résidences Mets ta carte, des ateliers pluridisciplinaires pour faire avancer le projet. Florian continue le developpement avec l'aide de Lilian comme product owner.
+
+
+## Changelog
+
+- aout 2024 : sortie V0.7.2 :
+ - correction d'un bug d'affichage lorsque la base de données est dupliqué de la base principale.
+ - correction d'un bug d'affichage dans le nombre de lignes champs essentiel
+- aout 2024 : sortie V0.7.1 : Ajout d'un cut off sur le nombre de lignes affichées dans le champs essentiel.
+- mai 2024 : sortie V0.7   
+ - version stabilisée ajoutée aux extensions yeswiki et accessible via la branche prod
+ - correction bug impresison firefox
+ - changement de la structure de la base de données
+ - intégration des modification des pages associées (formulaire, cartes exemples, menus...)
