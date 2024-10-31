@@ -1,0 +1,95 @@
+.hexa-entry {
+  width: 300px;
+  height: 347px;
+}
+.hexa-card {
+  position: absolute;
+  width: 300px;
+  height: 347px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.2s;
+  /*FF bug fix - applying backface-visibility on the .hexa-card
+    element makes .hexagon behave properly when rotated*/
+  -moz-backface-visibility: hidden;
+}
+.hexa-card.flipped {
+  transform: rotateY(180deg);
+}
+.hexa-card.flipped .front {
+  z-index: 2;
+}
+.hexa-card.flipped .back {
+  z-index: 3;
+}
+.hexagon {
+  position: absolute;
+  width: 300px;
+  height: 173.21px;
+  margin: 86.6px 0;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  transition: transform 0.5s;
+  z-index: 3;
+}
+.hexagon:hover {
+  transform: translateY(-3px);
+}
+.hexagon:before,
+.hexagon:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 212.13px;
+  height: 212.13px;
+  transform: scaleY(0.5774) rotate(-45deg);
+  background-color: inherit;
+  left: 43.934px;
+}
+.hexagon:before {
+  top: -106.066px;
+}
+.hexagon:after {
+  bottom: -106.066px;
+}
+.hexagon.back {
+  transform: rotateY(180deg);
+  z-index: 2;
+}
+.card-content {
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  color:var(--text-color);
+}
+.card-content img {
+  max-width: 90px;
+  margin-top: -45px;
+  border-radius: 3em;
+  border: 1px solid;
+}
+.hexa-card h1 {
+  font-size: 2rem;
+  color: var(--title-color);
+}
+.hexa-card-longtext {
+  line-height: 1.1em;
+  font-size: 14px;
+  margin: 0 1em;
+}
+.see-more {
+  position: absolute;
+  bottom: -75px;
+  left: 150px;
+  margin-left: -14px;
+  font-size: 28px;
+  color: var(--text-color);
+  z-index: 2;
+  transition: color 0.2s, transform 0.2s;
+}
+.hexa-card:hover .see-more {
+  color: var(--text-color);
+  transform: rotate(45deg);
+}

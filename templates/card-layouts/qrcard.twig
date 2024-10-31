@@ -3,7 +3,7 @@
 {% else %}
 <div class="qrcard-to-print bazar-entry" {{ fiche.html_data|raw }}>
 {% endif %} 
-    <div class="qrcard front" style="background-color: {{ fiche.bf_card_color }} !important;">
+    <div class="qrcard front" style="background-color: {{ cardColor }} !important;">
         <div class="qrcard-header">
             <div class="complexity">{{ difficulty }}</div>
             <div class="card-type">{{ type }}</div>
