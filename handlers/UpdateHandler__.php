@@ -54,7 +54,7 @@ class UpdateHandler__ extends YesWikiHandler
                 }
             }
 
-            $glob = glob('tools/qrcards/setup/forms/*.json');
+            $glob = glob('tools/qrcards/setup/forms/legacy/*.json');
             foreach ($glob as $filename) {
                 $formId = str_replace(array('tools/qrcards/setup/forms/', '.json'), '', $filename);
 

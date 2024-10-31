@@ -1,0 +1,26 @@
+{{ include_css('tools/qrcards/styles/hexa.css') }}
+{{ include_javascript('tools/qrcards/javascripts/hexa.js') }}
+<div class="no-dblclick bazar-entry hexa-entry">
+  <div class="hexa-card">
+        <figure class="hexagon front" style="background-color: {{ cardColor }} !important;">
+          <div class="card-content">
+            <div class="main-image">
+              {{ mainimage|raw }}
+            </div>
+            <h1>{{ fiche.bf_titre }}</h1>
+            <div class="hexa-card-text">
+              {{ fiche.bf_accroche }}
+            </div>
+          </div>
+          <span class="see-more"><i class="fa fa-undo" aria-hidden="true"></i></span>
+        </figure>
+        <figure class="hexagon back" style="background-color: {{ cardColor }} !important;">
+          <div class="card-content">
+            <div class="hexa-card-longtext">
+             {{ longtext|raw }}
+            </div>
+          </div>
+          <span class="see-more"><i class="fa fa-undo" aria-hidden="true"></i></span>
+        </figure>
+  </div>
+</div>

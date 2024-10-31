@@ -1,8 +1,23 @@
 <?php
 
+require_once 'tools/qrcards/vendor/autoload.php';
+
+use Symfony\Component\Yaml\Yaml;
 use YesWiki\Core\Controller\AuthController;
 use YesWiki\Security\Controller\SecurityController;
 use YesWiki\Core\Service\FavoritesManager;
+
+
+if (empty($GLOBALS['wiki']->config['metacartes']) && $pageConf = $GLOBALS['wiki']->LoadPage('ConfigMetacarte')) {
+    try {
+        $GLOBALS['wiki']->config['metacartes'] = Yaml::Parse($pageConf['body']);
+        dump($GLOBALS['wiki']->config['metacartes']);
+    } catch (\Exception $e) {
+        exit('<div class="alert alert-danger">Erreur de syntaxe dans la page ConfigMetacarte :<br/>' . $e->getMessage() . '</div>');
+    }
+} else {
+    dump('pas de conf.');
+}
 
 function display($img)
 {
@@ -48,6 +63,7 @@ function display_difficulty($fiche)
 
 function displayCard($fiche, $view = 'print')
 {
+    $output = '';
     $thumbwidth = 300;
     $thumbheight = 300;
     $thumbresize = 'fit';
@@ -63,6 +79,7 @@ function displayCard($fiche, $view = 'print')
     } else {
         $image = '<img loading="lazy" alt="logo qrcard" src="' . $imgLogo . '" />';
     }
+    $cardSetImg = (!empty($GLOBALS['wiki']->config['metacartes']['card_set_image'])) ? $GLOBALS['wiki']->config['metacartes']['card_set_image'] : $imgLogo;
     $picto1 = !empty($fiche['imagebf_picto_boite1']) ? display($fiche['imagebf_picto_boite1']) : false;
     if ($picto1) {
         $picto1 = '<img loading="lazy" src="' . $picto1 . '" alt="mini-picto1" />';
@@ -76,6 +93,27 @@ function displayCard($fiche, $view = 'print')
         $picto3 = '<img loading="lazy" src="' . $picto3 . '" alt="mini-picto3" />';
     }
     $link = (!empty($fiche['bf_url'])) ? $fiche['bf_url'] : $GLOBALS['wiki']->href('', $fiche['id_fiche']);
+    $customCardColors = null;
+    if (!empty($GLOBALS['wiki']->config['metacartes']['card_colors'])) {
+        foreach ($GLOBALS['wiki']->config['metacartes']['card_colors'] as $colors) {
+            if (!empty($fiche[$colors['field']]) && $fiche[$colors['field']] == $colors['key']) {
+                $customCardColors = $colors['color'];
+            }
+        }
+    }
+    $template = 'qrcard';
+    if (
+        !empty($GLOBALS['wiki']->config['metacartes']['template'])
+        && (
+            file_exists('tools/qrcards/templates/card-layouts/' . $GLOBALS['wiki']->config['metacartes']['template'] . '.twig')
+            || file_exists('custom/templates/qrcards/card-layouts/' . $GLOBALS['wiki']->config['metacartes']['template'] . '.twig')
+        )
+    ) {
+        $template = $GLOBALS['wiki']->config['metacartes']['template'];
+    } else {
+        $output .= '<div class="alert alert-danger">Le template "' . $GLOBALS['wiki']->config['metacartes']['template'] . '" n\'a pas été trouvé, on utilise le template par défaut.</div>';
+    }
+    $cardColor = $customCardColors ?? $fiche['bf_card_color'];
     $types = baz_valeurs_liste('ListeTypeCarte');
     $type = '';
     if (!empty($fiche['listeListeTypeCarte']) && !empty($types['label'][$fiche['listeListeTypeCarte']])) {
@@ -109,8 +147,9 @@ function displayCard($fiche, $view = 'print')
         'view' => $view,
         'difficulty' => display_difficulty($fiche),
         'type' => $type,
-        'logoimage' => $imgLogo,
+        'logoimage' => $cardSetImg,
         'mainimage' => $image,
+        'cardColor' => $cardColor,
         'picto1' => $picto1,
         'picto2' => $picto2,
         'picto3' => $picto3,
@@ -126,6 +165,6 @@ function displayCard($fiche, $view = 'print')
         'linkedit' => $linkedit,
         'linkdelete' => $linkdelete
     ];
-    $output = $GLOBALS['wiki']->render("@qrcards/card-layouts/qrcard.twig", $elements);
+    $output .= $GLOBALS['wiki']->render("@qrcards/card-layouts/{$template}.twig", $elements);
     return $output;
 }
