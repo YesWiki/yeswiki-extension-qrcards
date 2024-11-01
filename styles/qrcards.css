@@ -442,3 +442,12 @@
     min-height: calc(2 * var(--card-width));
   }
 }
+
+.verso .format-menu,
+.verso .more-styles .aceditor-btn-line,
+.verso .pages,
+.verso .attach-file-uploader,
+.verso .actions-builder-button,
+.verso .aceditor-btn-help {
+  display: none;
+}
