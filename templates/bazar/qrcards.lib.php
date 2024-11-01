@@ -14,7 +14,7 @@ if (empty($GLOBALS['wiki']->config['metacartes']) && $pageConf = $GLOBALS['wiki'
         exit('<div class="alert alert-danger">Erreur de syntaxe dans la page ConfigMetacarte :<br/>' . $e->getMessage() . '</div>');
     }
 } else {
-    exit('pas de conf.');
+    $GLOBALS['wiki']->config['metacartes'] = [];
 }
 
 function display($img)
@@ -109,8 +109,6 @@ function displayCard($fiche, $view = 'print')
         )
     ) {
         $template = $GLOBALS['wiki']->config['metacartes']['template'];
-    } else {
-        $output .= '<div class="alert alert-danger">Le template "' . $GLOBALS['wiki']->config['metacartes']['template'] . '" n\'a pas été trouvé, on utilise le template par défaut.</div>';
     }
     $cardColor = $customCardColors ?? $fiche['bf_card_color'];
     $types = baz_valeurs_liste('ListeTypeCarte');
@@ -159,7 +157,7 @@ function displayCard($fiche, $view = 'print')
         'textpicto1' => $fiche['bf_texte_boite1'] ?? '',
         'textpicto2' => $fiche['bf_texte_boite2'] ?? '',
         'textpicto3' => $fiche['bf_texte_boite3'] ?? '',
-        'longtext' => f($fiche['bf_chapeau']),
+        'longtext' => f($fiche['bf_chapeau'] ?? $fiche['bf_essentiel']),
         'qrcode' => $GLOBALS['wiki']->format('{{qrcode text="' . $link . '"}}'),
         'link' => $link,
         'shortlink' => str_replace(['https://', 'http://'], '', $link),
