@@ -306,7 +306,7 @@
 }
 
 .qrcard-main-content {
-  display: -webkit-box;
+  display: block;
   padding: 2mm;
   background: white !important;
   overflow: hidden;
@@ -314,11 +314,14 @@
   font-size: var(--longtext-font-size);
   color: var(--longtext-color);
   text-align: left;
-  -webkit-line-clamp: 19 !important;
-  line-clamp: 19 !important;
-  line-height: 1.14em !important;
+  line-height: 1.143em !important;
   font-size: 12px !important;
 }
+
+.qrcard-main-content ul {
+  padding-left: 1rem;
+}
+
 .page-qrcard img {
   border-radius: 0;
   object-fit: contain;
