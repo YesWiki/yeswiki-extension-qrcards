@@ -7,16 +7,14 @@ use YesWiki\Core\Controller\AuthController;
 use YesWiki\Core\Service\FavoritesManager;
 use YesWiki\Security\Controller\SecurityController;
 
-
 if (empty($GLOBALS['wiki']->config['metacartes']) && $pageConf = $GLOBALS['wiki']->LoadPage('ConfigMetacarte')) {
     try {
         $GLOBALS['wiki']->config['metacartes'] = Yaml::Parse($pageConf['body']);
-        dump($GLOBALS['wiki']->config['metacartes']);
-    } catch (\Exception $e) {
+    } catch (Exception $e) {
         exit('<div class="alert alert-danger">Erreur de syntaxe dans la page ConfigMetacarte :<br/>' . $e->getMessage() . '</div>');
     }
 } else {
-    dump('pas de conf.');
+    exit('pas de conf.');
 }
 
 function display($img)
@@ -116,9 +114,13 @@ function displayCard($fiche, $view = 'print')
     }
     $cardColor = $customCardColors ?? $fiche['bf_card_color'];
     $types = baz_valeurs_liste('ListeTypeCarte');
-    $type = '';
-    if (!empty($fiche['listeListeTypeCarte']) && !empty($types['label'][$fiche['listeListeTypeCarte']])) {
-        $type = $types['label'][$fiche['listeListeTypeCarte']];
+    if (!empty($types['nodes'])) {
+        $type = multiArraySearch($types['nodes'], 'id', $fiche['listeListeTypeCarte']);
+        if (is_array($type)) {
+            $type = array_shift($type)['label'] ?? '';
+        }
+    } else {
+        $type = (!empty($fiche['listeListeTypeCarte']) && !empty($types['label'][$fiche['listeListeTypeCarte']])) ? $types['label'][$fiche['listeListeTypeCarte']] : '';
     }
     $user = $GLOBALS['wiki']->services->get(AuthController::class)->getLoggedUser();
     $favoritesManager = $GLOBALS['wiki']->services->get(FavoritesManager::class);
@@ -167,5 +169,6 @@ function displayCard($fiche, $view = 'print')
         'linkdelete' => $linkdelete,
     ];
     $output .= $GLOBALS['wiki']->render("@qrcards/card-layouts/{$template}.twig", $elements);
+
     return $output;
 }

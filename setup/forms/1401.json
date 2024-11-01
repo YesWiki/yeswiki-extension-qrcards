@@ -1,0 +1,13 @@
+{
+  "bn_id_nature": "1401",
+  "bn_label_nature": "Sets de cartes",
+  "bn_description": "Liste des sets de cartes",
+  "bn_condition": "",
+  "bn_sem_context": "",
+  "bn_sem_type": "",
+  "bn_sem_use_template": "0",
+  "bn_template": "texte***bf_titre***Nom du set*** *** *** *** ***text***1*** *** *** * *** * *** *** *** ***\r\ntextelong***bf_description***Description*** *** *** *** ***wiki***0*** *** *** * *** * *** *** *** ***\r\nlistefiches***1400*** *** *** *** *** ***Liste des fiches li\u00e9es***0*** *** *** * *** * *** *** *** ***\r\ncheckboxfiche***1400***Cartes du set*** *** *** ***checkboxfiche1400bf_cardlist***dragndrop***0*** *** *** * *** * *** *** *** ***\r\n",
+  "bn_ce_i18n": "fr-FR",
+  "bn_only_one_entry": "N",
+  "bn_only_one_entry_message": ""
+}

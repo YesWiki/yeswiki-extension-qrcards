@@ -70,9 +70,6 @@
 </a>
 {% endif %}
 <div class="card-edit-links">
-    <a title="{{ _t('QRCARDS_PRINT')}}" data-toggle="tooltip" data-placement="top" href="{{ url({tag: fiche.id_fiche,params:{print:1}})  }}" class="btn btn-xs btn-default">
-        <i class="fas fa-print"></i>
-    </a>
     {% if currentPage != fiche.id_fiche %}
     <a title="{{ _t('QRCARDS_VIEW')}}" data-toggle="tooltip" data-placement="top" href="{{ url({tag:fiche.id_fiche}) }}" class="btn btn-xs btn-default">
         <i class="fa fa-eye-open"></i>
@@ -83,6 +80,38 @@
       <i class="fa fa-pencil-alt"></i>
     </a>
   {% endif %}
+    <a
+      title="{{ _t('DUPLICATE_CARD') }}"
+      class="btn btn-xs btn-default link-duplicate dropdown-toggle"
+      id="duplicate-dropup"
+      rel="tooltip" data-placement="top"
+      data-toggle="dropdown"
+      aria-haspopup="true"
+      aria-expanded="false"
+    >
+      <i class="fas fa-copy"></i>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="duplicate-dropup">
+      <li>
+        <a
+          href="{{ url({tag:fiche.id_fiche, handler:'duplicate'}) }}"
+          title="{{ _t('TEMPLATE_DUPLICATE_PAGE') }}"
+        >
+          {{ _t('TEMPLATE_DUPLICATE_LOCALLY') }}
+        </a>
+      </li>
+      <li>
+        <a
+          href="{{ url({tag:fiche.id_fiche, handler:'duplicate', params:{toUrl:1}}) }}"
+          title="{{ _t('TEMPLATE_DUPLICATE_PAGE') ~ ' ' ~ page }}"
+        >
+          {{ _t('TEMPLATE_DUPLICATE_IN_ANOTHER_WIKI') }}
+        </a>
+      </li>
+    </ul>
+  <a title="{{ _t('QRCARDS_PRINT')}}" data-toggle="tooltip" data-placement="top" href="{{ url({tag: fiche.id_fiche,params:{print:1}})  }}" class="btn btn-xs btn-default">
+  <i class="fas fa-print"></i>
+  </a>
   {% if linkdelete is defined %}
     <a href="{{ linkdelete|raw }}" class="btn btn-xs btn-danger modalbox" title="{{ _t('TEMPLATE_DELETE')}}" data-toggle="tooltip" data-placement="top">
       <i class="fa fa-trash"></i>
@@ -91,6 +120,13 @@
 </div>
 </div>
 </div>
+<script>
+document.addEventListener('DOMContentLoaded', function(event) {
+$('[rel="tooltip"]').tooltip({
+    trigger : 'hover'
+});
+})
+</script>
 {% else %}
 {% if currentPage != fiche.id_fiche %}
 <div class="qrcard-actions no-print text-center">

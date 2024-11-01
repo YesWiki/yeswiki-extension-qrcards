@@ -1,0 +1,38 @@
+<?php 
+$GLOBALS['wiki']->addCSSFile('tools/qrcards/styles/qrcards.css');
+$GLOBALS['wiki']->addJavascriptFile('tools/qrcards/javascripts/qrcards.js');
+require_once('tools/qrcards/templates/bazar/qrcards.lib.php'); if
+($GLOBALS['wiki']->getMethod() == 'pdf' || $GLOBALS['wiki']->getMethod() ==
+'preview' || !empty($_GET['print'])) { $displayMode = 'print'; } else {
+$displayMode = 'web'; } $cards = explode(',',
+$fiche['checkboxfiche1400bf_cardlist']); if (count($cards) == 1 &&
+empty($card[0]) ) { $cards = []; } echo '
+<h2 class="title-qrcard-set">'.$fiche['bf_titre'].'</h2>
+'; echo $GLOBALS['wiki']->Format($fiche['bf_description']); if (count($cards) >
+0) : ?>
+<hr />
+<div
+  class="no-print btn-group-qrcards btn-group btn-group-sm"
+  role="group"
+  aria-label="selecteur de vue"
+>
+  <a
+    href="<?php echo $GLOBALS['wiki']->href('', '', '');?>"
+    class="btn <?php echo ($displayMode == 'web') ? 'btn-primary': 'btn-default'; ?>"
+    >Vue web</a
+  >
+  <a
+    href="<?php echo $GLOBALS['wiki']->href('', '', 'print=1');?>"
+    class="btn <?php echo ($displayMode == 'print') ? 'btn-primary': 'btn-default'; ?>"
+    ><i class="fas fa-print"></i>Vue impression</a
+  >
+</div>
+<div
+  id="<?php echo $GLOBALS['wiki']->GetPageTag(); ?>-qrcard-container"
+  class="page-qrcard <?php echo $displayMode; ?>"
+>
+  <?php endif; ?> <?php foreach($cards as $card) { $c =
+  baz_valeurs_fiche($card); if ($c) { echo displayCard($c, $displayMode); } } ?>
+  <?php if (count($cards) > 0) : ?>
+</div>
+<?php endif; ?>
