@@ -1,5 +1,13 @@
 {
   "require": {
     "symfony/yaml": "^5.4"
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "platform": {
+      "php": "7.3.0"
+    },
+    "platform-check": true,
+    "sort-packages": true
   }
 }
