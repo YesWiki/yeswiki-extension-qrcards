@@ -28,7 +28,7 @@ function display($img)
 
 function f($text)
 {
-    return strip_tags($GLOBALS['wiki']->format($text), '<br>');
+    return strip_tags($GLOBALS['wiki']->format($text), '<span><b><u><i><ul><ol><li><br>');
 }
 
 function truncate($string, $length = 550, $append = '&hellip;')

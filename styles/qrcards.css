@@ -308,7 +308,7 @@
 
 .qrcard-main-content {
   display: -webkit-box;
-  padding: 1mm;
+  padding: 2mm;
   background: white !important;
   overflow: hidden;
   font-family: var(--longtext-font-family);
@@ -316,6 +316,7 @@
   color: var(--longtext-color);
   text-align: left;
   -webkit-line-clamp: 19 !important;
+  line-clamp: 19 !important;
   line-height: 1.14em !important;
   font-size: 12px !important;
 }
