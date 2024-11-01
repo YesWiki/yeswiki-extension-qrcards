@@ -77,7 +77,7 @@ class QrcardsInitialDatabaseAndPagesSetup extends YesWikiMigration
                 $content = str_replace(array_keys($replacements), array_values($replacements), $content);
             }
             $aclService->delete($pageName); // to clear acl cache
-            $aclService->save($pageName, 'read', '@admins');
+            $aclService->save($pageName, 'read', '*');
             $aclService->save($pageName, 'write', '@admins');
             $pageManager->save($pageName, $content, '', true);
         } else {
