@@ -66,7 +66,7 @@ function displayCard($fiche, $view = 'print')
     $thumbwidth = 300;
     $thumbheight = 300;
     $thumbresize = 'fit';
-    $imgLogo = !empty($GLOBALS['wiki']->config['card_logo']) ? $GLOBALS['wiki']->config['card_logo'] : 'tools/qrcards/images/metacartes.png';
+    $imgLogo = !empty($GLOBALS['wiki']->config['card_logo']) ? $GLOBALS['wiki']->config['card_logo'] : 'tools/qrcards/images/logo_qr_cartes.svg';
     if (isset($fiche['imagebf_image']) and is_file('files/' . $fiche['imagebf_image'])) {
         $image = '<img loading="lazy" alt="image" src="' . redimensionner_image(
             'files/' . $fiche['imagebf_image'],
