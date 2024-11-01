@@ -83,17 +83,20 @@
 .qrcard-header {
   display: flex;
   justify-content: space-between;
+  background: #fff;
 }
 .complexity {
   font-size: 8px;
   width: 10mm;
   margin-right: 2mm;
+  margin-left: 1mm;
 }
 .card-type {
   font-family: var(--type-font-family);
   font-size: var(--type-font-size);
   color: var(--type-color);
   text-transform: var(--type-text-transform);
+  margin-right: 1mm;
 }
 
 .qrcard-title {
@@ -108,6 +111,7 @@
   align-items: center;
   overflow: hidden;
   justify-content: center;
+  background: #fff;
 }
 
 .qrcard-image {
@@ -117,7 +121,7 @@
   margin: 0;
   overflow: hidden;
   width: 100%;
-  background:white;
+  background: white;
 }
 .qrcard-image img {
   width: 243px;
@@ -373,7 +377,9 @@
   justify-content: space-between;
 }
 
-[data-id="bf_plus"] .BAZ_label {display:none}
+[data-id='bf_plus'] .BAZ_label {
+  display: none;
+}
 
 .col-md-6 .col-md-4 .bazar-entry-edit-image {
   flex-direction: column;
@@ -416,8 +422,8 @@
     transform-origin: 250px 250px; /* chiffre empirique pour que les cartes soient collées au bord, pythagore-skills fealure */
     break-inside: avoid;
   }
-  .qrcard-to-print:nth-child(2n+1) {
-    break-before:page;
+  .qrcard-to-print:nth-child(2n + 1) {
+    break-before: page;
   }
 
   .page-qrcard {
