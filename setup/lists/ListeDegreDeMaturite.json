@@ -1,8 +1,17 @@
 {
-  "titre_liste": "Degré de maturité",
-  "label": {
-    "esquisse": "Esquisse",
-    "encours": "En cours d'élaboration",
-    "aboutie": "Aboutie"
-  }
+  "title": "Degr\u00e9 d'avancement",
+  "nodes": [
+    {
+      "id": "esquisse",
+      "label": "Brouillon"
+    },
+    {
+      "id": "encours",
+      "label": "En cours"
+    },
+    {
+      "id": "aboutie",
+      "label": "Aboutie"
+    }
+  ]
 }

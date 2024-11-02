@@ -1,9 +1,21 @@
 {
-  "titre_liste": "Complexité",
-  "label": {
-    "aucune": "Aucune",
-    "facile": "Facile",
-    "moyen": "Moyen",
-    "complexe": "Complexe"
-  }
+  "title": "Complexit\u00e9",
+  "nodes": [
+    {
+      "id": "aucune",
+      "label": "Aucune"
+    },
+    {
+      "id": "facile",
+      "label": "Facile"
+    },
+    {
+      "id": "moyen",
+      "label": "Moyen"
+    },
+    {
+      "id": "complexe",
+      "label": "Complexe"
+    }
+  ]
 }

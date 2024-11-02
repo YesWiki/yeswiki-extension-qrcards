@@ -1,9 +1,55 @@
 {
-  "titre_liste": "Type de carte",
-  "label": {
-    "action": "Action",
-    "ingredient": "Ingr\u00e9dient",
-    "intention": "Intention",
-    "recette": "Recette"
-  }
+  "title": "Type de carte",
+  "nodes": [
+    {
+      "id": "\u2460",
+      "label": "\u2460 Personne",
+      "children": []
+    },
+    {
+      "id": "\u2461",
+      "label": "\u2461 \u00c9v\u00e8nement",
+      "children": []
+    },
+    {
+      "id": "\u2462",
+      "label": "\u2462 Ingr\u00e9dient",
+      "children": []
+    },
+    {
+      "id": "\u2463",
+      "label": "\u2463 Recette",
+      "children": []
+    },
+    {
+      "id": "\u2464",
+      "label": "\u2464 Projet",
+      "children": []
+    },
+    {
+      "id": "\u2465",
+      "label": "\u2465 Communaut\u00e9",
+      "children": []
+    },
+    {
+      "id": "\u2466",
+      "label": "\u2466 R\u00f4le",
+      "children": []
+    },
+    {
+      "id": "\u2467",
+      "label": "\u2467 Action",
+      "children": []
+    },
+    {
+      "id": "\u2468",
+      "label": "\u2468 Intention",
+      "children": []
+    },
+    {
+      "id": "\u24ea",
+      "label": "\u24ea Concept cl\u00e9",
+      "children": []
+    }
+  ]
 }

@@ -1,0 +1,15 @@
+{
+  "titre_liste": "Type de carte",
+  "label": {
+    "\u2460": "\u2460 Personne",
+    "\u2461": "\u2461 \u00c9v\u00e8nement",
+    "\u2462": "\u2462 Ingr\u00e9dient",
+    "\u2463": "\u2463 Recette",
+    "\u2464": "\u2464 Projet",
+    "\u2465": "\u2465 Communaut\u00e9",
+    "\u2466": "\u2466 R\u00f4le",
+    "\u2467": "\u2467 Action",
+    "\u2468": "\u2468 Intention",
+    "\u24ea": "\u24ea Concept cl\u00e9"
+  }
+}

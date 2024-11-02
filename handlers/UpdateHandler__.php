@@ -38,7 +38,7 @@ class UpdateHandler__ extends YesWikiHandler
 
             $output .= '<strong>Extension Qrcards</strong><br/>';
 
-            $glob = glob('tools/qrcards/setup/lists/*.json');
+            $glob = glob('tools/qrcards/setup/lists/legacy/*.json');
             foreach ($glob as $filename) {
                 $listname = str_replace(['tools/qrcards/setup/lists/', '.json'], '', $filename);
                 if (file_exists($filename) && !$pageManager->getOne($listname)) {
