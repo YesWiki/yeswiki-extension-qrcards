@@ -3,4 +3,4 @@
 {{button class="btn-primary" link="https://metacartes.net/qrcartes/" text="Voir la documentation complète" }}
 
 ![legende](https://metacartes.net/qrcartes/files/Legende_QrCartes.svg)
-{{button class="btn-primary" link="https://metacartes.net/qrcartes/" text="Voir la documentation complète" }} [Récupérer le fil RSS](?BazaR/rss&id=1400) pour exporter le contenu ou suivre dans un lecteur de flux.
+{{button class="btn-primary" link="https://metacartes.net/qrcartes/" text="Voir la documentation complète" }}
