@@ -8,7 +8,7 @@ voir la doc complète ici : https://metacartes.net/qrcartes/
 
 # Changelog
 
-## QR cards V0.8.1 - Liste des changements
+## QR cards V0.8.0 - Liste des changements
 
 - mise à jour de compatibilité avec la future version de YesWiki (4.5)
 - ajout fonctionnalité duplication : permet de cloner des cartes existantes à l'intérieur du même wiki ou d'un wiki distant auquel on accès en écriture.
