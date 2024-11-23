@@ -112,13 +112,16 @@ function displayCard($fiche, $view = 'print')
     }
     $cardColor = $customCardColors ?? $fiche['bf_card_color'];
     $types = baz_valeurs_liste('ListeTypeCarte');
-    if (!empty($types['nodes'])) {
-        $type = multiArraySearch($types['nodes'], 'id', $fiche['listeListeTypeCarte']);
-        if (is_array($type)) {
-            $type = array_shift($type)['label'] ?? '';
+    $type = '';
+    if (!empty($fiche['listeListeTypeCarte'])) {
+        if (!empty($types['nodes'])) {
+            $type = multiArraySearch($types['nodes'], 'id', $fiche['listeListeTypeCarte']);
+            if (is_array($type)) {
+                $type = array_shift($type)['label'] ?? '';
+            }
+        } else {
+            $type = (!empty($fiche['listeListeTypeCarte']) && !empty($types['label'][$fiche['listeListeTypeCarte']])) ? $types['label'][$fiche['listeListeTypeCarte']] : '';
         }
-    } else {
-        $type = (!empty($fiche['listeListeTypeCarte']) && !empty($types['label'][$fiche['listeListeTypeCarte']])) ? $types['label'][$fiche['listeListeTypeCarte']] : '';
     }
     $user = $GLOBALS['wiki']->services->get(AuthController::class)->getLoggedUser();
     $favoritesManager = $GLOBALS['wiki']->services->get(FavoritesManager::class);
