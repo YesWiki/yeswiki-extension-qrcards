@@ -40,7 +40,7 @@ class UpdateHandler__ extends YesWikiHandler
 
             $glob = glob('tools/qrcards/setup/lists/legacy/*.json');
             foreach ($glob as $filename) {
-                $listname = str_replace(['tools/qrcards/setup/lists/', '.json'], '', $filename);
+                $listname = str_replace(['tools/qrcards/setup/lists/legacy/', '.json'], '', $filename);
                 if (file_exists($filename) && !$pageManager->getOne($listname)) {
                     $output .= 'ℹ️ Adding the <em>' . $listname . '</em> list<br />';
                     // save the page with the list value
@@ -57,7 +57,7 @@ class UpdateHandler__ extends YesWikiHandler
 
             $glob = glob('tools/qrcards/setup/forms/legacy/*.json');
             foreach ($glob as $filename) {
-                $formId = str_replace(['tools/qrcards/setup/forms/', '.json'], '', $filename);
+                $formId = str_replace(['tools/qrcards/setup/forms/legacy/', '.json'], '', $filename);
 
                 // test if the form exists, if not, install it
                 $form = $formManager->getOne($formId);
