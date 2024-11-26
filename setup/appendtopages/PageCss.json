@@ -1,4 +1,4 @@
 {
   "replace": "/*:root { */",
-  "content": ".verso .format-menu,.verso .more-styles .aceditor-btn-line,.verso .pages,.verso .attach-file-uploader,.verso .actions-builder-button,.verso .aceditor-btn-help {display: none;}\r\n.yw-topnav-fast-access .fa-clone::before {content: none;}\r\n#yw-topnav .yw-topnav-fast-access .dropdown-toggle[title=\"Qr Cartes\"] {background-image: url(tools/qrcards/images/icone_lanceur_font_awesome.svg) !important;background-repeat:no-repeat !important;background-position:center center !important;background-size: 32px !important;}\r\n/*\r\n/*:root { */"
+  "content": ".verso .format-menu,.verso .more-styles .aceditor-btn-line,.verso .pages,.verso .attach-file-uploader,.verso .actions-builder-button,.verso .aceditor-btn-help {display: none;}\r\n.yw-topnav-fast-access .fa-clone::before {content: none;}\r\n#yw-topnav .yw-topnav-fast-access .dropdown-toggle[title=\"Qr Cartes\"] {background-image: url(tools/qrcards/images/icone_lanceur_font_awesome.svg) !important;background-repeat:no-repeat !important;background-position:center center !important;background-size: 28px !important;}\r\n/*\r\n/*:root { */"
 }
