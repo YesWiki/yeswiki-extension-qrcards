@@ -4,9 +4,9 @@ $GLOBALS['wiki']->addJavascriptFile('tools/qrcards/javascripts/qrcards.js');
 require_once('tools/qrcards/templates/bazar/qrcards.lib.php'); if
 ($GLOBALS['wiki']->getMethod() == 'pdf' || $GLOBALS['wiki']->getMethod() ==
 'preview' || !empty($_GET['print'])) { $displayMode = 'print'; } else {
-$displayMode = 'web'; } $cards = explode(',',
-$fiche['checkboxfiche1400bf_cardlist']); if (count($cards) == 1 &&
-empty($cards[0]) ) { $cards = []; } echo '
+$displayMode = 'web'; } $cardSet = $fiche['checkboxfiche1400bf_cardlist'] ??
+$fiche['bf_cardlist'] ?? [] ; $cards = explode(',',$cardSet); if (count($cards)
+== 1 && empty($cards[0]) ) { $cards = []; } echo '
 <h2 class="title-qrcard-set">'.$fiche['bf_titre'].'</h2>
 '; echo $GLOBALS['wiki']->Format($fiche['bf_description']); if (count($cards) >
 0) : ?>
