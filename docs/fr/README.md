@@ -8,6 +8,13 @@ voir la doc complète ici : https://metacartes.net/qrcartes/
 
 # Changelog
 
+## QR cards V0.8.1 - Liste des changements
+- mise à jour du formulaire avec correction aide
+- cartes par défaut ajout de tags et correction du texte
+- ajout icone personnalisée lanceur
+- correction bug legacy/list : qu'importe la version wiki les listes sont bonnes. duplication apparaît seulement sur la 4.5.
+- correction bug import : corrige le problème d'import de fiches lorsque les listes sont vides
+
 ## QR cards V0.8.0 - Liste des changements
 
 - mise à jour de compatibilité avec la future version de YesWiki (4.5)
