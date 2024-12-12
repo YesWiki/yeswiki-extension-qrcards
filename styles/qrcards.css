@@ -413,6 +413,7 @@
   #yw-footer,
   .debug,
   .BAZ_fiche_info,
+  .filters-col,
   .no-print {
     display: none !important;
   }
@@ -428,7 +429,11 @@
   .qrcard-to-print:nth-child(2n + 1) {
     break-before: page;
   }
-
+  .qrcard-to-print .qrcard-header,
+  .qrcard-to-print .qrcard-title,
+  .qrcard-to-print .qrcard-image {
+    background: white !important;
+  }
   .page-qrcard {
     display: grid;
     grid-template-columns: var(--card-height) var(--card-height);

@@ -75,7 +75,7 @@
         <i class="fa fa-eye-open"></i>
     </a>
     {% endif %}
-    {% if linkedit is defined %}
+    {% if linkedit != null %}
     <a title="{{ _t('TEMPLATE_EDIT')}}" data-toggle="tooltip" data-placement="top" href="{{ linkedit|raw }}" class="btn btn-xs btn-default">
       <i class="fa fa-pencil-alt"></i>
     </a>
@@ -112,7 +112,7 @@
   <a title="{{ _t('QRCARDS_PRINT')}}" data-toggle="tooltip" data-placement="top" href="{{ url({tag: fiche.id_fiche,params:{print:1}})  }}" class="btn btn-xs btn-default">
   <i class="fas fa-print"></i>
   </a>
-  {% if linkdelete is defined %}
+  {% if linkdelete != 0 %}
     <a href="{{ linkdelete|raw }}" class="btn btn-xs btn-danger modalbox" title="{{ _t('TEMPLATE_DELETE')}}" data-toggle="tooltip" data-placement="top">
       <i class="fa fa-trash"></i>
     </a>
