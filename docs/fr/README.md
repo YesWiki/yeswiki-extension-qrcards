@@ -8,7 +8,13 @@ voir la doc complète ici : https://metacartes.net/qrcartes/
 
 # Changelog
 
+## QR cards V0.8.2 - Liste des changements
+
+- correction des erreurs à l'impression des cartes en couleurs
+- on cache les facettes pour l'impression
+
 ## QR cards V0.8.1 - Liste des changements
+
 - mise à jour du formulaire avec correction aide
 - cartes par défaut ajout de tags et correction du texte
 - ajout icone personnalisée lanceur
