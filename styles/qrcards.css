@@ -414,9 +414,23 @@
   .debug,
   .BAZ_fiche_info,
   .filters-col,
+  .page > br,
+  #yw-a11y-jump-content,
   .no-print {
     display: none !important;
   }
+
+  #yw-main .yw-main-content,
+  section.full-width .container {
+    max-width: 100%;
+  }
+
+  .results-col.col-sm-10 {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
   #yw-main {
     padding: 0;
   }
