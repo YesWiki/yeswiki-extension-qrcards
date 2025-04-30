@@ -3,47 +3,47 @@
   "nodes": [
     {
       "id": "\u2460",
-      "label": "\u2460 Personne",
+      "label": "\u2460 Personne / sujet",
       "children": []
     },
     {
       "id": "\u2461",
-      "label": "\u2461 \u00c9v\u00e8nement",
+      "label": "\u2461 \u00c9v\u00e8nement / rencontre",
       "children": []
     },
     {
       "id": "\u2462",
-      "label": "\u2462 Ingr\u00e9dient",
+      "label": "\u2462 Ressource / \u00e9l\u00e9ment",
       "children": []
     },
     {
       "id": "\u2463",
-      "label": "\u2463 Recette",
+      "label": "\u2463 M\u00e9thode / proc\u00e9dure",
       "children": []
     },
     {
       "id": "\u2464",
-      "label": "\u2464 Projet",
+      "label": "\u2464 Projet / mission",
       "children": []
     },
     {
       "id": "\u2465",
-      "label": "\u2465 Communaut\u00e9",
+      "label": "\u2465 Groupe / \u00e9quipe",
       "children": []
     },
     {
       "id": "\u2466",
-      "label": "\u2466 R\u00f4le",
+      "label": "\u2466 R\u00f4le / comp\u00e9tence",
       "children": []
     },
     {
       "id": "\u2467",
-      "label": "\u2467 Action",
+      "label": "\u2467 Action / d\u00e9cision",
       "children": []
     },
     {
       "id": "\u2468",
-      "label": "\u2468 Intention",
+      "label": "\u2468 Intention / objectif",
       "children": []
     },
     {

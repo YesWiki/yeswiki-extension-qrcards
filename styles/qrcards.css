@@ -26,6 +26,8 @@
   /* typo titre de la carte */
   --title-font-family: garamond, serif;
   --title-font-size: 20px;
+  --title-xl-font-size: 16px;
+  --title-xxl-font-size: 13px;
   --title-color: #222;
   --title-text-transform: uppercase;
 
@@ -113,7 +115,12 @@
   justify-content: center;
   background: #fff;
 }
-
+.title-xl {
+  font-size: var(--title-xl-font-size);
+}
+.title-xxl {
+  font-size: var(--title-xxl-font-size);
+}
 .qrcard-image {
   display: flex;
   align-items: center;

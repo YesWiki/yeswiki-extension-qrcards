@@ -1,3 +1,10 @@
+{% set titleLength = fiche.bf_titre|length %}
+{% set titleClass = '' %}
+{% if titleLength > 80 %}
+  {% set titleClass = 'title-xxl' %}
+{% elseif titleLength > 50 %}
+  {% set titleClass = 'title-xl' %}
+{% endif %}
 {% if view != 'print' %}
 <div class="card-plus-actions-container bazar-entry" {{ fiche.html_data|raw }}><div class="flip-container" ontouchstart="this.classList.toggle('hover');"><div><div class="flipper">
 {% else %}
@@ -8,7 +15,7 @@
             <div class="complexity">{{ difficulty }}</div>
             <div class="card-type">{{ type }}</div>
         </div>
-        <h2 class="qrcard-title">{{ fiche.bf_titre }}</h2>
+        <h2 class="qrcard-title {{ titleClass }}">{{ fiche.bf_titre }}</h2>
         <div class="qrcard-image">
             {{ mainimage|raw }}
         </div>
@@ -36,7 +43,7 @@
             <div class="complexity">{{ difficulty }}</div>
             <div class="card-type">{{ type }}</div>
         </div>
-        <h2 class="qrcard-title">{{ fiche.bf_titre }}</h2>
+        <h2 class="qrcard-title {{ titleClass }}">{{ fiche.bf_titre }}</h2>
         <div class="qrcard-main-content">
             {{ longtext|raw }}
         </div>
