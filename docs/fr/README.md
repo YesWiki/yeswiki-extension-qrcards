@@ -8,6 +8,14 @@ voir la doc complète ici : https://metacartes.net/qrcartes/
 
 # Changelog
 
+## QR cards V0.8.3 - Liste des changements
+
+- ajout du site de la documentation dans le menu
+- corrections bugs impression des cartes
+- taille des titres adaptatif en fonction de la longueur
+- taille des textes pictos un poil plus grande
+- ajout du bookmarklet dans la doc
+
 ## QR cards V0.8.2 - Liste des changements
 
 - correction des erreurs à l'impression des cartes en couleurs
