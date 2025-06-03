@@ -3,4 +3,19 @@
 {{button class="btn-primary" link="https://metacartes.net/qrcartes/" text="Voir la documentation complète" }}
 
 ![legende](https://metacartes.net/qrcartes/files/Legende_QrCartes.svg)
+
+----
+#### Pour ajouter des cartes depuis votre barre de signets
+
+A la manière des signets partagés, vous pouvez ajouter des cartes à partir de contenus web avec un simple bouton à ajouter à votre navigateur.
+
+ - déplacer ce bouton dans votre barre de signets ""
+<a class="btn btn-primary" href="javascript:var wleft = (screen.width-700)/2; var wtop=(screen.height-530)/2; window.open('{baseUrl}AjouterQrCards/iframe&vue=saisir&action=saisir_fiche&id=1400&bf_titre='+encodeURIComponent(document.title)+'&bf_ressources='+encodeURIComponent(location.href)+'&bf_chapeau='+encodeURIComponent(document.getSelection())+'', 'bf_bookmarklet', 'height=530,width=700,left='+wleft+',top='+wtop+',toolbar=no,location=no,directories=no,status=no,scrollbars=yes,resizable=yes,menubar=no');void 0;">+qrcard</a>""
+ - puis aller sur la page que vous voulez transformer en carte
+ - selectionner le texte dans la page qui servira de description courte
+ - puis cliquer sur votre signet **"+qrcard"** pour ajouter des Qr cartes avec un simple clic depuis votre navigateur.
+
+
+----
+
 {{button class="btn-primary" link="https://metacartes.net/qrcartes/" text="Voir la documentation complète" }}
