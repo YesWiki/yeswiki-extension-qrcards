@@ -347,9 +347,6 @@
 }
 
 .qrcard-to-print {
-  break-before: avoid-page;
-  break-after: avoid-page;
-  break-inside: avoid;
   display: inline-block;
   width: calc(2 * var(--card-width));
   position: relative;
@@ -461,7 +458,9 @@
     max-width: 100%;
   }
 
-  .results-col.col-sm-10 {
+  .results-col.col-sm-10,
+  .page>[data-template="qrcards.tpl.html"] {
+    display: block !important;
     margin: 0;
     padding: 0;
     width: 100%;
