@@ -74,6 +74,7 @@
   align-content: start;
   grid-template-columns: 1fr;
 }
+
 .qrcard.front {
   grid-template-rows: var(--card-recto-zone-height);
 }
@@ -87,12 +88,14 @@
   justify-content: space-between;
   background: #fff;
 }
+
 .complexity {
   font-size: 8px;
   width: 10mm;
   margin-right: 2mm;
   margin-left: 1mm;
 }
+
 .card-type {
   font-family: var(--type-font-family);
   font-size: var(--type-font-size);
@@ -115,12 +118,15 @@
   justify-content: center;
   background: #fff;
 }
+
 .title-xl {
   font-size: var(--title-xl-font-size);
 }
+
 .title-xxl {
   font-size: var(--title-xxl-font-size);
 }
+
 .qrcard-image {
   display: flex;
   align-items: center;
@@ -130,6 +136,7 @@
   width: 100%;
   background: white;
 }
+
 .qrcard-image img {
   width: 243px;
   display: block;
@@ -174,10 +181,12 @@
   font-size: var(--picto-font-size);
   color: var(--picto-color);
 }
+
 .mini-picto img {
   max-width: 9mm !important;
   margin-bottom: 2px;
 }
+
 .mini-text {
   text-transform: uppercase;
   line-height: 1em;
@@ -212,6 +221,7 @@
 .qrcode img {
   width: 13mm;
 }
+
 .qrcode {
   margin: 0;
 }
@@ -232,6 +242,7 @@
   width: var(--card-width);
   height: var(--card-height);
 }
+
 .flip-container {
   perspective: 1000;
   transform-style: preserve-3d;
@@ -307,6 +318,7 @@
   opacity: 0;
   transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 1000ms;
 }
+
 .bazar-entry:hover .card-actions {
   margin-top: 126mm;
   opacity: 1;
@@ -333,6 +345,7 @@
   border-radius: 0;
   object-fit: contain;
 }
+
 .qrcard-to-print {
   break-before: avoid-page;
   break-after: avoid-page;
@@ -343,16 +356,19 @@
   height: var(--card-height);
   --card-border: 1px solid black;
 }
+
 .qrcard-to-print .qrcard.front {
   position: absolute;
   top: 0;
   left: 0;
 }
+
 .qrcard-to-print .qrcard.back {
   position: absolute;
   top: 0;
   left: var(--card-width);
 }
+
 .page-qrcard.print .back {
   border-left: none;
 }
@@ -360,6 +376,7 @@
 .page-qrcard.print.monochrome {
   filter: grayscale(100) !important;
 }
+
 .page-qrcard.print.monochrome .qrcard {
   background-color: transparent !important;
 }
@@ -378,6 +395,7 @@
   font-weight: bold;
   text-transform: uppercase;
 }
+
 .qrcard-to-print .qrcard-actions {
   width: calc(2 * var(--card-width));
 }
@@ -395,11 +413,19 @@
   flex-direction: column;
 }
 
+.verso .format-menu,
+.verso .more-styles .aceditor-btn-line,
+.verso .pages,
+.verso .attach-file-uploader,
+.verso .actions-builder-button,
+.verso .aceditor-btn-help {
+  display: none;
+}
+
 /* hide yeswiki interface in print mode, and do some tweaks */
 @media print {
   @page {
     size: A4 portrait;
-    margin: 0;
   }
 
   ::-webkit-scrollbar {
@@ -407,13 +433,15 @@
   }
 
   body {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
     margin: 0;
   }
+
   a[href]::after {
     content: none;
   }
+
   .footer,
   #yw-topnav,
   #yw-header,
@@ -421,7 +449,7 @@
   .debug,
   .BAZ_fiche_info,
   .filters-col,
-  .page > br,
+  .page>*,
   #yw-a11y-jump-content,
   #search-form,
   .no-print {
@@ -443,21 +471,6 @@
     padding: 0;
   }
 
-  .qrcard-to-print {
-    break-inside: avoid;
-    height:var(--card-height);
-    width:var(--card-width);
-    display:block;
-  }
-  .qrcard-to-print:nth-child(2n) {
-    break-before: page;
-    margin-bottom:calc( 297mm - (2 * var(--card-height)));
-  }
-  .qrcard-to-print .qrcard-header,
-  .qrcard-to-print .qrcard-title,
-  .qrcard-to-print .qrcard-image {
-    background: white !important;
-  }
   .page-qrcard {
     display: block;
     padding: 0;
@@ -466,13 +479,22 @@
     letter-spacing: 0;
     word-spacing: 0;
   }
-}
 
-.verso .format-menu,
-.verso .more-styles .aceditor-btn-line,
-.verso .pages,
-.verso .attach-file-uploader,
-.verso .actions-builder-button,
-.verso .aceditor-btn-help {
-  display: none;
+  .qrcard-to-print {
+    break-inside: avoid;
+    height: var(--card-height);
+    width: var(--card-width);
+    display: block;
+  }
+
+  .qrcard-to-print:nth-child(2n) {
+    break-after: page;
+    margin-bottom: calc(290mm - (2 * var(--card-height)));
+  }
+
+  .qrcard-to-print .qrcard-header,
+  .qrcard-to-print .qrcard-title,
+  .qrcard-to-print .qrcard-image {
+    background: white !important;
+  }
 }
