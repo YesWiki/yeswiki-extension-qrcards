@@ -398,7 +398,7 @@
 /* hide yeswiki interface in print mode, and do some tweaks */
 @media print {
   @page {
-    size: A4 landscape;
+    size: A4 portrait;
     margin: 0;
   }
 
@@ -423,6 +423,7 @@
   .filters-col,
   .page > br,
   #yw-a11y-jump-content,
+  #search-form,
   .no-print {
     display: none !important;
   }
@@ -443,12 +444,14 @@
   }
 
   .qrcard-to-print {
-    transform: rotate(90deg);
-    transform-origin: 250px 250px; /* chiffre empirique pour que les cartes soient collées au bord, pythagore-skills fealure */
     break-inside: avoid;
+    height:var(--card-height);
+    width:var(--card-width);
+    display:block;
   }
-  .qrcard-to-print:nth-child(2n + 1) {
+  .qrcard-to-print:nth-child(2n) {
     break-before: page;
+    margin-bottom:calc( 297mm - (2 * var(--card-height)));
   }
   .qrcard-to-print .qrcard-header,
   .qrcard-to-print .qrcard-title,
@@ -456,16 +459,12 @@
     background: white !important;
   }
   .page-qrcard {
-    display: grid;
-    grid-template-columns: var(--card-height) var(--card-height);
-    grid-template-rows: calc(2 * var(--card-width));
-    padding: 0 0 110px 0; /* 110px pour compenser la rotation des cartes */
+    display: block;
+    padding: 0;
     margin: 0;
     font-size: 0;
     letter-spacing: 0;
     word-spacing: 0;
-    min-width: calc(2 * var(--card-height));
-    min-height: calc(2 * var(--card-width));
   }
 }
 
