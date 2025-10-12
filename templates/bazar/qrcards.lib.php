@@ -160,7 +160,7 @@ function displayCard($fiche, $view = 'print')
         'textpicto1' => $fiche['bf_texte_boite1'] ?? '',
         'textpicto2' => $fiche['bf_texte_boite2'] ?? '',
         'textpicto3' => $fiche['bf_texte_boite3'] ?? '',
-        'longtext' => f($fiche['bf_chapeau'] ?? $fiche['bf_essentiel']),
+        'longtext' => f($fiche['bf_chapeau'] ?? $fiche['bf_essentiel'] ?? ''),
         'qrcode' => $GLOBALS['wiki']->format('{{qrcode text="' . $link . '"}}'),
         'link' => $link,
         'shortlink' => str_replace(['https://', 'http://'], '', $link),
