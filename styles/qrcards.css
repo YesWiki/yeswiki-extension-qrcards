@@ -145,6 +145,14 @@
   height: 100% !important;
 }
 
+.qrcard-image .emoticon {
+  font-size: 150px;
+  text-align: center;
+  width: 100%;
+  line-height: 1;
+  display: block;
+}
+
 .qrcard-text {
   font-family: var(--text-font-family);
   font-size: var(--text-font-size);
