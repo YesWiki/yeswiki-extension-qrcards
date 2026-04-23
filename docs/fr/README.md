@@ -8,6 +8,10 @@ voir la doc complète ici : https://metacartes.net/qrcartes/
 
 # Changelog
 
+## QR cards V0.8.4 - Liste des changements
+
+- pouvoir renseigner et afficher un émoticone au lieu de l'image centrale au recto de la carte
+
 ## QR cards V0.8.3 - Liste des changements
 
 - ajout du site de la documentation dans le menu
