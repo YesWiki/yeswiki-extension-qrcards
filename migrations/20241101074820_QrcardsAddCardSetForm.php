@@ -1,18 +1,13 @@
 <?php
 
-use YesWiki\Bazar\Service\FormManager;
 use YesWiki\Core\YesWikiMigration;
+use YesWiki\Qrcards\Service\QrcardsSetup;
 
+/** The card set form, 1401. */
 class QrcardsAddCardSetForm extends YesWikiMigration
 {
     public function run(): void
     {
-        $formManager = $this->getService(FormManager::class);
-        // test if the form exists, if not, install it
-        $form = $formManager->getOne(1401);
-        if (empty($form)) {
-            $form = json_decode(file_get_contents('tools/qrcards/setup/forms/1401.json'), true);
-            $formManager->create($form);
-        }
+        $this->getService(QrcardsSetup::class)->installForm(QrcardsSetup::CARD_SET_FORM);
     }
 }

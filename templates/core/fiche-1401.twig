@@ -1,0 +1,16 @@
+{{ include_css('extensions/qrcards/styles/qrcards.css') }}
+{{ include_javascript('extensions/qrcards/javascripts/qrcards.js') }}
+{% set displayMode = request.get.print is defined and request.get.print is not empty ? 'print' : 'web' %}
+{% set cardList = entry.checkboxfiche1400bf_cardlist ?? entry.bf_cardlist ?? '' %}
+{% set cards = (cardList is iterable ? cardList : cardList|split(','))|map(card => card|trim)|filter(card => card is not empty) %}
+<h2 class="title-qrcard-set">{{ entry.bf_titre ?? entry.title }}</h2>
+{{ (html.bf_description ?? '')|raw }}
+{% if cards|length > 0 %}
+  <hr />
+  {{ include('@qrcards/_view-switch.twig') }}
+  <div id="{{ entry.tag }}-qrcard-container" class="page-qrcard {{ displayMode }}">
+    {% for card in cards %}
+      {{ renderAction('qrcard', {tag: card, view: displayMode})|raw }}
+    {% endfor %}
+  </div>
+{% endif %}

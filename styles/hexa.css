@@ -9,8 +9,6 @@
   cursor: pointer;
   transform-style: preserve-3d;
   transition: transform 0.2s;
-  /*FF bug fix - applying backface-visibility on the .hexa-card
-    element makes .hexagon behave properly when rotated*/
   -moz-backface-visibility: hidden;
 }
 .hexa-card.flipped {
@@ -81,6 +79,7 @@
 }
 .see-more {
   position: absolute;
+  display: inline-flex;
   bottom: -75px;
   left: 150px;
   margin-left: -14px;

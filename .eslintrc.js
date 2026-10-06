@@ -2,14 +2,15 @@ module.exports = {
   env: {
     browser: true,
     es2015: true,
-    jquery: true
+    jquery: false
   },
   globals: {
     wiki: 'writable',
     Vue: 'readable',
     _t: 'readable',
     ace: 'writable',
-    toastMessage: 'readable'
+    toastMessage: 'readable',
+    ywInitEach: 'readable'
   },
   extends: [
     'airbnb-base'

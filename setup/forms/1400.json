@@ -1,13 +1,401 @@
 {
-  "bn_id_nature": "1400",
-  "bn_label_nature": "QrCards",
-  "bn_description": "Permet de cr\u00e9er des cartes imprimables avec un QRcode associ\u00e9.",
-  "bn_condition": "",
-  "bn_sem_context": "",
-  "bn_sem_type": "",
-  "bn_sem_use_template": "1",
-  "bn_template": "tabs***Contenu de la carte, Page associée, À propos*** *** *** *** *** ***btn-secondary-1***0*** *** *** *** *** *** *** *** *** ***\r\nlabelhtml***<b>Les données saisies ici apparaîtront sur la carte imprimée et sur la page web associée.</b>*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\ntexte***bf_titre***Titre de la carte***255***255*** *** ***text***1*** ***Obligatoire. 2-3 mots maximum.*** * *** * *** *** *** *** *** ***\r\nlabelhtml***<div class=\"row\"><div class=\"col-md-5\">*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\nliste***ListeComplexite***Complexité*** *** *** ***listeListeComplexite*** ***0*** ***Affiche un nombre de points en haut à gauche du recto de la carte.*** * *** * *** *** *** *** *** ***\r\nlabelhtml***</div><div class=\"col-md-2\">*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\ntexte***bf_card_color***Couleur de fond*** *** ***#ffffff*** ***color***1*** ***Couleur de fond de la carte*** * *** * *** *** *** *** *** ***\r\nlabelhtml***</div><div class=\"col-md-5\">*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\nliste***ListeTypeCarte***Type de carte*** *** *** ***listeListeTypeCarte*** ***0*** ***Optionnel, favorise le partage et la compatibilité entre différents sets de cartes.*** * *** * *** *** *** *** *** ***\r\nlabelhtml***</div></div>*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\nlabelhtml***<div class=\"row\"><div class=\"col-md-6 recto\"><h3>Recto de la carte</h3>*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\nimage***bf_image***Visuel***400***400***800***800***left***0*** ***Affiché au recto dans la partie centrale comme une image illustrative*** * *** * *** *** *** *** *** ***\r\ntexte***bf_accroche***Accroche***255***255*** *** ***text***0*** ***Description courte en une phrase affichée au recto dans la partie centrale comme un titre.*** * *** * *** *** *** *** *** ***\r\nlabelhtml***<div class=\"row\"><div class=\"col-md-4\"><h4>Icône 1</h4>*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\nimage***bf_picto_boite1***gauche***100***100***400***400***left***0*** ***Icone affichée en bas à gauche de la carte. Privilégiez un  format carré et un fichier PNG ou SVG.*** * *** * *** *** *** *** *** ***\r\ntexte***bf_texte_boite1***Texte***15***15*** *** ***text***0*** ***Affiché en bas du recto  a droite du mini logo metacartes*** * *** * *** *** *** *** *** ***\r\nlabelhtml***</div><div class=\"col-md-4\"><h4>Icône 2</h4>*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\nimage***bf_picto_boite2***centre***100***100***400***400***left***0*** ***Image affichée en bas au milieu de la carte. Privilégiez un  format carré et un fichier PNG ou SVG.*** * *** * *** *** *** *** *** ***\r\ntexte***bf_texte_boite2***Texte***15***15*** *** ***text***0*** ***Affiché en bas du recto  a droite du mini logo metacartes*** * *** * *** *** *** *** *** ***\r\nlabelhtml***</div><div class=\"col-md-4\"><h4>Icône 3</h4>*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\nimage***bf_picto_boite3***droite***100***100***400***400***left***0*** ***Image affichée en bas à droite de la carte. Privilégiez un  format carré et un fichier PNG ou SVG.*** * *** * *** *** *** *** *** ***\r\ntexte***bf_texte_boite3***Texte***15***15*** *** ***text***0*** ***Affiché en bas du recto  a droite du mini logo metacartes*** * *** * *** *** *** *** *** ***\r\nlabelhtml***</div></div>*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\nlabelhtml***</div><div class=\"col-md-6 verso\"><h3>Verso de la carte</h3>*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\ntextelong***bf_chapeau***L'essentiel***80***9*** *** ***wiki***0*** ***Description affichée au verso (500 caractères max)*** * *** * *** *** *** *** *** ***\r\nlien_internet***bf_url***Url pour le QR code (laisser vide pour renvoyer vers la page web)*** *** *** *** *** ***0*** *** *** * *** * *** *** *** *** *** ***\r\nlabelhtml***</div></div>*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\ntabchange***formChange*** *** *** *** *** *** ***0*** *** *** *** *** *** *** *** *** ***\r\nlabelhtml***<h3>Contenus de la page associée à la carte</h3>*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\nlabelhtml*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\nlabelhtml***<b>Les données saisies ici apparaîtront uniquement sur la page web associée.</b>*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\ntextelong***bf_description***Contenus complémentaires (textes, images, liens, vidéos, ...)***80***30*** *** ***wiki***0*** ***Vous pouvez ajouter ici autant de contenus que vous voulez.*** * *** * *** *** *** *** *** ***\r\nlabelhtml***<b>Les mots clés ajoutés pourront servir à classer vos cartes.</b>*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\ntags***bf_tags***Mots clés*** *** *** *** *** ***0*** ***Taper entrée pour valider un mot-clé*** * *** * *** *** *** *** *** ***\r\nlabelhtml***<b>Vous pouvez lier cette carte à d'autres cartes existantes</b>*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\ncheckboxfiche***1400***Cartes liées*** *** *** ***bf_linked_cards***tags***0*** ***Tapez les premières lettre de la carte puis valider avec Entrée*** * *** * *** *** *** *** *** ***\r\nlabelhtml***<b>Pour certaines QR Cartes, la géolocalisation est utile.</b>*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\ntexte***bf_adresse***Adresse*** *** *** *** ***text***0*** *** *** * *** * *** *** *** *** *** ***\r\nmap***bf_latitude***bf_longitude*** *** *** *** ***1***0*** *** *** *** *** *** *** *** ***\r\nlabelhtml***<b>Pour certaines QR Cartes, la datation est utile.</b>*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\nlistedatedeb***bf_date_debut***Date de début*** *** *** *** *** ***0*** *** *** * *** * *** *** *** *** *** ***\r\nlistedatedeb***bf_date_fin***Date de fin*** *** *** *** *** ***0*** *** *** * *** * *** *** *** *** *** ***\r\ntabchange***formChange*** *** *** *** *** *** ***0*** *** *** *** *** *** *** *** *** ***\r\nlabelhtml***<h3>Informations contributions</h3>*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\nlabelhtml***<b>Les informations saisies ici servent à faciliter la coopération autour de la fiche (qui contribue, quel est l'état d'avancement ou ce qui reste à faire...)*** *** *** *** *** *** *** *** *** *** *** *** *** *** *** ***\r\ntextelong***contributeurices***Contributeurices*** *** *** *** ***wiki***0*** ***Nommer ici les personnes ayant contribué à la carte : rédaction, idée originale, illustration, ou autre participation*** * *** * *** *** *** *** *** ***\r\ntextelong***bf_ressources***Sources, références, ...*** *** *** *** ***wiki***0*** ***Indiquez ici les sources, les liens, la bibliographie, les ressources pour situer les contenus et / ou aller plus loin sur ce sujet*** * *** * *** *** *** *** *** ***\r\ntexte***bf_licence***Licence*** *** ***CC-BY-SA*** ***text***1*** ***Plus d'information sur les licences : https://creativecommons.org/licenses/by-sa/4.0/deed.fr*** * *** * *** *** *** *** *** ***\r\ntextelong***bf_notes_edition***Notes sur l'édition (pour soi ou pour les autres éditeurs)*** *** *** *** ***wiki***0*** ***Commentaires et notes  d'édition*** * *** * *** *** *** *** *** ***\r\nliste***ListeDegreDeMaturite***&nbsp;Etat d'avancement de la carte*** *** *** ***listeListeDegreDeMaturitebf_maturite*** ***0*** ***La carte est elle un premier brouillon qui nécessite encore du travail, un travail en cours avec des ajustements éventuels à faire, ou a-t-elle été réfléchie pour arriver à un résultat assez abouti ?*** * *** * *** *** *** *** *** ***\r\ntabchange***formChange*** *** *** *** *** *** ***0*** *** *** *** *** *** *** *** *** ***",
-  "bn_ce_i18n": "fr-FR",
-  "bn_only_one_entry": "N",
-  "bn_only_one_entry_message": ""
+  "id": "1400",
+  "lang": "fr-FR",
+  "label": "QrCards",
+  "description": "Permet de créer des cartes imprimables avec un QR code associé.",
+  "template": [
+    {
+      "type": "tabs",
+      "form_titles": "Contenu de la carte, Page associée, À propos",
+      "btn_color": "btn-secondary-1",
+      "required": "0"
+    },
+    {
+      "type": "labelhtml",
+      "form_text": "<b>Les données saisies ici apparaîtront sur la carte imprimée et sur la page web associée.</b>"
+    },
+    {
+      "type": "texte",
+      "name": "bf_titre",
+      "label": "Titre de la carte",
+      "size": "255",
+      "max_chars": "255",
+      "sub_type": "text",
+      "required": "1",
+      "hint": "Obligatoire. 2-3 mots maximum.",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "labelhtml",
+      "form_text": "<div class=\"row\"><div class=\"col-md-5\">"
+    },
+    {
+      "type": "liste",
+      "linked_object": "ListeComplexite",
+      "label": "Complexité",
+      "name": "listeListeComplexite",
+      "required": "0",
+      "hint": "Affiche un nombre de points en haut à gauche du recto de la carte.",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "labelhtml",
+      "form_text": "</div><div class=\"col-md-2\">"
+    },
+    {
+      "type": "texte",
+      "name": "bf_card_color",
+      "label": "Couleur de fond",
+      "default": "#ffffff",
+      "sub_type": "color",
+      "required": "1",
+      "hint": "Couleur de fond de la carte",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "labelhtml",
+      "form_text": "</div><div class=\"col-md-5\">"
+    },
+    {
+      "type": "liste",
+      "linked_object": "ListeTypeCarte",
+      "label": "Type de carte",
+      "name": "listeListeTypeCarte",
+      "required": "0",
+      "hint": "Optionnel, favorise le partage et la compatibilité entre différents sets de cartes.",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "labelhtml",
+      "form_text": "</div></div>"
+    },
+    {
+      "type": "labelhtml",
+      "form_text": "<div class=\"row\"><div class=\"col-md-6 recto\"><h3>Recto de la carte</h3>"
+    },
+    {
+      "type": "image",
+      "name": "bf_image",
+      "label": "Visuel",
+      "thumbnail_height": "400",
+      "thumbnail_width": "400",
+      "image_height": "800",
+      "image_width": "800",
+      "image_class": "left",
+      "required": "0",
+      "hint": "Affiché au recto dans la partie centrale comme une image illustrative",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "texte",
+      "name": "bf_accroche",
+      "label": "Accroche",
+      "size": "255",
+      "max_chars": "255",
+      "sub_type": "text",
+      "required": "0",
+      "hint": "Description courte en une phrase affichée au recto dans la partie centrale comme un titre.",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "labelhtml",
+      "form_text": "<div class=\"row\"><div class=\"col-md-4\"><h4>Icône 1</h4>"
+    },
+    {
+      "type": "image",
+      "name": "bf_picto_boite1",
+      "label": "gauche",
+      "thumbnail_height": "100",
+      "thumbnail_width": "100",
+      "image_height": "400",
+      "image_width": "400",
+      "image_class": "left",
+      "required": "0",
+      "hint": "Icone affichée en bas à gauche de la carte. Privilégiez un  format carré et un fichier PNG ou SVG.",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "texte",
+      "name": "bf_texte_boite1",
+      "label": "Texte",
+      "size": "30",
+      "max_chars": "30",
+      "sub_type": "text",
+      "required": "0",
+      "hint": "Affiché en bas du recto  a droite du mini logo metacartes",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "labelhtml",
+      "form_text": "</div><div class=\"col-md-4\"><h4>Icône 2</h4>"
+    },
+    {
+      "type": "image",
+      "name": "bf_picto_boite2",
+      "label": "centre",
+      "thumbnail_height": "100",
+      "thumbnail_width": "100",
+      "image_height": "400",
+      "image_width": "400",
+      "image_class": "left",
+      "required": "0",
+      "hint": "Image affichée en bas au milieu de la carte. Privilégiez un  format carré et un fichier PNG ou SVG.",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "texte",
+      "name": "bf_texte_boite2",
+      "label": "Texte",
+      "size": "30",
+      "max_chars": "30",
+      "sub_type": "text",
+      "required": "0",
+      "hint": "Affiché en bas du recto  a droite du mini logo metacartes",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "labelhtml",
+      "form_text": "</div><div class=\"col-md-4\"><h4>Icône 3</h4>"
+    },
+    {
+      "type": "image",
+      "name": "bf_picto_boite3",
+      "label": "droite",
+      "thumbnail_height": "100",
+      "thumbnail_width": "100",
+      "image_height": "400",
+      "image_width": "400",
+      "image_class": "left",
+      "required": "0",
+      "hint": "Image affichée en bas à droite de la carte. Privilégiez un  format carré et un fichier PNG ou SVG.",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "texte",
+      "name": "bf_texte_boite3",
+      "label": "Texte",
+      "size": "30",
+      "max_chars": "30",
+      "sub_type": "text",
+      "required": "0",
+      "hint": "Affiché en bas du recto  a droite du mini logo metacartes",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "labelhtml",
+      "form_text": "</div></div>"
+    },
+    {
+      "type": "labelhtml",
+      "form_text": "</div><div class=\"col-md-6 verso\"><h3>Verso de la carte</h3>"
+    },
+    {
+      "type": "textelong",
+      "name": "bf_chapeau",
+      "label": "L'essentiel",
+      "size": "80",
+      "num_rows": "9",
+      "syntax": "wiki",
+      "required": "0",
+      "hint": "Description affichée au verso (500 caractères max)",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "lien_internet",
+      "name": "bf_url",
+      "label": "Url pour le QR code (laisser vide pour renvoyer vers la page web)",
+      "required": "0",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "labelhtml",
+      "form_text": "</div></div>"
+    },
+    {
+      "type": "tabchange",
+      "form_change": "formChange",
+      "required": "0"
+    },
+    {
+      "type": "labelhtml",
+      "form_text": "<h3>Contenus de la page associée à la carte</h3>"
+    },
+    {
+      "type": "labelhtml",
+      "form_text": "<b>Les données saisies ici apparaîtront uniquement sur la page web associée.</b>"
+    },
+    {
+      "type": "textelong",
+      "name": "bf_description",
+      "label": "Contenus complémentaires (textes, images, liens, vidéos, ...)",
+      "size": "80",
+      "num_rows": "30",
+      "syntax": "wiki",
+      "required": "0",
+      "hint": "Vous pouvez ajouter ici autant de contenus que vous voulez.",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "labelhtml",
+      "form_text": "<b>Les mots clés ajoutés pourront servir à classer vos cartes.</b>"
+    },
+    {
+      "type": "tags",
+      "linked_object": "bf_tags",
+      "label": "Mots clés",
+      "required": "0",
+      "hint": "Taper entrée pour valider un mot-clé",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "labelhtml",
+      "form_text": "<b>Vous pouvez lier cette carte à d'autres cartes existantes</b>"
+    },
+    {
+      "type": "checkboxfiche",
+      "linked_object": "1400",
+      "label": "Cartes liées",
+      "name": "bf_linked_cards",
+      "display_method": "tags",
+      "required": "0",
+      "hint": "Tapez les premières lettre de la carte puis valider avec Entrée",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "labelhtml",
+      "form_text": "<b>Pour certaines QR Cartes, la géolocalisation est utile.</b>"
+    },
+    {
+      "type": "texte",
+      "name": "bf_adresse",
+      "label": "Adresse",
+      "sub_type": "text",
+      "required": "0",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "map",
+      "name": "bf_geolocation",
+      "label": "Géolocalisation de l'adresse",
+      "show_map_in_entry_view": "1",
+      "required": "0"
+    },
+    {
+      "type": "labelhtml",
+      "form_text": "<b>Pour certaines QR Cartes, la datation est utile.</b>"
+    },
+    {
+      "type": "listedatedeb",
+      "name": "bf_date_debut",
+      "label": "Date de début",
+      "required": "0",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "listedatefin",
+      "name": "bf_date_fin",
+      "label": "Date de fin",
+      "required": "0",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "tabchange",
+      "form_change": "formChange",
+      "required": "0"
+    },
+    {
+      "type": "labelhtml",
+      "form_text": "<h3>Informations contributions</h3>"
+    },
+    {
+      "type": "labelhtml",
+      "form_text": "<b>Les informations saisies ici servent à faciliter la coopération autour de la fiche (qui contribue, quel est l'état d'avancement ou ce qui reste à faire...)"
+    },
+    {
+      "type": "textelong",
+      "name": "contributeurices",
+      "label": "Contributeurices",
+      "syntax": "wiki",
+      "required": "0",
+      "hint": "Nommer ici les personnes ayant contribué à la carte : rédaction, idée originale, illustration, ou autre participation",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "textelong",
+      "name": "bf_ressources",
+      "label": "Sources, références, ...",
+      "syntax": "wiki",
+      "required": "0",
+      "hint": "Indiquez ici les sources, les liens, la bibliographie, les ressources pour situer les contenus et / ou aller plus loin sur ce sujet",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "texte",
+      "name": "bf_licence",
+      "label": "Licence",
+      "default": "CC-BY-SA",
+      "sub_type": "text",
+      "required": "1",
+      "hint": "Plus d'information sur les licences : https://creativecommons.org/licenses/by-sa/4.0/deed.fr",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "textelong",
+      "name": "bf_notes_edition",
+      "label": "Notes sur l'édition (pour soi ou pour les autres éditeurs)",
+      "syntax": "wiki",
+      "required": "0",
+      "hint": "Commentaires et notes  d'édition",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "liste",
+      "linked_object": "ListeDegreDeMaturite",
+      "label": "&nbsp;Etat d'avancement de la carte",
+      "name": "listeListeDegreDeMaturitebf_maturite",
+      "required": "0",
+      "hint": "La carte est elle un premier brouillon qui nécessite encore du travail, un travail en cours avec des ajustements éventuels à faire, ou a-t-elle été réfléchie pour arriver à un résultat assez abouti ?",
+      "read_access": "*",
+      "write_access": "*"
+    },
+    {
+      "type": "tabchange",
+      "form_change": "formChange",
+      "required": "0"
+    }
+  ],
+  "entry_title_template": "{{bf_titre}}",
+  "entry_bookmarklet": {
+    "url_field": "bf_ressources",
+    "description_field": "bf_chapeau"
+  },
+  "sem_context": "",
+  "sem_type": "",
+  "sem_use_template": "1",
+  "only_one_entry": "N",
+  "only_one_entry_message": ""
 }

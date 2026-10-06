@@ -1,3 +1,3 @@
-$(function() {
-  $('.hexa-card').click(function() { $(this).toggleClass('flipped'); });
+ywInitEach('.hexa-card', (card) => {
+  card.addEventListener('click', () => card.classList.toggle('flipped'))
 })

@@ -1,52 +1,29 @@
 :root {
-  /* largeur de la carte */
   --card-width: 75mm;
-
-  /* hauteur de la carte */
   --card-height: 125mm;
-
-  /* bordure de la carte */
   --card-border: 1px solid rgba(0, 0, 0, 0.3);
-
-  /* marges pour les bords en couleur et entre les zones de la carte */
   --card-spacing: 5mm;
-
-  /* Dans l'ordre, hauteurs de: type de carte / titre / image / texte résumé / pied de page (pictos, qrcode)*/
   --card-recto-zone-height: 5mm 20mm 50mm 20mm 20mm;
-
-  /* Dans l'ordre, hauteurs de: type de carte / titre / texte long / pied de page (pictos, qrcode)*/
   --card-verso-zone-height: 5mm 20mm 70mm 20mm;
-
-  /* typo type de la carte (en haut à droite) */
   --type-font-family: tahoma, sans-serif;
   --type-font-size: 10px;
   --type-color: #222;
   --type-text-transform: uppercase;
-
-  /* typo titre de la carte */
   --title-font-family: garamond, serif;
   --title-font-size: 20px;
   --title-xl-font-size: 16px;
   --title-xxl-font-size: 13px;
   --title-color: #222;
   --title-text-transform: uppercase;
-
-  /* typo texte recto de la carte */
   --text-font-family: tahoma, sans-serif;
   --text-font-size: 16px;
   --text-color: #222;
-
-  /* typo texte verso de la carte */
   --longtext-font-family: tahoma, sans-serif;
   --longtext-font-size: 16px;
   --longtext-color: #222;
-
-  /* typo lien pied de page de la carte */
   --link-font-family: tahoma, sans-serif;
   --link-font-size: 10px;
   --link-color: #222;
-
-  /* typo texte pictos pied de page de la carte */
   --picto-font-family: tahoma, sans-serif;
   --picto-font-size: 8px;
   --picto-color: #222;
@@ -60,6 +37,13 @@
   justify-content: flex-start;
   flex-wrap: wrap;
   gap: 3em 1em;
+}
+
+.qrcard,
+.qrcard *,
+.qrcard-actions,
+.qrcard-actions * {
+  box-sizing: border-box;
 }
 
 .qrcard {
@@ -216,7 +200,6 @@
   margin: 0;
 }
 
-/*QR code parameters */
 .qrcode,
 .qrcode img {
   width: 13mm;
@@ -236,7 +219,6 @@
   max-height: 13mm;
 }
 
-/* flip */
 .card-plus-actions-container {
   position: relative;
   width: var(--card-width);
@@ -294,7 +276,6 @@
   transform: rotateY(-180deg);
 }
 
-/* vertical */
 .vertical.flip-container {
   position: relative;
 }
@@ -315,17 +296,6 @@
 .vertical.flip-container:hover .front,
 .vertical.flip-container.hover .front {
   transform: rotateX(180deg);
-}
-
-.card-actions {
-  margin-top: 115mm;
-  opacity: 0;
-  transition: all cubic-bezier(0.075, 0.82, 0.165, 1) 1000ms;
-}
-
-.bazar-entry:hover .card-actions {
-  margin-top: 126mm;
-  opacity: 1;
 }
 
 .qrcard-main-content {
@@ -382,48 +352,130 @@
   background-color: transparent !important;
 }
 
-.btn-group-qrcards {
-  margin-top: 1em;
-  border: 1px solid var(--primary-color);
-  border-radius: 6px;
+.qrcards-view-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--yw-space-sm-y) var(--yw-space-sm-x);
+  margin-top: var(--yw-space-md-y);
 }
 
 .qrcard-actions {
   width: var(--card-width);
   position: absolute;
-  bottom: -28px;
-  font-size: 14px;
+  bottom: -2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--yw-space-sm-x);
+  font-size: 0.8rem;
   font-weight: bold;
   text-transform: uppercase;
+}
+
+.qrcard-actions .favorites {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+  color: var(--yw-text);
+  text-decoration: none;
+}
+
+.qrcard-actions .favorites.user-favorite {
+  color: var(--yw-warning);
+}
+
+.card-edit-links {
+  display: flex;
+  align-items: center;
+  gap: 0.15rem;
+}
+
+.card-edit-links .yw-btn {
+  min-width: 0;
+  padding: 0.2rem 0.4rem;
+}
+
+.card-edit-links .yw-dropdown__menu {
+  text-transform: none;
+  font-weight: normal;
+}
+
+.qrcard-to-print .qrcard-actions {
+  justify-content: center;
+}
+
+.qrcard-entry-card {
+  float: right;
+  margin: 0 0 2em 2em;
+  padding-bottom: 2.5rem;
+}
+
+.flip-container:focus-visible {
+  outline: 2px solid var(--yw-primary);
+  outline-offset: 4px;
 }
 
 .qrcard-to-print .qrcard-actions {
   width: calc(2 * var(--card-width));
 }
 
-.flex-between {
-  display: flex;
-  justify-content: space-between;
-}
-
 [data-id='bf_plus'] .BAZ_label {
   display: none;
 }
 
-.col-md-6 .col-md-4 .bazar-entry-edit-image {
+@media (min-width: 992px) {
+  #formulaire .row > .col-md-2 {
+    width: 16.6667%;
+  }
+
+  #formulaire .row > .col-md-5 {
+    width: 41.6667%;
+  }
+
+  #formulaire .row > .col-md-6 {
+    width: 50%;
+  }
+
+  #formulaire .row > .col-md-4 {
+    width: 33.3333%;
+  }
+}
+
+#formulaire .col-md-4 .bazar-entry-edit-image,
+#formulaire .col-md-4 .yw-form-group {
   flex-direction: column;
+}
+
+#formulaire .col-md-4 img {
+  max-width: 100%;
+  height: auto;
+}
+
+#formulaire .col-md-4 .controls,
+#formulaire .col-md-4 .file-or-url > * {
+  min-width: 0;
+  max-width: 100%;
+}
+
+#formulaire .col-md-4 .yw-file-picker-field__button {
+  width: 100%;
+  white-space: normal;
+}
+
+#formulaire .col-md-4 .file-or-url .yw-input {
+  flex-basis: 100%;
 }
 
 .verso .format-menu,
 .verso .more-styles .aceditor-btn-line,
 .verso .pages,
-.verso .attach-file-uploader,
+.verso .aceditor-btn-file,
 .verso .actions-builder-button,
-.verso .aceditor-btn-help {
+.verso .aceditor-btn-help,
+.verso .vditor-toolbar__item:has(> [data-type='yw-format'], > [data-type='link'], > [data-type='yw-file'], > [data-type='yw-component'], > [data-type='yw-help']) {
   display: none;
 }
 
-/* hide yeswiki interface in print mode, and do some tweaks */
 @media print {
   @page {
     size: A4 portrait;
@@ -444,14 +496,14 @@
     content: none;
   }
 
-  .footer,
   #yw-topnav,
   #yw-header,
   #yw-footer,
   .debug,
   .BAZ_fiche_info,
   .filters-col,
-  .page>*,
+  .yw-page-info,
+  .yw-chrome-edit,
   #yw-a11y-jump-content,
   #search-form,
   .no-print {
@@ -459,12 +511,13 @@
   }
 
   #yw-main .yw-main-content,
-  section.full-width .container {
+  #yw-main .container {
     max-width: 100%;
   }
 
-  .results-col.col-sm-10,
-  .page>[data-template="qrcards.tpl.html"] {
+  .facette-container,
+  .results-col,
+  .page .entry-list[data-template^="qrcards"] {
     display: block !important;
     margin: 0;
     padding: 0;

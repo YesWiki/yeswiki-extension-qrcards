@@ -1,5 +1,15 @@
-parameters:
 services:
   _defaults:
     autowire: true
+    autoconfigure: true
     public: true
+
+  YesWiki\Qrcards\Service\:
+    resource: 'services/*'
+
+  YesWiki\Qrcards\Service\QrcardsFormAssets:
+    tags:
+      - { name: yeswiki.event_subscriber }
+
+  YesWiki\Qrcards\Action\:
+    resource: 'actions/*'

@@ -1,3 +1,0 @@
-{{nav class="nav nav-tabs no-print" links="VoirQrCards, AjouterQrCards, FavorisQrcards, DocumentationQrCartes" titles="Cartes, Ajouter une carte, Favoris, Documentation"}}
-
-{{bazarliste id="1400" template="qrcards" dynamic="false" filtercolsize="2" groups="bf_tags" titles="Mots clés" }}

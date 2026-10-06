@@ -1,0 +1,13 @@
+{
+  "id": "qrcards",
+  "label": "Qr Cartes",
+  "link": "VoirQrCards",
+  "icon": { "source": "sprite", "value": "qrcode" },
+  "children": [
+    { "id": "qrcards-view", "label": "Voir les cartes", "link": "VoirQrCards", "icon": { "source": "sprite", "value": "eye" } },
+    { "id": "qrcards-add", "label": "Ajouter une carte", "link": "AjouterQrCards", "icon": { "source": "sprite", "value": "circle-plus" } },
+    { "id": "qrcards-favorites", "label": "Cartes favorites", "link": "FavorisQrCards", "icon": { "source": "sprite", "value": "star" } },
+    { "id": "qrcards-documentation", "label": "Documentation", "link": "DocumentationQrCartes", "icon": { "source": "sprite", "value": "book" } },
+    { "id": "qrcards-wikicartes", "label": "WikiCartothèque", "link": "https://metacartes.net/wikicartes/", "icon": { "source": "sprite", "value": "git-branch" } }
+  ]
+}

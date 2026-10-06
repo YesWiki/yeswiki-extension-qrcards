@@ -1,64 +1,81 @@
-# qrcards extension
+# QR cards extension
 
-Creates printable cards with an attached QR code, to extend the experience online.
+Creates printable cards with a QR code that leads back to the card's page on the wiki. Each card is an entry: its front and back are printed, and the QR code opens the entry.
 
-# Documentation
+Full documentation (in French): https://metacartes.net/qrcartes/
 
-The full documentation lives here: https://metacartes.net/qrcartes/
+## What the extension installs
 
-# Changelog
+`./yeswicli migrate` (or installing from `/admin/updates`) creates:
 
-## QR cards V0.8.3
+- the **QrCards** form (1400) and the **Sets de cartes** card set form (1401);
+- the `ListeComplexite`, `ListeDegreDeMaturite` and `ListeTypeCarte` value lists;
+- two sample cards, `bienvenue` and `demarrer`;
+- the `VoirQrCards`, `AjouterQrCards`, `FavorisQrCards` and `DocumentationQrCartes` pages, readable by anyone and writable by admins;
+- the `MenuQrCards` menu, drawn as tabs at the top of those pages;
+- a "Qr Cartes" entry in the quick access menu, with its sub-entries (they show when the quick access menu draws dropdowns, in `/admin/layout`).
 
-- documentation site added to the menu
-- card printing bugs fixed
-- title size now adapts to the title length
-- pictogram text slightly larger
-- bookmarklet added to the documentation
+Nothing is created when a page, list or form of the same name is already there.
 
-## QR cards V0.8.2
+## Showing cards
 
-- fixed errors when printing cards in colour
-- facets hidden when printing
+The card list is the `qrcards` template of `{{entrylist}}`:
 
-## QR cards V0.8.1
+```
+{{entrylist id="1400" template="qrcards" dynamic="false" groups="bf_tags" titles="Mots clés"}}
+```
 
-- form updated, help text fixed
-- default cards: tags added and text fixed
-- custom launcher icon added
-- legacy/list bug fixed: lists are now correct whatever the wiki version, duplication only shows on 4.5
-- import bug fixed: entries now import correctly when the lists are empty
+The "Vue impression" button (or `&print=1` in the address) lays the cards out front and back side by side, two per A4 page. "Ne pas imprimer" takes a card off the page before printing.
 
-## QR cards V0.8.0
+One card on its own is the `{{qrcard}}` action:
 
-- made compatible with the upcoming YesWiki version (4.5)
-- duplication: clone existing cards inside the same wiki, or from a remote wiki you can write to
-- card sets: build distinct card sets from the same database. A card can belong to several sets by drag and drop. This partly solves the bug that prevented having several card sets on one wiki.
-- keyword categorisation: attach one or more keywords to a card and sort on them without having to build lists first
-- card type sorting: beyond recipes and ingredients, ten types taken from the information seeds model are now offered. This helps card sets work together.
-- linked cards: cards can now point at each other.
-- geolocation: place QR card data on a map through YesWiki's mapping feature.
-- dating: place events in time and feed cards into YesWiki's calendar feature.
-- card input form reworked:
-    - wording and help texts rewritten to be easier to follow
-    - laid out in tabs to cut down the information load
-    - formatting allowed in the essential field, so cards can show formatted content
-- default pages updated: new documentation page with a legend
-- launcher pages updated
+```
+{{qrcard tag="bienvenue"}}
+{{qrcard tag="bienvenue" view="print"}}
+```
 
-### Migrating to QR cards 0.8
+| Parameter | Required | Purpose |
+|---|---|---|
+| `tag` | yes | the card's entry |
+| `view` | no | `web` (the card flips on hover) or `print` (front and back side by side) |
 
-Two options:
+A card's entry page shows the card beside the rest of the entry. A card set entry shows the cards it holds, in the order chosen.
 
-- wait for YesWiki 4.5 to be released before updating
-- advanced users: switch to the testing channel
+## Adding a card from the browser
 
-We chose not to force a migration that could break data, so the move is manual.
+`DocumentationQrCartes` offers a "+qrcard" button to drag to the bookmarks bar. On any site it opens the card form with the page's title, its address under "Sources" and the selected text on the back. The QrCards form also has its own bookmarklet, in the list of forms.
 
-**Important: download your data as CSV before any update.**
+## Customising
 
-## Earlier changes
+The `ConfigMetacarte` page, when there is one, holds YAML:
 
-- August 2024, V0.7.2: fixed a display bug when the database is duplicated from the main one; fixed a display bug in the line count of the essential field
-- August 2024, V0.7.1: added a cut-off on the number of lines shown in the essential field
-- May 2024, V0.7: stabilised version added to the YesWiki extensions and available on the prod branch; fixed a Firefox printing bug; database structure changed; changes to the associated pages integrated (form, sample cards, menus)
+```yaml
+template: hexa
+card_set_image: https://example.com/set-logo.svg
+card_colors:
+  - field: listeListeTypeCarte
+    key: "①"
+    color: "#f6d365"
+```
+
+- `template`: the card layout, `qrcard` by default, or `hexa`. A layout of your own goes in `custom/templates/qrcards/card-layouts/<name>.twig`.
+- `card_set_image`: the logo printed at the bottom of the cards.
+- `card_colors`: a background colour picked by the value of a field, instead of the colour set in the entry.
+
+The wiki's `card_logo` setting replaces the picture shown when a card has none.
+
+Card sizes and fonts are CSS custom properties, which `custom/styles/custom.css` can redefine:
+
+| Property | Purpose |
+|---|---|
+| `--card-width`, `--card-height` | card size (75 × 125 mm) |
+| `--card-border` | card border |
+| `--card-spacing` | width of the coloured edges and gap between zones |
+| `--card-recto-zone-height` | heights of the type, title, picture, summary and footer on the front |
+| `--card-verso-zone-height` | heights of the type, title, long text and footer on the back |
+| `--type-*` | font of the card type (top right) |
+| `--title-*` | title font, with `--title-xl-font-size` and `--title-xxl-font-size` for long titles |
+| `--text-*` | font of the summary on the front |
+| `--longtext-*` | font of the text on the back |
+| `--link-*` | font of the footer link |
+| `--picto-*` | font of the captions under the icons |

@@ -1,0 +1,15 @@
+{% if entries|length > 0 %}
+  {{ include_css('extensions/qrcards/styles/qrcards.css') }}
+  {{ include_javascript('extensions/qrcards/javascripts/qrcards.js') }}
+  {% set displayMode = request.get.print is defined and request.get.print is not empty ? 'print' : 'web' %}
+  {{ resultsInfo|raw }}
+  {{ include('@qrcards/_view-switch.twig') }}
+  <div id="{{ params.listindex ?? 'qrcards' }}-qrcard-container" class="page-qrcard {{ displayMode }}">
+    {% for entry in entries %}
+      {{ renderAction('qrcard', {tag: entry.tag, view: displayMode})|raw }}
+    {% endfor %}
+  </div>
+  {{ pager_links|raw }}
+{% else %}
+  {{ resultsInfo|raw }}
+{% endif %}

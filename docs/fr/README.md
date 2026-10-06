@@ -1,12 +1,95 @@
-# Extension Qrcard
+# Extension QR cartes
 
-Permet de créer des cartes imprimables avec un qrcode associé pour prolonger l'expérience en ligne.
+Crée des cartes imprimables avec un QR code associé pour prolonger l'expérience en ligne. Chaque carte est une fiche : le recto et le verso sont imprimés, le QR code renvoie vers la page de la fiche sur le wiki.
 
-# Documentation
+Documentation complète : https://metacartes.net/qrcartes/
 
-voir la doc complète ici : https://metacartes.net/qrcartes/
+## Ce que l'extension installe
+
+`./yeswicli migrate` (ou l'installation depuis `/admin/updates`) crée :
+
+- le formulaire **QrCards** (1400) et le formulaire **Sets de cartes** (1401) ;
+- les listes `ListeComplexite`, `ListeDegreDeMaturite` et `ListeTypeCarte` ;
+- deux cartes d'exemple, `bienvenue` et `demarrer` ;
+- les pages `VoirQrCards`, `AjouterQrCards`, `FavorisQrCards` et `DocumentationQrCartes`, lisibles par tous et modifiables par les admins ;
+- le menu `MenuQrCards`, affiché en onglets en haut de ces pages ;
+- une entrée « Qr Cartes » dans le menu d'accès rapide, avec ses sous-entrées (elles s'affichent si le menu d'accès rapide montre les menus déroulants, dans `/admin/layout`).
+
+Rien n'est créé si une page, une liste ou un formulaire du même nom existe déjà.
+
+## Afficher des cartes
+
+La liste des cartes est le modèle `qrcards` de `{{entrylist}}` :
+
+```
+{{entrylist id="1400" template="qrcards" dynamic="false" groups="bf_tags" titles="Mots clés"}}
+```
+
+Le bouton « Vue impression » (ou `&print=1` dans l'adresse) dispose les cartes recto et verso côte à côte, deux par page A4. « Ne pas imprimer » retire une carte de la page avant d'imprimer.
+
+Une carte seule s'affiche avec l'action `{{qrcard}}` :
+
+```
+{{qrcard tag="bienvenue"}}
+{{qrcard tag="bienvenue" view="print"}}
+```
+
+| Paramètre | Obligatoire | Rôle |
+|---|---|---|
+| `tag` | oui | la fiche de la carte |
+| `view` | non | `web` (la carte se retourne au survol) ou `print` (recto et verso côte à côte) |
+
+La fiche d'une carte montre la carte à côté des contenus de la page associée. Une fiche **Sets de cartes** affiche les cartes qu'elle contient, dans l'ordre choisi.
+
+## Ajouter une carte depuis le navigateur
+
+La page `DocumentationQrCartes` propose un bouton « +qrcard » à glisser dans la barre de signets : depuis n'importe quel site, il ouvre le formulaire avec le titre de la page, son adresse dans « Sources » et le texte sélectionné au verso. Le formulaire QrCards a aussi son propre signet, dans la liste des formulaires.
+
+## Personnaliser
+
+La page `ConfigMetacarte`, si elle existe, contient du YAML :
+
+```yaml
+template: hexa
+card_set_image: https://example.com/logo-du-set.svg
+card_colors:
+  - field: listeListeTypeCarte
+    key: "①"
+    color: "#f6d365"
+```
+
+- `template` : la mise en page des cartes, `qrcard` par défaut ou `hexa`. Une mise en page à vous se place dans `custom/templates/qrcards/card-layouts/<nom>.twig`.
+- `card_set_image` : le logo imprimé en bas des cartes.
+- `card_colors` : une couleur de fond selon la valeur d'un champ, à la place de la couleur choisie dans la fiche.
+
+Le paramètre `card_logo` de la configuration du wiki remplace l'image affichée quand une carte n'a pas de visuel.
+
+Les dimensions et les polices des cartes sont des variables CSS, à redéfinir dans `custom/styles/custom.css` :
+
+| Variable | Rôle |
+|---|---|
+| `--card-width`, `--card-height` | taille de la carte (75 × 125 mm) |
+| `--card-border` | bordure de la carte |
+| `--card-spacing` | marges des bords en couleur et entre les zones |
+| `--card-recto-zone-height` | hauteurs du type, du titre, de l'image, du résumé et du pied de page au recto |
+| `--card-verso-zone-height` | hauteurs du type, du titre, du texte long et du pied de page au verso |
+| `--type-*` | police du type de carte (en haut à droite) |
+| `--title-*` | police du titre, avec `--title-xl-font-size` et `--title-xxl-font-size` pour les titres longs |
+| `--text-*` | police de l'accroche au recto |
+| `--longtext-*` | police du texte au verso |
+| `--link-*` | police du lien en pied de page |
+| `--picto-*` | police des textes sous les icônes |
 
 # Changelog
+
+## QR cards 5.0 (YesWiki Ectoplasme)
+
+- portage pour YesWiki Ectoplasme : formulaires, listes, menus et pages créés par les migrations au format Ectoplasme
+- les cartes sont dessinées en Twig, sans jQuery ni Bootstrap
+- action `{{qrcard}}` pour afficher une carte n’importe où
+- le menu « Qr Cartes » est une entrée du menu d’accès rapide, les onglets des pages sont le menu `MenuQrCards`
+- le signet « +qrcard » est aussi activé sur le formulaire des cartes
+- la date de fin d’une carte est un champ de date de fin, et non plus un second champ de date de début
 
 ## QR cards V0.8.3 - Liste des changements
 

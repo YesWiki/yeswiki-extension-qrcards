@@ -1,144 +1,90 @@
-{% set titleLength = fiche.bf_titre|length %}
-{% set titleClass = '' %}
-{% if titleLength > 80 %}
-  {% set titleClass = 'title-xxl' %}
-{% elseif titleLength > 50 %}
-  {% set titleClass = 'title-xl' %}
-{% endif %}
-{% if view != 'print' %}
-<div class="card-plus-actions-container bazar-entry" {{ fiche.html_data|raw }}><div class="flip-container" ontouchstart="this.classList.toggle('hover');"><div><div class="flipper">
-{% else %}
-<div class="qrcard-to-print bazar-entry" {{ fiche.html_data|raw }}>
-{% endif %} 
-    <div class="qrcard front" style="background-color: {{ cardColor }} !important;">
-        <div class="qrcard-header">
-            <div class="complexity">{{ difficulty }}</div>
-            <div class="card-type">{{ type }}</div>
-        </div>
-        <h2 class="qrcard-title {{ titleClass }}">{{ fiche.bf_titre }}</h2>
-        <div class="qrcard-image">
-            {{ mainimage|raw }}
-        </div>
-        <div class="qrcard-text">
-            {{ fiche.bf_accroche }}
-        </div>
-        <div class="qrcard-footer">
-            <img loading="lazy" class="logo" alt="logo" src="{{ logoimage }}" />
-            <div class="boite1">
-                <div class="mini-picto">{{ picto1|raw }}</div>
-                <div class="mini-text">{{ textpicto1 }}</div>
-            </div>
-            <div class="boite2">
-                <div class="mini-picto">{{ picto2|raw }}</div>
-                <div class="mini-text">{{ textpicto2 }}</div>
-            </div>
-            <div class="boite3">
-                <div class="mini-picto">{{ picto3|raw }}</div>
-                <div class="mini-text">{{ textpicto3 }}</div>
-            </div>
-        </div>
+{% set titleClass = title|length > 80 ? 'title-xxl' : (title|length > 50 ? 'title-xl' : '') %}
+{% set front %}
+  <div class="qrcard front" style="background-color: {{ color }};">
+    <div class="qrcard-header">
+      <div class="complexity">{{ difficulty }}</div>
+      <div class="card-type">{{ type }}</div>
     </div>
-    <div class="qrcard back" style="background-color: {{ fiche.bf_card_color }} !important;">
-        <div class="qrcard-header">
-            <div class="complexity">{{ difficulty }}</div>
-            <div class="card-type">{{ type }}</div>
-        </div>
-        <h2 class="qrcard-title {{ titleClass }}">{{ fiche.bf_titre }}</h2>
-        <div class="qrcard-main-content">
-            {{ longtext|raw }}
-        </div>
-        <div class="qrcard-footer">
-            <img loading="lazy" class="logo" alt="logo" src="{{ logoimage }}" />
-            <div class="link">
-                <a class="card-link" href="{{ link }}">{{ shortlink }}</a>
-                <img loading="lazy" class="logo-cc" src="tools/qrcards/images/cc-by-sa.svg" alt="licence CC BY SA" />
-            </div>
-            <div class="qrcode">
-                {{ qrcode|raw }}
-            </div>
-        </div>
+    <h2 class="qrcard-title {{ titleClass }}">{{ title }}</h2>
+    <div class="qrcard-image">
+      <img loading="lazy" alt="" src="{{ image ?: logo }}" />
     </div>
-{% if view != 'print' %}
-</div>
-</div>
-</div>
-<div class="qrcard-actions flex-between no-print">
-{% if currentuser is not empty %}
-{{ include_javascript('javascripts/favorites.js') }}
-<a href="#"
-    class="favorites"
-    title="{{ (isUserFavorite) ? _t('FAVORITES_REMOVE') : _t('FAVORITES_ADD') }}"
-    data-resource="{{ fiche.id_fiche }}" 
-    data-user="{{ currentuser }}"
-    data-toggle="tooltip"
-    data-placement="top">
-    <i class="{{ (isUserFavorite) ? 'fas' : 'far' }} fa-star"></i>
-    {{  _t('QRCARDS_FAVORI') }}
-</a>
-{% endif %}
-<div class="card-edit-links">
-    {% if currentPage != fiche.id_fiche %}
-    <a title="{{ _t('QRCARDS_VIEW')}}" data-toggle="tooltip" data-placement="top" href="{{ url({tag:fiche.id_fiche}) }}" class="btn btn-xs btn-default">
-        <i class="fa fa-eye-open"></i>
-    </a>
+    <div class="qrcard-text">{{ entry.bf_accroche ?? '' }}</div>
+    <div class="qrcard-footer">
+      <img loading="lazy" class="logo" alt="" src="{{ setLogo }}" />
+      {% for picto in pictos %}
+        <div class="boite{{ loop.index }}">
+          <div class="mini-picto">{% if picto.image %}<img loading="lazy" src="{{ picto.image }}" alt="" />{% endif %}</div>
+          <div class="mini-text">{{ picto.text }}</div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endset %}
+{% set back %}
+  <div class="qrcard back" style="background-color: {{ color }};">
+    <div class="qrcard-header">
+      <div class="complexity">{{ difficulty }}</div>
+      <div class="card-type">{{ type }}</div>
+    </div>
+    <h2 class="qrcard-title {{ titleClass }}">{{ title }}</h2>
+    <div class="qrcard-main-content">{{ longText|raw }}</div>
+    <div class="qrcard-footer">
+      <img loading="lazy" class="logo" alt="" src="{{ setLogo }}" />
+      <div class="link">
+        <a class="card-link" href="{{ link }}">{{ shortLink }}</a>
+        <img loading="lazy" class="logo-cc" src="{{ license }}" alt="CC BY SA" />
+      </div>
+      <div class="qrcode"><img src="{{ qrcode }}" alt="{{ link }}" /></div>
+    </div>
+  </div>
+{% endset %}
+{% if view == 'print' %}
+  <div class="qrcard-to-print" data-tag="{{ entry.tag }}">
+    {{ front }}
+    {{ back }}
+    {% if currentPage != entry.tag %}
+      <div class="qrcard-actions no-print">
+        <button type="button" class="yw-btn yw-btn--sm yw-btn--danger qrcard-remove-from-print">{{ icon('x') }} {{ _t('QRCARDS_DONT_PRINT') }}</button>
+      </div>
     {% endif %}
-    {% if linkedit != null %}
-    <a title="{{ _t('TEMPLATE_EDIT')}}" data-toggle="tooltip" data-placement="top" href="{{ linkedit|raw }}" class="btn btn-xs btn-default">
-      <i class="fa fa-pencil-alt"></i>
-    </a>
-  {% endif %}
-    <a
-      title="{{ _t('DUPLICATE_CARD') }}"
-      class="btn btn-xs btn-default link-duplicate dropdown-toggle"
-      id="duplicate-dropup"
-      rel="tooltip" data-placement="top"
-      data-toggle="dropdown"
-      aria-haspopup="true"
-      aria-expanded="false"
-    >
-      <i class="fas fa-copy"></i>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="duplicate-dropup">
-      <li>
-        <a
-          href="{{ url({tag:fiche.id_fiche, handler:'duplicate'}) }}"
-          title="{{ _t('TEMPLATE_DUPLICATE_PAGE') }}"
-        >
-          {{ _t('TEMPLATE_DUPLICATE_LOCALLY') }}
-        </a>
-      </li>
-      <li>
-        <a
-          href="{{ url({tag:fiche.id_fiche, handler:'duplicate', params:{toUrl:1}}) }}"
-          title="{{ _t('TEMPLATE_DUPLICATE_PAGE') ~ ' ' ~ page }}"
-        >
-          {{ _t('TEMPLATE_DUPLICATE_IN_ANOTHER_WIKI') }}
-        </a>
-      </li>
-    </ul>
-  <a title="{{ _t('QRCARDS_PRINT')}}" data-toggle="tooltip" data-placement="top" href="{{ url({tag: fiche.id_fiche,params:{print:1}})  }}" class="btn btn-xs btn-default">
-  <i class="fas fa-print"></i>
-  </a>
-  {% if linkdelete != 0 %}
-    <a href="{{ linkdelete|raw }}" class="btn btn-xs btn-danger modalbox" title="{{ _t('TEMPLATE_DELETE')}}" data-toggle="tooltip" data-placement="top">
-      <i class="fa fa-trash"></i>
-    </a>
-  {% endif %}
-</div>
-</div>
-</div>
-<script>
-document.addEventListener('DOMContentLoaded', function(event) {
-$('[rel="tooltip"]').tooltip({
-    trigger : 'hover'
-});
-})
-</script>
+  </div>
 {% else %}
-{% if currentPage != fiche.id_fiche %}
-<div class="qrcard-actions no-print text-center">
-<a href="#" class="text-danger link-remove-from-print">❌ Ne pas imprimer</a>
-</div>
-{% endif %}
-</div>
+  <div class="card-plus-actions-container" data-tag="{{ entry.tag }}">
+    <div class="flip-container" tabindex="0">
+      <div class="flipper">
+        {{ front }}
+        {{ back }}
+      </div>
+    </div>
+    <div class="qrcard-actions no-print">
+      {% if favoriteUser %}
+        {{ include_javascript('javascripts/favorites.js') }}
+        <a href="#" class="favorites{{ isFavorite ? ' user-favorite' : '' }}" title="{{ isFavorite ? _t('FAVORITES_REMOVE') : _t('FAVORITES_ADD') }}" data-resource="{{ entry.tag }}" data-user="{{ favoriteUser }}">
+          {{ icon(isFavorite ? 'star-filled' : 'star') }} {{ _t('QRCARDS_FAVORI') }}
+        </a>
+      {% else %}
+        <span></span>
+      {% endif %}
+      <div class="card-edit-links">
+        {% if currentPage != entry.tag %}
+          <a class="yw-btn yw-btn--sm" href="{{ viewUrl }}" title="{{ _t('QRCARDS_VIEW') }}">{{ icon('eye') }}</a>
+        {% endif %}
+        {% if editUrl %}
+          <a class="yw-btn yw-btn--sm" href="{{ editUrl }}" title="{{ _t('QRCARDS_EDIT') }}">{{ icon('pencil') }}</a>
+        {% endif %}
+        <div class="yw-dropdown">
+          <button type="button" class="yw-btn yw-btn--sm" data-yw-dropdown-toggle aria-haspopup="true" aria-expanded="false" title="{{ _t('DUPLICATE_CARD') }}">{{ icon('copy') }}</button>
+          <ul class="yw-dropdown__menu yw-dropdown__menu--right">
+            <li><a href="{{ duplicateUrl }}">{{ _t('TEMPLATE_DUPLICATE_LOCALLY') }}</a></li>
+            <li><a href="{{ duplicateRemoteUrl }}">{{ _t('TEMPLATE_DUPLICATE_IN_ANOTHER_WIKI') }}</a></li>
+          </ul>
+        </div>
+        <a class="yw-btn yw-btn--sm" href="{{ printUrl }}" title="{{ _t('QRCARDS_PRINT') }}">{{ icon('printer') }}</a>
+        {% if deleteUrl %}
+          <a class="yw-btn yw-btn--sm yw-btn--danger modalbox" href="{{ deleteUrl }}" title="{{ _t('QRCARDS_DELETE') }}" data-confirm-text="{{ _t('BAZ_CONFIRM_SUPPRIMER_FICHE') }}">{{ icon('trash') }}</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
 {% endif %}

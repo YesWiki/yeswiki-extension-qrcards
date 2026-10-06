@@ -1,15 +1,22 @@
 {
     "name": "yeswiki/extension-qrcards",
     "type": "yeswiki-extension",
+    "description": "Printable cards with a QR code that leads back to their page on the wiki",
+    "license": "AGPL-3.0-or-later",
     "require": {
-        "symfony/yaml": "^5.4"
+        "php": ">=8.3"
     },
-    "config": {
-        "optimize-autoloader": true,
-        "platform": {
-            "php": "7.3.0"
-        },
-        "platform-check": true,
-        "sort-packages": true
+    "extra": {
+        "yeswiki": {
+            "label": {
+                "fr": "QR cartes",
+                "en": "QR cards"
+            },
+            "description": {
+                "fr": "Crée des cartes imprimables avec un QR code associé pour prolonger l'expérience en ligne.",
+                "en": "Creates printable cards with a QR code that leads back to their page on the wiki."
+            },
+            "requires-extensions": []
+        }
     }
 }

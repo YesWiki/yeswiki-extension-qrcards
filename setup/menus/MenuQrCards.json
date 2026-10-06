@@ -1,0 +1,9 @@
+{
+  "title": "QR cartes",
+  "nodes": [
+    { "id": "qrcards-view", "label": "Cartes", "link": "VoirQrCards" },
+    { "id": "qrcards-add", "label": "Ajouter une carte", "link": "AjouterQrCards" },
+    { "id": "qrcards-favorites", "label": "Favoris", "link": "FavorisQrCards" },
+    { "id": "qrcards-documentation", "label": "Documentation", "link": "DocumentationQrCartes" }
+  ]
+}

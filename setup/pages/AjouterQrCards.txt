@@ -1,3 +1,0 @@
-{{nav class="nav nav-tabs no-print" links="VoirQrCards, AjouterQrCards, FavorisQrcards, DocumentationQrCartes" titles="Cartes, Ajouter une carte, Favoris, Documentation"}}
-{{bazar vue="saisir" redirecturl="VoirQrCards" voirmenu="0" id="1400" }}
-""<link rel="stylesheet" href="tools/qrcards/styles/qrcards.css">""

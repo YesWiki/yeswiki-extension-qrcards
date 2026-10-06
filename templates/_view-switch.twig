@@ -1,0 +1,4 @@
+<div class="no-print qrcards-view-switch" role="group" aria-label="{{ _t('QRCARDS_VIEW_SELECTOR') }}">
+  <a href="{{ url_with({print: null}) }}" class="yw-btn yw-btn--sm{{ displayMode == 'web' ? ' yw-btn--primary' : '' }}">{{ icon('eye') }} {{ _t('QRCARDS_VIEW_WEB') }}</a>
+  <a href="{{ url_with({print: 1}) }}" class="yw-btn yw-btn--sm{{ displayMode == 'print' ? ' yw-btn--primary' : '' }}">{{ icon('printer') }} {{ _t('QRCARDS_VIEW_PRINT') }}</a>
+</div>
