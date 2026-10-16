@@ -67,7 +67,9 @@ function displayCard($fiche, $view = 'print')
     $thumbheight = 300;
     $thumbresize = 'fit';
     $imgLogo = !empty($GLOBALS['wiki']->config['card_logo']) ? $GLOBALS['wiki']->config['card_logo'] : 'tools/qrcards/images/logo_qr_cartes.svg';
-    if (isset($fiche['imagebf_image']) and is_file('files/' . $fiche['imagebf_image'])) {
+    if (!empty($fiche['bf_emoticon'])) {
+        $image = '<span class="emoticon">' . htmlspecialchars($fiche['bf_emoticon']) . '</span>';
+    } elseif (isset($fiche['imagebf_image']) and is_file('files/' . $fiche['imagebf_image'])) {
         $image = '<img loading="lazy" alt="image" src="' . redimensionner_image(
             'files/' . $fiche['imagebf_image'],
             'cache/image_' . $thumbwidth . 'x' . $thumbheight . '_' . $fiche['imagebf_image'],
