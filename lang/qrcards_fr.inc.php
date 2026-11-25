@@ -16,4 +16,11 @@ return [
     'QRCARDS_CARD_TAG' => 'Fiche de la carte',
     'QRCARDS_CARD_VIEW' => 'Affichage',
     'QRCARDS_CARD_TAG_REQUIRED' => 'le paramètre tag (la fiche de la carte) est obligatoire',
+    'QRCARDS_CARD_FORMAT' => 'Format d\'impression',
+    'QRCARDS_FORMAT_STANDARD' => 'standard',
+    'QRCARDS_FORMAT_STANDARD_HINT' => 'Cartes de 75 × 125 mm, recto et verso côte à côte, deux cartes par feuille A4',
+    'QRCARDS_FORMAT_A5' => 'A5',
+    'QRCARDS_FORMAT_A5_HINT' => 'Une carte par feuille A4 paysage : le recto sur une moitié, le verso sur l\'autre',
+    'QRCARDS_FORMAT_A4' => 'A4',
+    'QRCARDS_FORMAT_A4_HINT' => 'Le recto sur une feuille A4, le verso sur la suivante, pour une impression recto verso',
 ];

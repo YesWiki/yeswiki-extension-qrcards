@@ -40,7 +40,7 @@
   </div>
 {% endset %}
 {% if view == 'print' %}
-  <div class="qrcard-to-print" data-tag="{{ entry.tag }}">
+  <div class="qrcard-to-print qrcard-format-{{ format }}" data-tag="{{ entry.tag }}">
     {{ front }}
     {{ back }}
     {% if currentPage != entry.tag %}

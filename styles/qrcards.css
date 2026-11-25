@@ -482,6 +482,16 @@
     margin: 0;
   }
 
+  @page qrcard-a5 {
+    size: A4 landscape;
+    margin: 0;
+  }
+
+  @page qrcard-a4 {
+    size: A4 portrait;
+    margin: 0;
+  }
+
   ::-webkit-scrollbar {
     display: none;
   }
@@ -546,13 +556,40 @@
     display: block;
   }
 
-  .qrcard-to-print:nth-child(2n) {
+  .qrcard-format-standard:nth-child(2n) {
     margin-bottom: calc(297mm - 2 * var(--card-height));
   }
 
-  .qrcard-to-print:nth-child(2n+1) {
+  .qrcard-format-standard:nth-child(2n+1),
+  .qrcard-format-a5,
+  .qrcard-format-a4,
+  .qrcard-format-a4 .qrcard.back {
     page-break-before: always;
     break-before: page;
+  }
+
+  .qrcard-format-a5 {
+    page: qrcard-a5;
+    zoom: 1.68;
+    margin-left: calc((297mm / 1.68 - 2 * var(--card-width)) / 2);
+  }
+
+  .qrcard-format-a4 {
+    page: qrcard-a4;
+    zoom: 2.36;
+    height: auto;
+    margin-left: calc((210mm / 2.36 - var(--card-width)) / 2);
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  .qrcard-format-a4 .qrcard.front,
+  .qrcard-format-a4 .qrcard.back {
+    position: static;
+  }
+
+  .page-qrcard.print .qrcard-format-a4 .back {
+    border-left: var(--card-border);
   }
 
   .qrcard-to-print .qrcard-header,

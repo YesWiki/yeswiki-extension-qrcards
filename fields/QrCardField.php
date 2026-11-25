@@ -42,8 +42,9 @@ class QrCardField extends BazarField
         $assets = $this->getService(AssetRegistry::class);
         $assets->addCssFile(QrCardRenderer::ASSETS . '/styles/qrcards.css');
         $assets->addJsFile(QrCardRenderer::ASSETS . '/javascripts/qrcards.js');
-        $view = $this->getRequest()->query->get('print') ? QrCardRenderer::VIEW_PRINT : QrCardRenderer::VIEW_WEB;
-        $card = $this->getService(QrCardRenderer::class)->render($entry, $view);
+        $print = $this->getRequest()->query->get('print');
+        $view = $print ? QrCardRenderer::VIEW_PRINT : QrCardRenderer::VIEW_WEB;
+        $card = $this->getService(QrCardRenderer::class)->render($entry, $view, QrCardRenderer::printFormat($print));
 
         return $view === QrCardRenderer::VIEW_PRINT
             ? '<div class="page-qrcard print">' . $card . '</div>'

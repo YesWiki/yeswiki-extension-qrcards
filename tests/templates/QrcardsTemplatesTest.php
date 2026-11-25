@@ -8,6 +8,7 @@ use YesWiki\Content\Service\FormBuilderExtensions;
 use YesWiki\Content\Service\FormManager;
 use YesWiki\Content\Service\PageManager;
 use YesWiki\Files\Service\Storage;
+use YesWiki\Kernel\Service\CurrentRequest;
 use YesWiki\Kernel\Service\ExtensionRegistry;
 use YesWiki\Kernel\Service\UrlFormatter;
 use YesWiki\Qrcards\Service\QrCardRenderer;
@@ -89,6 +90,7 @@ class QrcardsTemplatesTest extends YesWikiTestCase
             $services->get(FormManager::class)->delete($id);
         }
         unset($_GET['print']);
+        $services->get(CurrentRequest::class)->get()->query->remove('print');
         parent::tearDown();
     }
 
@@ -124,6 +126,26 @@ class QrcardsTemplatesTest extends YesWikiTestCase
         $this->assertStringContainsString('qrcard-to-print', $html);
         $this->assertStringContainsString('qrcard-remove-from-print', $html);
         $this->assertStringNotContainsString('flip-container', $html);
+    }
+
+    public function testThePrintFormatComesFromTheArgumentOrTheAddress(): void
+    {
+        $actions = $this->getWiki()->services->get(ActionRunner::class);
+        $query = $this->getWiki()->services->get(CurrentRequest::class)->get()->query;
+
+        $this->assertStringContainsString('qrcard-format-a4', $actions->action('qrcard', ['tag' => self::CARD, 'view' => 'print', 'format' => 'a4']));
+        $query->set('print', 'a5');
+        $this->assertStringContainsString('qrcard-format-a5', $actions->action('qrcard', ['tag' => self::CARD]));
+        $query->set('print', '1');
+        $this->assertStringContainsString('qrcard-format-standard', $actions->action('qrcard', ['tag' => self::CARD]));
+    }
+
+    public function testUnknownPrintValuesFallBackToStandard(): void
+    {
+        $this->assertSame(QrCardRenderer::FORMAT_A5, QrCardRenderer::printFormat('a5'));
+        $this->assertSame(QrCardRenderer::FORMAT_STANDARD, QrCardRenderer::printFormat('1'));
+        $this->assertSame(QrCardRenderer::FORMAT_STANDARD, QrCardRenderer::printFormat('A3'));
+        $this->assertSame(QrCardRenderer::FORMAT_STANDARD, QrCardRenderer::printFormat(null));
     }
 
     public function testACardEntryShowsItsCardBesideTheFieldsTheCardDoesNotHold(): void

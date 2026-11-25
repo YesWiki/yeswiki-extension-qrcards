@@ -11,7 +11,7 @@ use YesWiki\Kernel\Component\Setting;
 use YesWiki\Kernel\Performable\RegisteredAction;
 use YesWiki\Qrcards\Service\QrCardRenderer;
 
-/** `{{qrcard tag="my-card" view="print"}}`: one card entry drawn as its printable card. */
+/** `{{qrcard tag="my-card" view="print" format="a5"}}`: one card entry drawn as its printable card. */
 class QrCardAction extends YesWikiAction implements RegisteredAction, ProvidesComponents
 {
     public static function performableName(): string
@@ -33,20 +33,28 @@ class QrCardAction extends YesWikiAction implements RegisteredAction, ProvidesCo
                         QrCardRenderer::VIEW_WEB => _t('QRCARDS_VIEW_WEB'),
                         QrCardRenderer::VIEW_PRINT => _t('QRCARDS_VIEW_PRINT'),
                     ])->label(_t('QRCARDS_CARD_VIEW'))->default(QrCardRenderer::VIEW_WEB),
+                    Setting::choice('format', [
+                        QrCardRenderer::FORMAT_STANDARD => _t('QRCARDS_FORMAT_STANDARD'),
+                        QrCardRenderer::FORMAT_A5 => _t('QRCARDS_FORMAT_A5'),
+                        QrCardRenderer::FORMAT_A4 => _t('QRCARDS_FORMAT_A4'),
+                    ])->label(_t('QRCARDS_CARD_FORMAT'))->default(QrCardRenderer::FORMAT_STANDARD),
                 ),
         ];
     }
 
     public function formatArguments($arg): array
     {
+        $print = $this->getRequest()->query->get('print');
         $view = (string)($arg['view'] ?? '');
         if ($view === '') {
-            $view = $this->getRequest()->query->get('print') ? QrCardRenderer::VIEW_PRINT : QrCardRenderer::VIEW_WEB;
+            $view = $print ? QrCardRenderer::VIEW_PRINT : QrCardRenderer::VIEW_WEB;
         }
+        $format = (string)($arg['format'] ?? '');
 
         return [
             'tag' => trim((string)($arg['tag'] ?? '')),
             'view' => $view === QrCardRenderer::VIEW_PRINT ? QrCardRenderer::VIEW_PRINT : QrCardRenderer::VIEW_WEB,
+            'format' => QrCardRenderer::printFormat($format !== '' ? $format : $print),
         ];
     }
 
@@ -60,6 +68,6 @@ class QrCardAction extends YesWikiAction implements RegisteredAction, ProvidesCo
             return '';
         }
 
-        return $this->getService(QrCardRenderer::class)->render($entry, $this->arguments['view']);
+        return $this->getService(QrCardRenderer::class)->render($entry, $this->arguments['view'], $this->arguments['format']);
     }
 }

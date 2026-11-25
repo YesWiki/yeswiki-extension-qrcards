@@ -27,6 +27,10 @@ class QrCardRenderer
 {
     public const VIEW_WEB = 'web';
     public const VIEW_PRINT = 'print';
+    public const FORMAT_STANDARD = 'standard';
+    public const FORMAT_A5 = 'a5';
+    public const FORMAT_A4 = 'a4';
+    public const FORMATS = [self::FORMAT_STANDARD, self::FORMAT_A5, self::FORMAT_A4];
     public const CONFIG_PAGE = 'ConfigMetacarte';
     public const DEFAULT_LAYOUT = 'qrcard';
     public const ASSETS = 'extensions/qrcards';
@@ -55,11 +59,17 @@ class QrCardRenderer
     }
 
     /** @param array<string, mixed> $entry */
-    public function render(array $entry, string $view = self::VIEW_WEB): string
+    public function render(array $entry, string $view = self::VIEW_WEB, string $format = self::FORMAT_STANDARD): string
     {
         $config = $this->config();
 
-        return $this->templateEngine->render('@qrcards/card-layouts/' . $this->layout($config) . '.twig', $this->variables($entry, $view, $config));
+        return $this->templateEngine->render('@qrcards/card-layouts/' . $this->layout($config) . '.twig', $this->variables($entry, $view, $config, $format));
+    }
+
+    /** The print format a `print` value asks for: `a5`, `a4`, or `standard` for anything else, `1` included. */
+    public static function printFormat(mixed $print): string
+    {
+        return is_string($print) && in_array($print, self::FORMATS, true) ? $print : self::FORMAT_STANDARD;
     }
 
     /**
@@ -68,8 +78,9 @@ class QrCardRenderer
      *
      * @return array<string, mixed>
      */
-    public function variables(array $entry, string $view, array $config = []): array
+    public function variables(array $entry, string $view, array $config = [], string $format = self::FORMAT_STANDARD): array
     {
+        $format = self::printFormat($format);
         $tag = (string)($entry['tag'] ?? '');
         $link = trim((string)($entry['bf_url'] ?? '')) ?: $this->urlFormatter->href('', $tag, null, false);
         $logo = $this->logo();
@@ -80,13 +91,14 @@ class QrCardRenderer
         return [
             'entry' => $entry,
             'view' => $view === self::VIEW_PRINT ? self::VIEW_PRINT : self::VIEW_WEB,
+            'format' => $format,
             'currentPage' => $this->pageContext->getTag(),
             'title' => (string)($entry['bf_titre'] ?? $entry['title'] ?? $tag),
             'difficulty' => trim(str_repeat('⚫️ ', self::DIFFICULTY[$entry['listeListeComplexite'] ?? ''] ?? 0)),
             'type' => $this->typeLabel((string)($entry['listeListeTypeCarte'] ?? '')),
             'logo' => $logo,
             'setLogo' => is_string($config['card_set_image'] ?? null) && $config['card_set_image'] !== '' ? $config['card_set_image'] : $logo,
-            'image' => $this->imageUrl($entry, 'imagebf_image', true),
+            'image' => $this->imageUrl($entry, 'imagebf_image', $format === self::FORMAT_STANDARD),
             'color' => $this->color($entry, $config),
             'pictos' => array_map(fn (int $i): array => [
                 'image' => $this->imageUrl($entry, "imagebf_picto_boite{$i}"),
@@ -98,7 +110,7 @@ class QrCardRenderer
             'shortLink' => str_replace(['https://', 'http://'], '', $link),
             'license' => $this->assets->urlFor(self::ASSETS . '/images/cc-by-sa.svg') ?? '',
             'viewUrl' => $this->urlFormatter->href('', $tag, null, false),
-            'printUrl' => $this->urlFormatter->href('', $tag, ['print' => '1'], false),
+            'printUrl' => $this->urlFormatter->href('', $tag, ['print' => self::FORMAT_STANDARD], false),
             'duplicateUrl' => $this->urlFormatter->href('duplicate', $tag, null, false),
             'duplicateRemoteUrl' => $this->urlFormatter->href('duplicate', $tag, ['toUrl' => '1'], false),
             'editUrl' => $writable && $this->aclService->hasAccess('write', $tag)

@@ -16,4 +16,11 @@ return [
     'QRCARDS_CARD_TAG' => 'Card entry',
     'QRCARDS_CARD_VIEW' => 'Display',
     'QRCARDS_CARD_TAG_REQUIRED' => 'the tag parameter (the card entry) is required',
+    'QRCARDS_CARD_FORMAT' => 'Print format',
+    'QRCARDS_FORMAT_STANDARD' => 'standard',
+    'QRCARDS_FORMAT_STANDARD_HINT' => '75 × 125 mm cards, front and back side by side, two cards per A4 sheet',
+    'QRCARDS_FORMAT_A5' => 'A5',
+    'QRCARDS_FORMAT_A5_HINT' => 'One card per landscape A4 sheet: the front on one half, the back on the other',
+    'QRCARDS_FORMAT_A4' => 'A4',
+    'QRCARDS_FORMAT_A4_HINT' => 'The front on one A4 sheet, the back on the next, for double-sided printing',
 ];

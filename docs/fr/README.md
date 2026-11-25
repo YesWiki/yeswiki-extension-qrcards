@@ -25,19 +25,29 @@ La liste des cartes est le modèle `qrcards` de `{{entrylist}}` :
 {{entrylist id="1400" template="qrcards" dynamic="false" groups="bf_tags" titles="Mots clés"}}
 ```
 
-Le bouton « Vue impression » (ou `&print=1` dans l'adresse) dispose les cartes recto et verso côte à côte, deux par page A4. « Ne pas imprimer » retire une carte de la page avant d'imprimer.
+Trois boutons « Vue impression » préparent l'impression, selon le format voulu :
+
+| Bouton | Adresse | Ce qui sort de l'imprimante |
+|---|---|---|
+| standard | `&print=standard` | des cartes de 75 × 125 mm, recto et verso côte à côte, deux cartes par feuille A4 |
+| A5 | `&print=a5` | une carte par feuille A4 paysage, le recto sur une moitié et le verso sur l'autre |
+| A4 | `&print=a4` | le recto sur une feuille A4 et le verso sur la suivante, pour une impression recto verso |
+
+Les formats A5 et A4 agrandissent la carte entière, polices comprises, et utilisent l'image d'origine au lieu de la miniature. La carte garde ses proportions, il reste donc une marge blanche autour. Les anciennes adresses en `&print=1` donnent le format standard. « Ne pas imprimer » retire une carte de la page avant d'imprimer.
 
 Une carte seule s'affiche avec l'action `{{qrcard}}` :
 
 ```
 {{qrcard tag="bienvenue"}}
 {{qrcard tag="bienvenue" view="print"}}
+{{qrcard tag="bienvenue" view="print" format="a5"}}
 ```
 
 | Paramètre | Obligatoire | Rôle |
 |---|---|---|
 | `tag` | oui | la fiche de la carte |
 | `view` | non | `web` (la carte se retourne au survol) ou `print` (recto et verso côte à côte) |
+| `format` | non | avec `view="print"` : `standard` (par défaut), `a5` ou `a4`, comme les boutons ci-dessus |
 
 La fiche d'une carte montre la carte à côté des contenus de la page associée. Une fiche **Sets de cartes** affiche les cartes qu'elle contient, dans l'ordre choisi.
 

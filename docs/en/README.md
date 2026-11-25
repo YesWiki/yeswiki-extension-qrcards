@@ -25,19 +25,29 @@ The card list is the `qrcards` template of `{{entrylist}}`:
 {{entrylist id="1400" template="qrcards" dynamic="false" groups="bf_tags" titles="Mots clés"}}
 ```
 
-The "Vue impression" button (or `&print=1` in the address) lays the cards out front and back side by side, two per A4 page. "Ne pas imprimer" takes a card off the page before printing.
+Three "Vue impression" buttons set up printing, one per format:
+
+| Button | Address | What comes out of the printer |
+|---|---|---|
+| standard | `&print=standard` | 75 × 125 mm cards, front and back side by side, two cards per A4 sheet |
+| A5 | `&print=a5` | one card per landscape A4 sheet, the front on one half and the back on the other |
+| A4 | `&print=a4` | the front on one A4 sheet and the back on the next, for double-sided printing |
+
+The A5 and A4 formats scale the whole card up, fonts included, and use the original image instead of the thumbnail. The card keeps its proportions, so a white margin remains around it. Older `&print=1` addresses give the standard format. "Ne pas imprimer" takes a card off the page before printing.
 
 One card on its own is the `{{qrcard}}` action:
 
 ```
 {{qrcard tag="bienvenue"}}
 {{qrcard tag="bienvenue" view="print"}}
+{{qrcard tag="bienvenue" view="print" format="a5"}}
 ```
 
 | Parameter | Required | Purpose |
 |---|---|---|
 | `tag` | yes | the card's entry |
 | `view` | no | `web` (the card flips on hover) or `print` (front and back side by side) |
+| `format` | no | with `view="print"`: `standard` (default), `a5` or `a4`, like the buttons above |
 
 A card's entry page shows the card beside the rest of the entry. A card set entry shows the cards it holds, in the order chosen.
 
