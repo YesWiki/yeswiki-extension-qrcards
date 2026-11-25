@@ -41,6 +41,8 @@ Une carte seule s'affiche avec l'action `{{qrcard}}` :
 
 La fiche d'une carte montre la carte à côté des contenus de la page associée. Une fiche **Sets de cartes** affiche les cartes qu'elle contient, dans l'ordre choisi.
 
+Un autre formulaire peut aussi montrer sa fiche sous forme de carte : ajoutez-lui le champ **QR carte** dans le constructeur de formulaires, à l'endroit où la carte doit apparaître. La carte reprend les champs du formulaire QrCards que ce formulaire possède (`bf_titre`, `bf_accroche`, `imagebf_image`, `bf_chapeau`…).
+
 ## Ajouter une carte depuis le navigateur
 
 La page `DocumentationQrCartes` propose un bouton « +qrcard » à glisser dans la barre de signets : depuis n'importe quel site, il ouvre le formulaire avec le titre de la page, son adresse dans « Sources » et le texte sélectionné au verso. Le formulaire QrCards a aussi son propre signet, dans la liste des formulaires.

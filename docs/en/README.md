@@ -41,6 +41,8 @@ One card on its own is the `{{qrcard}}` action:
 
 A card's entry page shows the card beside the rest of the entry. A card set entry shows the cards it holds, in the order chosen.
 
+Any other form can show its entries as a card too: add the **QR card** field to it in the form builder, where the card should appear. The card uses whichever QrCards form fields that form has (`bf_titre`, `bf_accroche`, `imagebf_image`, `bf_chapeau`…).
+
 ## Adding a card from the browser
 
 `DocumentationQrCartes` offers a "+qrcard" button to drag to the bookmarks bar. On any site it opens the card form with the page's title, its address under "Sources" and the selected text on the back. The QrCards form also has its own bookmarklet, in the list of forms.

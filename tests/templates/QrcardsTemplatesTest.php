@@ -4,6 +4,7 @@ namespace YesWiki\Test\Qrcards\Templates;
 
 use YesWiki\Content\Service\EntryDisplay;
 use YesWiki\Content\Service\EntryManager;
+use YesWiki\Content\Service\FormBuilderExtensions;
 use YesWiki\Content\Service\FormManager;
 use YesWiki\Content\Service\PageManager;
 use YesWiki\Files\Service\Storage;
@@ -22,6 +23,8 @@ class QrcardsTemplatesTest extends YesWikiTestCase
 {
     private const CARD = 'qrcards-test-card';
     private const SET = 'qrcards-test-set';
+    private const OTHER_FORM = '1499';
+    private const OTHER = 'qrcards-test-other';
 
     /** @var list<string> */
     private array $created = [];
@@ -130,6 +133,47 @@ class QrcardsTemplatesTest extends YesWikiTestCase
         $this->assertStringContainsString('qrcard-entry-card', $html);
         $this->assertStringContainsString('Contenu de la page associée', $html);
         $this->assertStringContainsString('Carte de test qrcards', $html);
+    }
+
+    public function testTheQrcardFieldShowsTheCardInAnotherForm(): void
+    {
+        $services = $this->getWiki()->services;
+        $forms = $services->get(FormManager::class);
+        $this->assertNull($forms->getOne(self::OTHER_FORM), 'form ' . self::OTHER_FORM . ' must be free for this test');
+        $forms->create([
+            'id' => self::OTHER_FORM,
+            'label' => 'Qrcards test other form',
+            'description' => '',
+            'template' => json_encode([
+                ['type' => 'texte', 'name' => 'bf_titre', 'label' => 'Titre', 'required' => '1'],
+                ['type' => 'qrcard'],
+                ['type' => 'textelong', 'name' => 'bf_description', 'label' => 'Description'],
+            ]),
+        ]);
+        $this->formsCreated[] = self::OTHER_FORM;
+        $services->get(EntryManager::class)->create(self::OTHER_FORM, [
+            'tag' => self::OTHER,
+            'antispam' => 1,
+            'bf_titre' => 'Fiche ordinaire avec carte',
+            'bf_description' => 'Texte de la fiche ordinaire',
+        ]);
+        $this->created[] = self::OTHER;
+
+        $html = $services->get(EntryDisplay::class)->renderEntry(false, self::OTHER);
+
+        $this->assertStringContainsString('qrcard-entry-card', $html);
+        $this->assertStringContainsString('flip-container', $html);
+        $this->assertStringContainsString('Fiche ordinaire avec carte', $html);
+        $this->assertStringContainsString('Texte de la fiche ordinaire', $html);
+        $this->assertArrayNotHasKey('qrcard', $services->get(EntryManager::class)->getOne(self::OTHER) ?? []);
+    }
+
+    public function testTheFormBuilderOffersTheQrcardField(): void
+    {
+        $this->assertContains(
+            'extensions/qrcards/javascripts/form-builder-qrcard.js',
+            $this->getWiki()->services->get(FormBuilderExtensions::class)->forDesigner()['scripts']
+        );
     }
 
     public function testACardSetListsItsCards(): void
