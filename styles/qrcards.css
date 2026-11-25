@@ -5,6 +5,8 @@
   --card-spacing: 5mm;
   --card-recto-zone-height: 5mm 20mm 50mm 20mm 20mm;
   --card-verso-zone-height: 5mm 20mm 70mm 20mm;
+  --print-a5-scale: 1.67;
+  --print-a4-scale: 2.36;
   --type-font-family: tahoma, sans-serif;
   --type-font-size: 10px;
   --type-color: #222;
@@ -478,17 +480,6 @@
 
 @media print {
   @page {
-    size: A4 portrait;
-    margin: 0;
-  }
-
-  @page qrcard-a5 {
-    size: A4 landscape;
-    margin: 0;
-  }
-
-  @page qrcard-a4 {
-    size: A4 portrait;
     margin: 0;
   }
 
@@ -516,6 +507,8 @@
   .yw-chrome-edit,
   #yw-a11y-jump-content,
   #search-form,
+  .yw-corner-tools,
+  .yw-page-actions,
   .no-print {
     display: none !important;
   }
@@ -560,25 +553,41 @@
     margin-bottom: calc(297mm - 2 * var(--card-height));
   }
 
-  .qrcard-format-standard:nth-child(2n+1),
-  .qrcard-format-a5,
-  .qrcard-format-a4,
+  .qrcard-format-standard:nth-child(2n+1):not(:first-child),
+  .qrcard-format-a5:not(:first-child),
+  .qrcard-format-a4:not(:first-child),
   .qrcard-format-a4 .qrcard.back {
     page-break-before: always;
     break-before: page;
   }
 
+  .qrcard-format-a5 .qrcard,
+  .qrcard-format-a4 .qrcard {
+    transform-origin: 0 0;
+  }
+
   .qrcard-format-a5 {
-    page: qrcard-a5;
-    zoom: 1.68;
-    margin-left: calc((297mm / 1.68 - 2 * var(--card-width)) / 2);
+    position: relative;
+    width: 297mm;
+    height: 209mm;
+    overflow: hidden;
+  }
+
+  .qrcard-format-a5 .qrcard {
+    transform: scale(var(--print-a5-scale));
+  }
+
+  .qrcard-format-a5 .qrcard.front {
+    left: calc(148.5mm - var(--card-width) * var(--print-a5-scale));
+  }
+
+  .qrcard-format-a5 .qrcard.back {
+    left: 148.5mm;
   }
 
   .qrcard-format-a4 {
-    page: qrcard-a4;
-    zoom: 2.36;
+    width: 210mm;
     height: auto;
-    margin-left: calc((210mm / 2.36 - var(--card-width)) / 2);
     break-inside: auto;
     page-break-inside: auto;
   }
@@ -586,6 +595,9 @@
   .qrcard-format-a4 .qrcard.front,
   .qrcard-format-a4 .qrcard.back {
     position: static;
+    transform: scale(var(--print-a4-scale));
+    margin-left: calc((210mm - var(--card-width) * var(--print-a4-scale)) / 2);
+    margin-bottom: calc(var(--card-height) * (var(--print-a4-scale) - 1));
   }
 
   .page-qrcard.print .qrcard-format-a4 .back {

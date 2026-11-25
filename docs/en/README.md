@@ -90,4 +90,5 @@ Card sizes and fonts are CSS custom properties, which `custom/styles/custom.css`
 | `--text-*` | font of the summary on the front |
 | `--longtext-*` | font of the text on the back |
 | `--link-*` | font of the footer link |
+| `--print-a5-scale`, `--print-a4-scale` | how much the card grows when printed in A5 (1.67) and A4 (2.36); lower them if you make the card bigger |
 | `--picto-*` | font of the captions under the icons |

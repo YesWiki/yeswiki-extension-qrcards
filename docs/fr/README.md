@@ -90,6 +90,7 @@ Les dimensions et les polices des cartes sont des variables CSS, à redéfinir d
 | `--text-*` | police de l'accroche au recto |
 | `--longtext-*` | police du texte au verso |
 | `--link-*` | police du lien en pied de page |
+| `--print-a5-scale`, `--print-a4-scale` | agrandissement de la carte en impression A5 (1,67) et A4 (2,36) ; à réduire si vous agrandissez la carte |
 | `--picto-*` | police des textes sous les icônes |
 
 # Changelog

@@ -140,6 +140,22 @@ class QrcardsTemplatesTest extends YesWikiTestCase
         $this->assertStringContainsString('qrcard-format-standard', $actions->action('qrcard', ['tag' => self::CARD]));
     }
 
+    public function testEachPrintFormatSetsItsSheetSize(): void
+    {
+        $this->assertStringContainsString('size: A4 landscape', QrCardRenderer::pageRule('a5'));
+        $this->assertStringContainsString('size: A4 portrait', QrCardRenderer::pageRule('a4'));
+        $this->assertStringContainsString('size: A4 portrait', QrCardRenderer::pageRule('1'));
+    }
+
+    public function testTheCardOffersEveryPrintFormat(): void
+    {
+        $html = $this->getWiki()->services->get(ActionRunner::class)->action('qrcard', ['tag' => self::CARD, 'view' => 'web']);
+
+        foreach (QrCardRenderer::FORMATS as $format) {
+            $this->assertStringContainsString('print=' . $format, $html);
+        }
+    }
+
     public function testUnknownPrintValuesFallBackToStandard(): void
     {
         $this->assertSame(QrCardRenderer::FORMAT_A5, QrCardRenderer::printFormat('a5'));

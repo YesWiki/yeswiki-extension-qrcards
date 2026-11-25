@@ -31,6 +31,7 @@ class QrCardRenderer
     public const FORMAT_A5 = 'a5';
     public const FORMAT_A4 = 'a4';
     public const FORMATS = [self::FORMAT_STANDARD, self::FORMAT_A5, self::FORMAT_A4];
+    public const PAGE_SIZES = [self::FORMAT_STANDARD => 'A4 portrait', self::FORMAT_A5 => 'A4 landscape', self::FORMAT_A4 => 'A4 portrait'];
     public const CONFIG_PAGE = 'ConfigMetacarte';
     public const DEFAULT_LAYOUT = 'qrcard';
     public const ASSETS = 'extensions/qrcards';
@@ -62,8 +63,17 @@ class QrCardRenderer
     public function render(array $entry, string $view = self::VIEW_WEB, string $format = self::FORMAT_STANDARD): string
     {
         $config = $this->config();
+        if ($view === self::VIEW_PRINT) {
+            $this->assets->addCss(self::pageRule($format));
+        }
 
         return $this->templateEngine->render('@qrcards/card-layouts/' . $this->layout($config) . '.twig', $this->variables($entry, $view, $config, $format));
+    }
+
+    /** The `@page` rule a print format needs: one sheet size for the whole document, as browsers print every page alike. */
+    public static function pageRule(string $format): string
+    {
+        return '@media print { @page { size: ' . self::PAGE_SIZES[self::printFormat($format)] . '; margin: 0; } }';
     }
 
     /** The print format a `print` value asks for: `a5`, `a4`, or `standard` for anything else, `1` included. */
@@ -110,7 +120,7 @@ class QrCardRenderer
             'shortLink' => str_replace(['https://', 'http://'], '', $link),
             'license' => $this->assets->urlFor(self::ASSETS . '/images/cc-by-sa.svg') ?? '',
             'viewUrl' => $this->urlFormatter->href('', $tag, null, false),
-            'printUrl' => $this->urlFormatter->href('', $tag, ['print' => self::FORMAT_STANDARD], false),
+            'printUrls' => array_combine(self::FORMATS, array_map(fn (string $f): string => $this->urlFormatter->href('', $tag, ['print' => $f], false), self::FORMATS)),
             'duplicateUrl' => $this->urlFormatter->href('duplicate', $tag, null, false),
             'duplicateRemoteUrl' => $this->urlFormatter->href('duplicate', $tag, ['toUrl' => '1'], false),
             'editUrl' => $writable && $this->aclService->hasAccess('write', $tag)

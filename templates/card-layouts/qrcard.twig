@@ -80,7 +80,14 @@
             <li><a href="{{ duplicateRemoteUrl }}">{{ _t('TEMPLATE_DUPLICATE_IN_ANOTHER_WIKI') }}</a></li>
           </ul>
         </div>
-        <a class="yw-btn yw-btn--sm" href="{{ printUrl }}" title="{{ _t('QRCARDS_PRINT') }}">{{ icon('printer') }}</a>
+        <div class="yw-dropdown">
+          <button type="button" class="yw-btn yw-btn--sm" data-yw-dropdown-toggle aria-haspopup="true" aria-expanded="false" title="{{ _t('QRCARDS_PRINT') }}">{{ icon('printer') }}</button>
+          <ul class="yw-dropdown__menu yw-dropdown__menu--right">
+            {% for format, url in printUrls %}
+              <li><a href="{{ url }}" title="{{ _t('QRCARDS_FORMAT_' ~ format|upper ~ '_HINT') }}">{{ _t('QRCARDS_VIEW_PRINT') }} {{ _t('QRCARDS_FORMAT_' ~ format|upper) }}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
         {% if deleteUrl %}
           <a class="yw-btn yw-btn--sm yw-btn--danger modalbox" href="{{ deleteUrl }}" title="{{ _t('QRCARDS_DELETE') }}" data-confirm-text="{{ _t('BAZ_CONFIRM_SUPPRIMER_FICHE') }}">{{ icon('trash') }}</a>
         {% endif %}
